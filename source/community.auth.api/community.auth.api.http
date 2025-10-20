@@ -1,0 +1,21 @@
+GET {{community.auth.api_HostAddress}}/login/requestlogincode?username=jason.shepard@protonmail.com
+
+###
+
+POST {{community.auth.api_HostAddress}}/login
+Content-Type: application/json
+
+{
+  "username": "jason.shepard@protonmail.com",
+  "loginCode": "928302"
+}
+
+###
+
+POST {{community.auth.api_HostAddress}}/login/withpassword
+Content-Type: application/json
+
+{
+  "username": "jason.shepard@protonmail.com",
+  "password": "Suc<M@BallsM8"
+}

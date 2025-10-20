@@ -1,0 +1,161 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  --font-sans: poppins, system-ui;
+  --color-dark: #16170a;
+  --color-primary: #464b1f;
+  --color-light: #f4f5f0;
+  --color-link: #dfe0d0;
+  --color-white: #ffffff;
+  --color-blue: #464c20;
+  --color-red: #B66953;
+  --color-green-highlight: #dfe0d0;
+  --color-dark-10: brightness(var(--color-dark), 10%);
+
+  --ui-primary: var(--color-primary);
+
+  --color-warn: #d7b662;
+  --color-danger: #cd5c5c;
+  --color-info: #5eaacc;
+  --color-success: #65cd5c;
+
+  --ui-warning: --color-warn;
+  --ui-danger: --color-danger;
+  --ui-info: --color-info;
+  --ui-success: --color-success;
+
+  --viewport-lg-min: '(min-width: 1200px)';
+
+  --ui-bg: var(--color-light);
+  --ui-text: var(--color-primary);
+  --ui-header-height: 10vh;
+}
+
+.dark {
+  --ui-bg: #16170a;
+  --ui-border: #313316;
+  --ui-text: var(--color-light);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root, html, body {
+  height: 100%;
+  font-family: var(--font-sans), sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+}
+
+svg {
+  height: 10vh;
+  flex-grow: 0;
+}
+
+#main {
+  display: flex;
+  flex: 1;
+
+  > article {
+    flex: 1;
+    border: 0 1px solid var(--ui-bg);
+    min-height: 82vh;
+  }
+
+  > nav, > aside {
+    flex: 0 0 20vw;
+    background-color: var(--color-dark-10);
+  }
+
+  > nav {
+    order: -1;
+  }
+}
+
+
+footer {
+  border-top: 1px solid var(--ui-border);
+  position: fixed;
+  display: flex;
+  font-size: .75em;
+  left: 0;
+  bottom: 0;
+  height: 8vh;
+  text-align: center;
+  width: 100%;
+  vertical-align: bottom;
+
+}
+
+footer .copy {
+  width: 100%;
+  text-align: center;
+}
+
+header {
+  @apply border-b;
+  @apply h-(--ui-header-height);
+  @apply border-b border-default sticky top-0 z-50 flex flex-col;
+  @apply sticky;
+  @apply z-50;
+  @apply flex;
+  @apply flex-col;
+  top: 0;
+
+  .header-container {
+    @apply mx-auto;
+    @apply w-full;
+    @apply flex;
+    @apply gap-px;
+    @apply items-center justify-items-start h-full;
+    @apply px-4 sm:px-6 lg:px-8;
+
+    .logo-container {
+      @apply lg:flex-1 flex
+    }
+
+    .nav-container {
+      @apply hidden lg:flex;
+
+      nav {
+        @apply relative flex gap-x-1.5;
+        @apply justify-between;
+        
+        ul {
+          @apply min-w-0;
+          @apply isolate flex items-center;
+
+          li {
+            @apply min-w-0 py-2;
+            a {
+              font-weight: 800;
+              @apply relative w-full flex items-center;
+              @apply lg:px-6.5;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+footer .icons {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+span.iconify {
+  margin: 5px 15px;
+}
+
+span.iconify:active {
+  background-color: var(--color-dark-10);
+}

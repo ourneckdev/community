@@ -1,0 +1,17 @@
+services:
+  postgis:
+    image: postgis/postgis:latest
+    platform: linux/x86_64
+    container_name: postgis
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=community
+      - POSTGRES_USER=community
+      - POSTGRES_PASSWORD=Suc<M@BallsM8
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+
+volumes:
+  postgis_data:

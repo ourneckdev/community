@@ -1,0 +1,37 @@
+﻿services:
+  community.auth.api:
+    image: community.auth.api
+    build:
+      context: .
+      dockerfile: community.auth.api/Dockerfile
+  
+  # docker run --name community-postgis -e POSTGRES_USER=community -e POSTGRES_PASSWORD="Suc<M@BallsM8" -d postgis/postgis -p 5432:5432
+  community.lookup.api:
+    image: community.lookup.api
+    build:
+      context: .
+      dockerfile: community.lookup.api/Dockerfile
+
+  community.lookups.api:
+    image: community.lookups.api
+    build:
+      context: .
+      dockerfile: community.lookups.api/Dockerfile
+
+  community.community.api:
+    image: community.community.api
+    build:
+      context: .
+      dockerfile: community.community.api/Dockerfile
+
+  community.user.api:
+    image: community.user.api
+    build:
+      context: .
+      dockerfile: community.user.api/Dockerfile
+
+  community.reports.api:
+    image: community.reports.api
+    build:
+      context: .
+      dockerfile: community.reports.api/Dockerfile

@@ -1,0 +1,67 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+
+@theme {
+  --font-sans: poppins, system-ui;
+  --color-dark: #16170a;
+  --color-light: #f4f5f0;
+  --color-white: #ffffff;
+  --color-blue: #464c20;
+  --color-red: #B66953;
+  --color-green-highlight: #dfe0d0;
+
+  --color-warn: #d7b662;
+  --color-danger: #cd5c5c;
+  --color-info: #5eaacc;
+  --color-success: #65cd5c;
+
+  --viewport-lg-min: '(min-width: 1200px)',
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root, html {
+  font-family: var(--font-sans), sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+svg {
+  height:100px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+}
+#main {
+  display: flex;
+  flex: 1;
+}
+#main > article {
+  flex: 1;
+}
+#main > nav,
+#main > aside {
+  flex: 0 0 20vw;
+  background: beige;
+}
+#main > nav {
+  order: -1;
+}
+header, footer {
+  background: yellowgreen;
+  height: 20vh;
+}

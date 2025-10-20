@@ -1,0 +1,9 @@
+.DS_Store
+obj/
+bin/
+postgres_data/
+.idea/
+*.user
+node_modules/
+dist/
+.vs/*

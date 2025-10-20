@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DocumentationFile>bin\Debug\net9.0\community.ioc.xml</DocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\net9.0\community.ioc.xml</DocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\community.common\community.common.csproj"/>
+        <ProjectReference Include="..\community.data.entities\community.data.entities.csproj"/>
+        <ProjectReference Include="..\community.data.postgres\community.data.postgres.csproj"/>
+        <ProjectReference Include="..\community.middleware\community.middleware.csproj"/>
+        <ProjectReference Include="..\community.models\community.models.csproj"/>
+        <ProjectReference Include="..\community.providers.auth\community.providers.auth.csproj"/>
+        <ProjectReference Include="..\community.providers.common\community.providers.common.csproj"/>
+        <ProjectReference Include="..\community.providers.lookups\community.providers.lookups.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="SimpleInjector" Version="5.5.0"/>
+        <PackageReference Include="SimpleInjector.Integration.AspNetCore" Version="5.5.0"/>
+    </ItemGroup>
+
+</Project>
