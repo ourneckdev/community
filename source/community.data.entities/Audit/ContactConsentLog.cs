@@ -1,6 +1,6 @@
 using community.common.BaseClasses;
 
-namespace community.data.entities.audit;
+namespace community.data.entities.Audit;
 
 /// <summary>
 /// represents a row of granting or revoking consent to contact for a user or community contact record. 

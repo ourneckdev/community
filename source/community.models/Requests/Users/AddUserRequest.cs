@@ -1,4 +1,4 @@
-using community.common.Utilities;
+using community.common.Extensions;
 using community.data.entities;
 using community.models.Abstract;
 using community.models.Requests.Addresses;

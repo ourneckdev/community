@@ -2,6 +2,7 @@ using System.Text;
 using community.common.BaseClasses;
 using community.common.Definitions;
 using community.common.Exceptions;
+using community.common.Extensions;
 using community.common.Utilities;
 using community.data.postgres.Interfaces;
 using community.models.Requests.Authentication;
@@ -75,8 +76,8 @@ public class AuthenticationProvider(
 
             logger.LogInformation("Login successful: {{ \n" +
                                   @$"\t""user id"": ""{userId}"",\n" +
-                                  @$"\t""access token"": ""{loginResponse.AccessToken}"",\n" +
-                                  @$"\t""refresh token"": ""{loginResponse.RefreshToken}"",\n" +
+                                  @$"\t""access token"": ""{loginResponse.AccessToken.MaskString()}"",\n" +
+                                  @$"\t""refresh token"": ""{loginResponse.RefreshToken.MaskString(10)}"",\n" +
                                   @$"\t""log time"": ""{DateTime.UtcNow}"",\n" +
                                   "}}");
 
@@ -119,8 +120,8 @@ public class AuthenticationProvider(
 
                 logger.LogInformation("Login with password successful: {{ \n" +
                                       @$"\t""user id"": ""{user.Id}"",\n" +
-                                      @$"\t""access token"": ""{accessToken}"",\n" +
-                                      @$"\t""refresh token"": ""{refreshToken}"",\n" +
+                                      @$"\t""access token"": ""{accessToken.MaskString()}"",\n" +
+                                      @$"\t""refresh token"": ""{refreshToken.MaskString(10)}"",\n" +
                                       @$"\t""log time"": ""{DateTime.UtcNow}"",\n" +
                                       "}}");
 

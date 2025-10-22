@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using community.common.BaseClasses;
 using community.common.Enumerations;
-using community.data.entities.Lookups;
 
 namespace community.data.entities;
 

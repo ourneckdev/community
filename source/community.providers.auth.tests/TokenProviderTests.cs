@@ -5,6 +5,7 @@ using community.models.Responses;
 using community.models.Responses.Authentication;
 using community.providers.auth.Implementation;
 using community.providers.auth.Interfaces;
+using community.tests.common;
 using Microsoft.Extensions.Options;
 using Moq;
 

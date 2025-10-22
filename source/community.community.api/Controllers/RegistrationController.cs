@@ -2,7 +2,6 @@ using community.common.BaseClasses;
 using community.models.Requests.Registration;
 using community.models.Responses.Authentication;
 using community.models.Responses.Base;
-using community.providers.auth.Interfaces;
 using community.providers.community.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -35,7 +35,7 @@ public record RegisterContactRequest(Guid ContactMethodId, string Value)
             CommunityId = CommunityId,
             UserId = type == EntityType.User ? UserId.GetValueOrDefault() : null,
             ContactMethodId = ContactMethodId,
-            Value = Value.IsValidPhoneNumber() ? Value.FormatPhoneNumber() : Value,
+            Value = Value.IsValidUsPhoneNumber() ? Value.FormatUsPhoneNumber() : Value,
             EntityType = type
         };
     }
@@ -53,7 +53,7 @@ public record RegisterContactRequest(Guid ContactMethodId, string Value)
         if(string.IsNullOrEmpty(Value))
             exception.AddError(nameof(Value), ValidationMessages.ContactMethodRequired);
         
-        if(!Value.IsValidEmailAddress() && !Value.IsValidPhoneNumber())
+        if(!Value.IsValidEmailAddress() && !Value.IsValidUsPhoneNumber())
             exception.AddError(nameof(Value), ValidationMessages.ContactMethodInvalid);
         
         if(exception.Errors.Any() && shouldThrow)

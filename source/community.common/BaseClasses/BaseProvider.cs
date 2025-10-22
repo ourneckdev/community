@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.Security.Claims;
 using community.common.Definitions;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 
 namespace community.common.BaseClasses;

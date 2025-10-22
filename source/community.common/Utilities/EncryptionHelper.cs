@@ -22,6 +22,19 @@ public static class EncryptionHelper
     }
 
     /// <summary>
+    /// Calculates the storage requirements for a base65 encoded cryptographic strong random numbers based on length of bytes required.
+    /// </summary>
+    /// <remarks>
+    /// Base64 encoding causes an overhead of 33–37% relative to the size of the original binary data
+    /// </remarks>
+    /// <param name="byteSize">The length of the bytes required to generate.</param>
+    /// <returns>The calculated byte size of the encoded cryptographically strong random number.</returns>
+    public static int CalculateBase64Bytes(this int byteSize)
+    {
+        return Convert.ToInt32(4 * Math.Ceiling(Convert.ToDecimal(byteSize) / 3));
+    }
+
+    /// <summary>
     ///     Encrypts plain text into a base-64 representation of resulting byte array.
     /// </summary>
     /// <param name="valueToEncrypt">The plain text to encrypt.</param>

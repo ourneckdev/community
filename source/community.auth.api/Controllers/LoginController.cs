@@ -1,5 +1,7 @@
 using community.common.BaseClasses;
 using community.models.Requests.Authentication;
+using community.models.Responses.Authentication;
+using community.models.Responses.Base;
 using community.providers.auth.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +39,10 @@ public class LoginController(IAuthenticationProvider authenticationProvider)
     /// <returns></returns>
     [HttpPost]
     [Route("")]
+    [ProducesResponseType(typeof(LoginResponse),StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> LoginAsync([FromBody] LoginWithCodeRequest withCodeRequest)
     {
         return Ok(await authenticationProvider.LoginAsync(withCodeRequest));
@@ -49,6 +55,10 @@ public class LoginController(IAuthenticationProvider authenticationProvider)
     /// <returns></returns>
     [HttpPost]
     [Route("withpassword")]
+    [ProducesResponseType(typeof(SingleResponse<LoginResponse>),StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> WithPasswordAsync([FromBody] LoginWithPasswordRequest withpasswordRequest)
     {
         return Ok(await authenticationProvider.LoginWithPasswordAsync(withpasswordRequest));

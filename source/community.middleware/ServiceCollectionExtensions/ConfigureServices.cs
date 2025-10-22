@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Carter;
 using community.middleware.Builders;
@@ -33,7 +34,14 @@ public static class ConfigureServices
             services.AddCarter();
         else
         {
-            services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.TypeInfoResolverChain.Add(ProblemDetailsSerializerContext.Default));;
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.TypeInfoResolverChain.Add(ProblemDetailsSerializerContext.Default);
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                    options.JsonSerializerOptions.PropertyNamingPolicy=JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });;
             services.AddEndpointsApiExplorer();
         }
         

@@ -2,7 +2,7 @@ using System.Data;
 using System.Reflection;
 using Microsoft.Data.SqlClient;
 
-namespace community.providers.auth.tests;
+namespace community.tests.common;
 
 public static class ExceptionsHelper
 {

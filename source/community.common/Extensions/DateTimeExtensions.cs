@@ -10,9 +10,21 @@ public static class DateTimeExtensions
     /// </summary>
     /// <param name="dateTime"></param>
     /// <returns></returns>
-    public static string ToUnixTime(this DateTime dateTime)
+    public static long ToUnixTime(this DateTime dateTime)
     {
         dateTime = dateTime.ToUniversalTime();
-        return $"{((DateTimeOffset)dateTime).ToUnixTimeSeconds()}";
+        return ((DateTimeOffset)dateTime).ToUnixTimeSeconds();
     }
+
+    /// <summary>
+    /// Converts epoch time to a UTC Date.
+    /// </summary>
+    /// <param name="epoch"></param>
+    /// <returns></returns>
+    public static DateTime FromUnixTime(this long epoch)
+    {
+        var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        return dateTime.AddSeconds(epoch);
+    }
+
 }

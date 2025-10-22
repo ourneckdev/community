@@ -1,5 +1,5 @@
 using community.common.Definitions;
-using community.common.Utilities;
+using community.common.Extensions;
 using community.data.entities;
 using community.models.Requests.Registration;
 using community.models.Requests.Users;

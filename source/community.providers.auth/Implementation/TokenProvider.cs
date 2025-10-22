@@ -41,8 +41,9 @@ public class TokenProvider(IOptions<JwtSettings> jwtSettings, IHttpContextAccess
             new(JwtRegisteredClaimNames.Jti, EncryptionHelper.Generate(48)),
             new(JwtRegisteredClaimNames.Iss, jwtSettings.Value.Issuer),
             new(JwtRegisteredClaimNames.Aud, jwtSettings.Value.Audience),
-            new(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToUnixTime(), ClaimValueTypes.Integer64),
-            new(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddMinutes(timeSpan.Minutes).ToUnixTime(), ClaimValueTypes.Integer64),
+            new(JwtRegisteredClaimNames.Sub, user.Username),
+            new(JwtRegisteredClaimNames.Iat, $"{DateTime.UtcNow.ToUnixTime()}", ClaimValueTypes.Integer64),
+            new(JwtRegisteredClaimNames.Exp, $"{DateTime.UtcNow.AddMinutes(timeSpan.Minutes).ToUnixTime()}", ClaimValueTypes.Integer64),
 
             new(CommunityClaims.CurrentCommunityId, $"{user.LastCommunityId}"), // current community ID
             new(CommunityClaims.UserId, $"{user.Id}"), // the user's ID
