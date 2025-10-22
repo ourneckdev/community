@@ -1,4 +1,3 @@
-using community.common.AppSettings;
 using community.common.Interfaces;
 using community.models.BusinessObjects;
 

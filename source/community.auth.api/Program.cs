@@ -39,3 +39,9 @@ builder.Services.RegisterServices(container, builder.Configuration, swaggerConfi
 var app = builder.Build();
 app.RegisterApplication(container, swaggerConfiguration);
 await app.RunAsync();
+
+
+/// <summary>
+/// exposes the underlying program without top-level statements
+/// </summary>
+public partial class Program { }

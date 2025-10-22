@@ -1,6 +1,5 @@
 using community.common.Exceptions;
 using community.common.Interfaces;
-using community.data.entities;
 using community.models.Requests.Authentication;
 using community.models.Responses;
 using community.models.Responses.Authentication;

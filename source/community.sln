@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "community.providers.common.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "community.tests.common", "community.tests.common\community.tests.common.csproj", "{D4D6BEB0-7952-473B-9A98-266E3C04A9FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "community.auth.api.tests", "community.auth.api.tests\community.auth.api.tests.csproj", "{3CDB5C48-3571-4EC1-BA3E-E8D41501F4BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{D4D6BEB0-7952-473B-9A98-266E3C04A9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4D6BEB0-7952-473B-9A98-266E3C04A9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4D6BEB0-7952-473B-9A98-266E3C04A9FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CDB5C48-3571-4EC1-BA3E-E8D41501F4BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CDB5C48-3571-4EC1-BA3E-E8D41501F4BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CDB5C48-3571-4EC1-BA3E-E8D41501F4BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CDB5C48-3571-4EC1-BA3E-E8D41501F4BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4B66C9C3-CB56-43E3-A3B9-9717BEFD8844} = {1AC797CA-4B44-4DA3-A70D-D2E722D79A1F}
@@ -163,5 +169,6 @@ Global
 		{06D201FB-70CF-407D-885F-81909C27B9C3} = {6A61F950-EE80-46F7-B8BD-D3F9CC2D449F}
 		{635DDC1A-9A11-45B6-B166-3BEC643CB4AA} = {49B919B6-A0EF-4011-8D24-8D320B534DD6}
 		{D4D6BEB0-7952-473B-9A98-266E3C04A9FD} = {49B919B6-A0EF-4011-8D24-8D320B534DD6}
+		{3CDB5C48-3571-4EC1-BA3E-E8D41501F4BC} = {49B919B6-A0EF-4011-8D24-8D320B534DD6}
 	EndGlobalSection
 EndGlobal

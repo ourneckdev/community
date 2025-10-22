@@ -1,10 +1,11 @@
-﻿using community.common.Utilities;
+﻿using System.ComponentModel;
+using community.common.Utilities;
 
-namespace community.common.tests;
+namespace community.common.tests.Extensions;
 
 public class EncryptionHelperTests
 {
-    [Fact]
+    [Fact, Category("Unit")]
     public void EncryptAndDecryptTest_ShouldSucceed()
     {
         // using the maximum password length of 32 characters here
@@ -16,19 +17,25 @@ public class EncryptionHelperTests
         Assert.Equal(plainText, decryptedString);
     }
 
-    [Fact]
+    [Fact, Category("Unit")]
     public void EncryptAndDecryptDates_ShouldSucceed()
     {
         var dateOnly = new DateOnly(2001, 9, 11);
-        var encrytpedDate = EncryptionHelper.Encrypt(dateOnly);
-        var decryptedDate = DateOnly.Parse(EncryptionHelper.Decrypt(encrytpedDate));
+        var encryptedDate = EncryptionHelper.Encrypt(dateOnly);
+        var decryptedDate = DateOnly.Parse(EncryptionHelper.Decrypt(encryptedDate));
         Assert.Equal(dateOnly, decryptedDate);
     }
 
-    [Fact]
-    public void Generate_256BitString_ShouldSucceed()
+    [Theory, Category("Unit")]
+    [InlineData(24)]
+    [InlineData(36)]
+    [InlineData(48)]
+    [InlineData(96)]
+    [InlineData(128)]
+    public void Generate_256BitString_ShouldSucceed(int bytes)
     {
-        var key = EncryptionHelper.Generate(24);
+        var key = EncryptionHelper.Generate(bytes);
         Assert.NotNull(key);
+        Assert.Equal(bytes.CalculateBase64Bytes(), key.Length);
     }
 }

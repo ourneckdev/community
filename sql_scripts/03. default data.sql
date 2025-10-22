@@ -3312,10 +3312,13 @@ values ('01950294-15e0-7bd7-b232-4cfe690f1bb5', 'Main Phone', 'phone')
 insert into community (name, description)
 values ('Santa Fe Trail Ranch', 'Santa Fe Trail Ranch (SFTR) is south of Trinidad, Colorado near the Colorado/New Mexico state line. The entrance is west of Interstate 25 exit 6, just north of Raton Pass. SFTR covers approximately 16,800 acres and ranges in elevation from 6,500 to 8,100 feet. All 454 of the 35-acre parcels are privately owned, and homes have been built on about half of them. Approximately six to eight new homes are being built each year. Eighty-three (83) miles of reasonably good dirt and gravel roads, maintained by the property owner''s association, provide year-round access.' ||
                                 '\n\n' ||
-                                'There is a very active property owner’s association (POA) guiding many of the activities on the Ranch. We are also served by the Santa Fe Trail Ranch Metro District (Metro), a quasi-governmental tax district that was originally formed by a vote of the SFTR property owners to provide financial assistance with the construction of water and telephone service on our ranch and has been providing water service to SFTR since October 2004. Since then, the Metro has been instrumental in the construction of our new entrance bridge as well as the Metro Operations Center (MOC). In addition to the Metro Business Office, the MOC contains a large meeting room that hosts most of the ranch''s meetings, and since it''s completion in 2019, the summer picnic and other activities have been held under its spacious covered patio. For more info about the Metro, visit their website at <a href="http://sftrmetro.com">sftrmetro.com</a>');
+                                'There is a very active property owner’s association (POA) guiding many of the activities on the Ranch. We are also served by the Santa Fe Trail Ranch Metro District (Metro), a quasi-governmental tax district that was originally formed by a vote of the SFTR property owners to provide financial assistance with the construction of water and telephone service on our ranch and has been providing water service to SFTR since October 2004. Since then, the Metro has been instrumental in the construction of our new entrance bridge as well as the Metro Operations Center (MOC). In addition to the Metro Business Office, the MOC contains a large meeting room that hosts most of the ranch''s meetings, and since it''s completion in 2019, the summer picnic and other activities have been held under its spacious covered patio. For more info about the Metro, visit their website at <a href="http://sftrmetro.com">sftrmetro.com</a>')
+     , ('Test Community', 'Community used for testing purposes');
 
+--
 insert into "user" (user_type_id, username_verified, username_verified_date, username, password, login_code, login_code_expiration, firstname, lastname, date_of_birth)
-values ('0194e2a0-1dd9-7d58-bdb6-f8eae6732cc2', true, utcnow(), 'jason.shepard@protonmail.com', 'BvkJKgmTTD/vNJB7/KNxdA/tKIggEwcJBSRDMkBQQmng==hJd//QPBs2Jxc7WsRg0yHyv3EuOU4cVGfOpDtsE5OfU=', '928302', utcnow() + interval '15 minutes', 'jason', 'shepard', 'A5uD2em2zIKMX5omsR8wfwFs4fW30W2Htcm05N8C9Bzw==uZ543+ELFvN3j47/rLDWug==');
+values ('0194e2a0-1dd9-7d58-bdb6-f8eae6732cc2', true, utcnow(), 'jason.shepard@protonmail.com', 'BvkJKgmTTD/vNJB7/KNxdA/tKIggEwcJBSRDMkBQQmng==hJd//QPBs2Jxc7WsRg0yHyv3EuOU4cVGfOpDtsE5OfU=', '928302', utcnow() + interval '15 minutes', 'jason', 'shepard', 'A5uD2em2zIKMX5omsR8wfwFs4fW30W2Htcm05N8C9Bzw==uZ543+ELFvN3j47/rLDWug==')
+     , ('0194e2a0-1ddb-7da9-bf6e-c9fea6787578', true, utcnow(), 'ourneckofthewoods@proton.me', 'LtdSKW6iDd8U3ylWwXOwCQp3VCbOJOmpS+kvHtLGwDqg==oD4TMc8u44WYUFZ7lPgF2v3sKVtXQMFW7LbRUwFJ0Ic=', null, null, 'OurNeck', 'user', 'uusgjw5MEiJSFtDDgGTZNQS8FbLXhQM3O+QK7WJdcHVA==xNryHAc1wRusgCPIx/EHLQ==');
 
 insert into report_type (id, name, icon)
 values ('019502b3-e525-7b3f-9c4e-4a4c1e7631ff', 'Fire', 'fire-256x256.png')
@@ -3331,8 +3334,8 @@ declare user_id uuid;
 declare contact_id uuid;
 
 BEGIN
-select id into community_id from community;
-select id into user_id from "user";
+select id into community_id from community where name = 'Santa Fe Trail Ranch';
+select id into user_id from "user" where username = 'jason.shepard@protonmail.com';
 
 insert into user_community (user_id, community_id)
 values (user_id, community_id);
@@ -3350,6 +3353,40 @@ values (community_id, '33712 Mountain View Drive', 'Trinidad', 'CO', '81082-3994
 insert into contact (community_id, user_id, entity_type, contact_method_id, value, verified, can_contact)
 values (community_id, user_id, 1, '01950294-15e2-73a1-8772-dc729ab46f37', 'jason.shepard@protonmail.com', true, true)
      , (community_id, user_id, 1, '01950294-15e2-7287-a4c7-c17d6c38d4d8', '3219457624', true, true)
+returning id, can_contact
+    )
+
+insert into contact_consent_log(contact_id, has_consent, community_id)
+select *, community_id
+  from ins;
+
+END $$;
+
+
+DO $$
+declare community_id uuid;
+declare user_id uuid;
+declare contact_id uuid;
+
+BEGIN
+select id into community_id from community where name = 'Test Community';
+select id into user_id from "user" where username = 'ourneckofthewoods@proton.me';
+
+insert into user_community (user_id, community_id)
+values (user_id, community_id);
+
+update "user" set last_community_id = community_id where id = user_id;
+
+insert into user_address (user_id, community_id, lot_number, address_1, city, state_code, postal_code, county_code, country_code, longitude, latitude, place_id, address_type_id)
+values (user_id, community_id,  null, '1234 Easy Street', 'Anywhere', 'CO', '80102', '08031', 'USA', '-104.990251', '39.7392358', 'ChIJzxcfI6qAa4cR1jaKJ_j0jhE', '01950294-15c7-732b-ae70-ca05fe33a8f9');
+
+insert into community_address(community_id, address_1, city, state_code, postal_code, county_code, country_code, longitude, latitude, place_id, address_type_id)
+values (community_id, '1234 Easy Street', 'Anywhere', 'CO', '80102', '08031', 'USA', '-104.990251', '39.7392358', 'ChIJzxcfI6qAa4cR1jaKJ_j0jhE', '01950294-15c6-77eb-92d2-769bb5c72fcf');
+
+  with ins
+   as(
+insert into contact (community_id, user_id, entity_type, contact_method_id, value, verified, can_contact)
+values (community_id, user_id, 1, '01950294-15e2-73a1-8772-dc729ab46f37', 'outneckofthewoods@proton.me', true, true)
 returning id, can_contact
     )
 

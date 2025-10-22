@@ -35,7 +35,7 @@ public abstract record VerifiableUserNameRecord : IRequiresValidation
     /// Verifies the username is a valid phonenumber
     /// </summary>
     /// <returns></returns>
-    private bool IsValidPhoneNumber() => Username.IsValidPhoneNumber();
+    private bool IsValidPhoneNumber() => Username.IsValidUsPhoneNumber();
     
     /// <summary>
     /// Verifieds if the username is a valid email address.

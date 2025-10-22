@@ -28,9 +28,22 @@
           </div>
         </nav>
       </div>
-      <div class="flex items-right justify-end lg:flex-1 gap-1">
-        <button class="relative lg:hidden">
-          <u-icon name="mdi-hamburger-menu" size="30"/>
+      <div class="buttons-container">
+
+        <button class="non-mobile" title="Search" aria-label="Search">
+          <u-icon name="mdi-search"/>
+        </button>
+        <button class="non-mobile-light" title="Switch to dark mode" aria-label="Switch to dark mode">
+          <u-icon name="mdi-white-balance-sunny"/>
+        </button>
+        <button class="non-mobile-dark" title="Switch to light mode" aria-label="Switch to light mode">
+          <u-icon name="mdi-moon-and-stars"/>
+        </button>
+        <button class="non-mobile" title="User profile" aria-label="User profile">
+          <u-icon name="mdi-user-circle"/>
+        </button>
+        <button class="mobile-only" title="Show menu" aria-label="Show menu">
+          <u-icon name="mdi-hamburger-menu"/>
         </button>
       </div>
     </div>

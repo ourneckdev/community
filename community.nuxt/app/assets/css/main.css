@@ -35,7 +35,8 @@
 .dark {
   --ui-bg: #16170a;
   --ui-border: #313316;
-  --ui-text: var(--color-light);
+  --ui-text: var(--color-link);
+  --ui-hover: var(--color-light);
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -128,13 +129,14 @@ header {
       nav {
         @apply relative flex gap-x-1.5;
         @apply justify-between;
-        
+
         ul {
           @apply min-w-0;
           @apply isolate flex items-center;
 
           li {
             @apply min-w-0 py-2;
+
             a {
               font-weight: 800;
               @apply relative w-full flex items-center;
@@ -142,6 +144,20 @@ header {
             }
           }
         }
+      }
+    }
+
+    .buttons-container {
+      @apply flex-grow-1;
+      @apply flex;
+      @apply items-center;
+      @apply justify-end lg:flex-1;
+
+      button {
+        font-size: 1.75em;
+        @apply cursor-pointer;
+        @apply hover:bg-elevated;
+        @apply rounded-md;
       }
     }
   }
@@ -158,4 +174,35 @@ span.iconify {
 
 span.iconify:active {
   background-color: var(--color-dark-10);
+}
+
+.non-mobile {
+  @apply hidden;
+  @apply lg:flex;
+}
+
+.non-mobile-dark {
+  @apply hidden;
+  @apply dark:lg:flex;
+}
+
+.non-mobile-light {
+  @apply hidden;
+  @apply lg:flex;
+  @apply dark:lg:hidden;
+}
+
+.mobile-only {
+  @apply flex;
+  @apply lg:hidden;
+}
+
+.dark-mode {
+  @apply hidden;
+  @apply dark:flex;
+}
+
+.light-mode {
+  @apply flex;
+  @apply dark:hidden;
 }

@@ -19,7 +19,8 @@ public static class WebApplicationExtensions
     /// <param name="container">The SimpleInjector container.</param>
     /// <param name="configuration">The Swagger configuration</param>
     /// <param name="useCarter"></param>
-    public static void RegisterApplication(this WebApplication app, Container container, SwaggerConfiguration configuration, bool useCarter = false)
+    public static void RegisterApplication(this WebApplication app, Container container,
+        SwaggerConfiguration configuration, bool useCarter = false)
     {
         app.UseExceptionHandler();
         app.Services.UseSimpleInjector(container);
@@ -31,7 +32,7 @@ public static class WebApplicationExtensions
         app.UseStaticFiles();
 
         app.UseMiddleware<CorrelationIdHandler>();
-        
+
         app.UseSwagger();
         app.UseSwaggerUI(config =>
         {
@@ -43,7 +44,7 @@ public static class WebApplicationExtensions
         app.UseAuthorization();
 
         app.UseHsts();
-        
+
         if (!useCarter)
             app.MapControllers();
         else

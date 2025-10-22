@@ -3,7 +3,7 @@ using community.common.Definitions;
 using Microsoft.AspNetCore.Http;
 using Moq;
 
-namespace community.providers.auth.tests;
+namespace community.tests.common;
 
 public abstract class BaseTest
 {

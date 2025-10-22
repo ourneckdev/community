@@ -1,5 +1,3 @@
-using community.common.Extensions;
-using community.common.Interfaces;
 using community.middleware.Builders;
 using community.providers.common.HttpClients;
 using Microsoft.Extensions.Configuration;

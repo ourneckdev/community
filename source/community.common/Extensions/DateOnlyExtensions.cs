@@ -1,4 +1,6 @@
-namespace community.common.Utilities;
+using community.common.Utilities;
+
+namespace community.common.Extensions;
 
 /// <summary>
 /// Extension methods related to DateOnly properties.

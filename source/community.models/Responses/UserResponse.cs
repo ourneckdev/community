@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 using community.common.Definitions;
-using community.common.Utilities;
+using community.common.Extensions;
 using community.data.entities;
 using community.models.Responses.Authentication;
 using community.models.Responses.Base;

@@ -1,4 +1,3 @@
-using System.Net.Security;
 using community.common.BaseClasses;
 using community.common.Definitions;
 using community.common.Enumerations;
@@ -57,7 +56,7 @@ public class RegistrationProvider(
                     request.Address?.City,
                     request.Address?.StateCode,
                     request.Address?.PostalCode,
-                    request.PhoneNumber?.Value.FormatPhoneNumber()
+                    request.PhoneNumber?.Value.FormatUsPhoneNumber()
                 ));
             if (existingCommunities.Any())
             {
@@ -138,7 +137,7 @@ public class RegistrationProvider(
             }
             else
             {
-                if (request.Admin.Username.IsValidPhoneNumber())
+                if (request.Admin.Username.IsValidUsPhoneNumber())
                     await contactRepository.AddAsync(new Contact
                     {
                         UserId = newUserId,

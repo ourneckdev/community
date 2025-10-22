@@ -39,7 +39,7 @@ public record RegisterCommunityAdminRequest(
         {
             UserTypeId = UserTypes.GetKey(Strings.UserType_CommunityAdministrator),
             LastCommunityId = lastCommunityId,
-            Username = Username.IsValidPhoneNumber() ? Username.FormatPhoneNumber() : Username,
+            Username = Username.IsValidUsPhoneNumber() ? Username.FormatUsPhoneNumber() : Username,
             Password = Password != null ? EncryptionHelper.Encrypt(Password) : null,
             Prefix = Prefix,
             FirstName = FirstName,
