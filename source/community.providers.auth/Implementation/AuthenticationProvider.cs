@@ -42,7 +42,8 @@ public class AuthenticationProvider(
                 var userId = await userRepository.UserExistsAsync(username);
                 var loginCode = GenerateLoginCode();
                 await authRepository.SetLoginCode(userId, loginCode);
-                return new SingleResponse<LoginCodeResponse>(new LoginCodeResponse());
+                // TODO: send SMS or Email Login Code
+                return new SingleResponse<LoginCodeResponse>(new LoginCodeResponse(loginCode));
             }
             catch (NotFoundException ex)
             {

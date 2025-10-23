@@ -6,12 +6,12 @@ using community.models.Responses.Base;
 namespace community.providers.community.Interfaces;
 
 /// <summary>
-/// Encapsulates all the business logic that pertains to a user.
+///     Encapsulates all the business logic that pertains to a user.
 /// </summary>
 public interface IUserProvider : IProvider
 {
     /// <summary>
-    /// Retrieves full profile for user
+    ///     Retrieves full profile for user
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
@@ -19,16 +19,17 @@ public interface IUserProvider : IProvider
     Task<SingleResponse<UserResponse>> GetAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Validates a username as valid phone or email address.
-    /// Sends a confirmation to the user. 
+    ///     Validates a username as valid phone or email address.
+    ///     Sends a confirmation to the user.
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<SingleResponse<bool>> VerifyUserNameAsync(VerifyUserNameRequest request, CancellationToken cancellationToken = default);
+    Task<SingleResponse<bool>> VerifyUserNameAsync(VerifyUserNameRequest request,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Adds a user
+    ///     Adds a user
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
@@ -36,7 +37,7 @@ public interface IUserProvider : IProvider
     Task<SingleResponse<Guid>> AddAsync(AddUserRequest request, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Updates an existing user.
+    ///     Updates an existing user.
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>

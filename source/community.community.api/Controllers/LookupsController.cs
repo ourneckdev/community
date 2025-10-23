@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace community.community.api.Controllers;
 
 /// <summary>
-/// Exposes endpoints returning lookup type data that has customizable options.  These endpoints require authorization.
+///     Exposes endpoints returning lookup type data that has customizable options.  These endpoints require authorization.
 /// </summary>
 /// <param name="provider">The provider logic required for retrieving the appropriate types</param>
 [Authorize]
@@ -16,7 +16,7 @@ namespace community.community.api.Controllers;
 public class LookupsController(ILookupProvider provider) : BaseController
 {
     /// <summary>
-    /// Retrieves the available address types including custom types per community
+    ///     Retrieves the available address types including custom types per community
     /// </summary>
     /// <returns></returns>
     [HttpGet]
@@ -28,7 +28,7 @@ public class LookupsController(ILookupProvider provider) : BaseController
     }
 
     /// <summary>
-    /// Retrieves the available contact methods including any custom methods per community
+    ///     Retrieves the available contact methods including any custom methods per community
     /// </summary>
     /// <returns></returns>
     [HttpGet]

@@ -5,4 +5,6 @@ namespace community.common.Exceptions;
 ///     allows logging of error codes for easier reference.
 /// </summary>
 /// <param name="message">The error message</param>
-public class CommunityException(string message) : Exception(message) { }
+public class CommunityException(string message) : Exception(message)
+{
+}

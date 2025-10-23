@@ -1,12 +1,12 @@
 namespace community.models.BusinessObjects.DomainModels;
 
 /// <summary>
-/// Defines a DTO object to be used for manipulating data prior to saving.
+///     Defines a DTO object to be used for manipulating data prior to saving.
 /// </summary>
 public abstract class AddressModel : BaseCommunityModel
 {
-        /// <summary>
-    /// Optional lot number
+    /// <summary>
+    ///     Optional lot number
     /// </summary>
     public string? LotNumber { get; set; }
 
@@ -61,18 +61,16 @@ public abstract class AddressModel : BaseCommunityModel
     public decimal? Latitude { get; set; }
 
     /// <summary>
-    /// Gets or sets a string representation of the timezone.
+    ///     Gets or sets a string representation of the timezone.
     /// </summary>
     public string TimeZone { get; set; } = null!;
-    
+
     /// <summary>
-    /// Get or sets the standard timezone offset 
+    ///     Get or sets the standard timezone offset
     /// </summary>
     public TimeSpan TimeZoneOffset { get; set; }
 
     /// <summary>
-    /// 
     /// </summary>
     public string? PlaceId { get; set; }
-
 }

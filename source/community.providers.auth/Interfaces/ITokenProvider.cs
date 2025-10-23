@@ -30,10 +30,11 @@ public interface ITokenProvider : IProvider
     /// </summary>
     /// <returns>Returns a base-64 representation of a 32 Byte cryptographically secure random string.</returns>
     string GenerateRefreshToken(Guid userId);
-    
+
 
     /// <summary>
-    /// Looks up a user by id, returns a hydrated LoginResponse containing the Access and Refresh Tokens, and user information.
+    ///     Looks up a user by id, returns a hydrated LoginResponse containing the Access and Refresh Tokens, and user
+    ///     information.
     /// </summary>
     /// <param name="user">The user object the access and refresh tokens are being generated against.w</param>
     /// <returns></returns>

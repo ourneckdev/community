@@ -1,9 +1,11 @@
 using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("community.providers.community")]
-[assembly:InternalsVisibleTo("community.providers.auth")]
-[assembly:InternalsVisibleTo("community.models")]
-[assembly:InternalsVisibleTo("community.middleware")]
+[assembly: InternalsVisibleTo("community.providers.community")]
+[assembly: InternalsVisibleTo("community.providers.auth")]
+[assembly: InternalsVisibleTo("community.providers.auth.tests")]
+[assembly: InternalsVisibleTo("community.models")]
+[assembly: InternalsVisibleTo("community.middleware")]
+
 namespace community.common.Definitions;
 
 internal static class ValidationMessages

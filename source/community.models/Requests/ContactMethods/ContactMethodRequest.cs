@@ -6,16 +6,34 @@ using community.models.Abstract;
 namespace community.models.Requests.ContactMethods;
 
 /// <summary>
-/// Defines the required properties necessary for collecting contact information during the registration process. 
+///     Defines the required properties necessary for collecting contact information during the registration process.
 /// </summary>
 /// <param name="ContactMethodId"></param>
 /// <param name="Value"></param>
-public record ContactMethodRequest(Guid ContactMethodId, string Value) 
+public record ContactMethodRequest(Guid ContactMethodId, string Value)
     : BaseCommunityRecord, IRequiresValidation
 {
+    /// <inheritdoc cref="IRequiresValidation.Validate" />
+    public void Validate(ValidationException? exception = null)
+    {
+        var shouldThrow = exception == null;
+
+        exception ??= new ValidationException();
+
+        if (ContactMethodId == Guid.Empty)
+            exception.AddError(nameof(ContactMethodId), ValidationMessages.ContactMethodRequired);
+
+        if (string.IsNullOrEmpty(Value))
+            exception.AddError(nameof(Value), ValidationMessages.ContactMethodRequired);
+
+        if (exception.Errors.Any() && shouldThrow)
+            throw exception;
+    }
+
     /// <summary>
-    /// Maps an incoming request object to a database entity.
-    /// </summary>]
+    ///     Maps an incoming request object to a database entity.
+    /// </summary>
+    /// ]
     /// <param name="communityId"></param>
     /// <param name="userId"></param>
     /// <returns></returns>
@@ -29,22 +47,4 @@ public record ContactMethodRequest(Guid ContactMethodId, string Value)
             Value = Value
         };
     }
-
-    /// <inheritdoc cref="IRequiresValidation.Validate" />
-    public void Validate(ValidationException? exception = null)
-    {
-        var shouldThrow = exception == null;
-        
-        exception ??= new ValidationException();
-        
-        if(ContactMethodId == Guid.Empty)
-            exception.AddError(nameof(ContactMethodId), ValidationMessages.ContactMethodRequired);
-        
-        if(string.IsNullOrEmpty(Value))
-            exception.AddError(nameof(Value), ValidationMessages.ContactMethodRequired);
-        
-        if(exception.Errors.Any() && shouldThrow)
-            throw exception;
-    }
 }
-    

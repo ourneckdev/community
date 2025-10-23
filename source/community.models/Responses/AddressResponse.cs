@@ -9,6 +9,35 @@ namespace community.models.Responses;
 /// </summary>
 public abstract class AddressResponse : BaseCommunityResponse
 {
+    /// <summary>
+    /// </summary>
+    /// <param name="address"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    protected static T MapValues<T>(BaseAddressEntity address) where T : AddressResponse, new()
+    {
+        var response = BaseCommunityResponse.MapValues<T>(address);
+        response.Id = address.Id;
+        response.CommunityId = address.CommunityId;
+        response.AddressTypeId = address.AddressTypeId;
+        response.AddressType = address.AddressType?.Name;
+        response.LotNumber = address.LotNumber;
+        response.AddressLine1 = address.AddressLine1;
+        response.AddressLine2 = address.AddressLine2;
+        response.AddressLine3 = address.AddressLine3;
+        response.City = address.City;
+        response.StateCode = address.StateCode;
+        response.PostalCode = address.PostalCode;
+        response.CountyCode = address.CountyCode;
+        response.CountryCode = address.CountryCode;
+        response.Longitude = address.Longitude;
+        response.Latitude = address.Latitude;
+        response.TimeZone = address.TimeZone;
+        response.TimeZoneOffset = address.TimeZoneOffset;
+        response.PlaceId = address.PlaceId;
+        return response;
+    }
+
     #region Properties
 
     /// Gets or sets a common name to reference the record by.
@@ -91,33 +120,4 @@ public abstract class AddressResponse : BaseCommunityResponse
     public string? PlaceId { get; set; }
 
     #endregion
-    
-    /// <summary>
-    /// </summary>
-    /// <param name="address"></param>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    protected static T MapValues<T>(BaseAddressEntity address) where T : AddressResponse, new()
-    {
-        var response = BaseCommunityResponse.MapValues<T>(address);
-        response.Id = address.Id;
-        response.CommunityId = address.CommunityId;
-        response.AddressTypeId = address.AddressTypeId;
-        response.AddressType = address.AddressType?.Name;
-        response.LotNumber = address.LotNumber;
-        response.AddressLine1 = address.AddressLine1;
-        response.AddressLine2 = address.AddressLine2;
-        response.AddressLine3 = address.AddressLine3;
-        response.City = address.City;
-        response.StateCode = address.StateCode;
-        response.PostalCode = address.PostalCode;
-        response.CountyCode = address.CountyCode;
-        response.CountryCode = address.CountryCode;
-        response.Longitude = address.Longitude;
-        response.Latitude = address.Latitude;
-        response.TimeZone = address.TimeZone;
-        response.TimeZoneOffset = address.TimeZoneOffset;
-        response.PlaceId = address.PlaceId;
-        return response;
-    }
 }

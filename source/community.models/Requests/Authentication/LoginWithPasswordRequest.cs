@@ -10,6 +10,5 @@ namespace community.models.Requests.Authentication;
 public record LoginWithPasswordRequest(
     [property: JsonPropertyName("username")]
     string Username,
-    
     [property: JsonPropertyName("password")]
     string? Password);

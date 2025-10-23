@@ -36,12 +36,15 @@ public interface IAuthenticationProvider : IProvider
     /// <returns>A JWT AccessToken, RefreshToken and the <see cref="UserResponse" /></returns>
     /// <exception cref="BusinessRuleException">An exception thrown if the user isn't found or their password is incorrect.</exception>
     Task<SingleResponse<LoginResponse>> LoginWithPasswordAsync(LoginWithPasswordRequest withCodeRequest);
-    
+
     /// <summary>
-    /// For users who have opted to log in with a password, we need to expose functionality that allows them
-    /// to reset their password.
+    ///     For users who have opted to log in with a password, we need to expose functionality that allows them
+    ///     to reset their password.
     /// </summary>
-    /// <param name="forgotPasswordRequest">Immutable record containing the required properties necessary for initiating a forgot password flow.</param>
+    /// <param name="forgotPasswordRequest">
+    ///     Immutable record containing the required properties necessary for initiating a
+    ///     forgot password flow.
+    /// </param>
     /// <returns>a response indicating if the process was executed successfully and any relevant messaging.</returns>
     Task<SingleResponse<ForgotPasswordResponse>> ForgotPasswordAsync(ForgotPasswordRequest forgotPasswordRequest);
 }

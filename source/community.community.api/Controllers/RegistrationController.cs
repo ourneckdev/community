@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace community.community.api.Controllers;
 
 /// <summary>
-///  Hosts endpoints responsible for signing new users up
+///     Hosts endpoints responsible for signing new users up
 /// </summary>
 [AllowAnonymous]
 [ApiController]
@@ -17,7 +17,7 @@ namespace community.community.api.Controllers;
 public class RegistrationController(IRegistrationProvider registrationProvider) : BaseController
 {
     /// <summary>
-    /// Initial setup for a community who wishes to setup the app for their members.
+    ///     Initial setup for a community who wishes to setup the app for their members.
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>

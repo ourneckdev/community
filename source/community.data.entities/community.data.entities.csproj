@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Base\" />
+        <Folder Include="Base\"/>
     </ItemGroup>
 
 </Project>

@@ -15,9 +15,9 @@ public class ReportType : BaseLookupEntity
     /// </summary>
     [MaxLength(255)]
     public string Icon { get; set; } = "";
-    
+
     /// <summary>
-    /// Gets or sets the order the type should display in the UI
+    ///     Gets or sets the order the type should display in the UI
     /// </summary>
     public short SortOrder { get; set; }
 }

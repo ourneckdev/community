@@ -30,10 +30,11 @@ public record EditAddressRequest(
     string PostalCode,
     string? CountyCode,
     string CountryCode = "USA")
-    : BaseAddressRequest(CommunityId, AddressTypeId, LotNumber, AddressLine1, AddressLine2, AddressLine3, City, StateCode, TimeZone, PostalCode, CountyCode, CountryCode)
+    : BaseAddressRequest(CommunityId, AddressTypeId, LotNumber, AddressLine1, AddressLine2, AddressLine3, City,
+        StateCode, TimeZone, PostalCode, CountyCode, CountryCode)
 {
     /// <summary>
-    /// Initializes the record with a user id
+    ///     Initializes the record with a user id
     /// </summary>
     /// <param name="id"></param>
     /// <param name="communityId"></param>

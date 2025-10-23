@@ -7,7 +7,7 @@ using community.models.Requests;
 namespace community.models.Abstract;
 
 /// <summary>
-/// Base address data used across requests
+///     Base address data used across requests
 /// </summary>
 public abstract record BaseAddressRequest(
     Guid AddressTypeId,
@@ -20,11 +20,11 @@ public abstract record BaseAddressRequest(
     string TimeZone,
     string PostalCode,
     string? CountyCode,
-    string CountryCode = "USA") 
+    string CountryCode = "USA")
     : IRequiresValidation
 {
     /// <summary>
-    /// Overridden initializes that accepts community id.
+    ///     Overridden initializes that accepts community id.
     /// </summary>
     /// <param name="communityId"></param>
     /// <param name="addressTypeId"></param>
@@ -51,87 +51,44 @@ public abstract record BaseAddressRequest(
         string postalCode,
         string? countyCode,
         string countryCode = "USA")
-        : this(addressTypeId, lotNumber, addressLine1, addressLine2, addressLine3, city, stateCode, timeZone, postalCode,
+        : this(addressTypeId, lotNumber, addressLine1, addressLine2, addressLine3, city, stateCode, timeZone,
+            postalCode,
             countyCode, countryCode)
     {
         CommunityId = communityId;
     }
 
-    #region Properties
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    public Guid? Id { get; protected init; }
-    
-    /// <summary>
-    /// The community id of the address
-    /// </summary>
-    public Guid CommunityId { get; set; }
-    
-    /// <summary>
-    /// The user id of a user address.
-    /// </summary>
-    public Guid? UserId { get; set; }
-    
-    /// <summary>
-    /// gets or sets the longitude of the requested address
-    /// </summary>
-    public decimal? Latitude { get; set; }
-
-    /// <summary>
-    /// Gets or sets the Longitude of the requested address
-    /// </summary>
-    public decimal? Longitude { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the place id from the google response.
-    /// </summary>
-    public string? PlaceId { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the timezone offset.
-    /// </summary>
-    public TimeSpan? TimeZoneOffset { get; set; }
-    
-    /// <summary>
-    /// Gets or sets who's making the change.
-    /// </summary>
-    protected Guid? ModifiedBy { get; set; }
-    
-    #endregion
-    
     /// <inheritdoc cref="IRequiresValidation.Validate" />
     public void Validate(ValidationException? exception = null)
     {
         var shouldThrow = exception == null;
-        
+
         exception ??= new ValidationException(ValidationMessages.AddressValidationErrors);
-        
-        if(string.IsNullOrEmpty(AddressLine1))
+
+        if (string.IsNullOrEmpty(AddressLine1))
             exception.AddError(nameof(AddressLine1), ValidationMessages.StreetAddressRequired);
-        
-        if(string.IsNullOrEmpty(City))
+
+        if (string.IsNullOrEmpty(City))
             exception.AddError(nameof(City), ValidationMessages.CityRequired);
-        
-        if(string.IsNullOrEmpty(StateCode))
+
+        if (string.IsNullOrEmpty(StateCode))
             exception.AddError(nameof(StateCode), ValidationMessages.StateRequired);
-        
-        if(string.IsNullOrEmpty(PostalCode))
+
+        if (string.IsNullOrEmpty(PostalCode))
             exception.AddError(nameof(PostalCode), ValidationMessages.PostalCodeRequired);
-        
-        if(string.IsNullOrEmpty(CountryCode))
+
+        if (string.IsNullOrEmpty(CountryCode))
             exception.AddError(nameof(CountryCode), ValidationMessages.CountryRequired);
-        
-        if(string.IsNullOrEmpty(TimeZone))
+
+        if (string.IsNullOrEmpty(TimeZone))
             exception.AddError(nameof(TimeZone), ValidationMessages.TimeZoneRequired);
-        
-        if(exception.Errors.Any() && shouldThrow)
+
+        if (exception.Errors.Any() && shouldThrow)
             throw exception;
     }
-    
+
     /// <summary>
-    /// Uses generic conversion to convert to UserAddress, appends UserId
+    ///     Uses generic conversion to convert to UserAddress, appends UserId
     /// </summary>
     /// <returns></returns>
     public UserAddress ToUserAddress()
@@ -142,13 +99,16 @@ public abstract record BaseAddressRequest(
     }
 
     /// <summary>
-    /// Uses generic conversion to convert to commmunity address
+    ///     Uses generic conversion to convert to commmunity address
     /// </summary>
     /// <returns></returns>
-    public CommunityAddress ToCommunityAddress() => ToAddress<CommunityAddress>();
+    public CommunityAddress ToCommunityAddress()
+    {
+        return ToAddress<CommunityAddress>();
+    }
 
     /// <summary>
-    /// Adds the id of the user making the update.
+    ///     Adds the id of the user making the update.
     /// </summary>
     /// <param name="userId"></param>
     public BaseAddressRequest AddUserAudit(Guid? userId)
@@ -156,10 +116,10 @@ public abstract record BaseAddressRequest(
         ModifiedBy = userId;
         return this;
     }
-    
-    
+
+
     /// <summary>
-    /// Generic conversion to base address
+    ///     Generic conversion to base address
     /// </summary>
     /// <returns></returns>
     private T ToAddress<T>() where T : BaseAddressEntity, new()
@@ -186,15 +146,18 @@ public abstract record BaseAddressRequest(
             ModifiedBy = ModifiedBy
         };
     }
-    
-    /// <summary>
-    /// Outputs the address a string to be passed to google for geocoding
-    /// </summary>
-    /// <returns></returns>
-    public override string ToString() => $"{AddressLine1} {AddressLine2 ?? " "}{City} {StateCode} {PostalCode} {CountyCode}";
 
     /// <summary>
-    /// Back fills the geocode data if not supplied
+    ///     Outputs the address a string to be passed to google for geocoding
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()
+    {
+        return $"{AddressLine1} {AddressLine2 ?? " "}{City} {StateCode} {PostalCode} {CountyCode}";
+    }
+
+    /// <summary>
+    ///     Back fills the geocode data if not supplied
     /// </summary>
     /// <param name="result"></param>
     public void SetGeoCode(Result? result)
@@ -204,4 +167,47 @@ public abstract record BaseAddressRequest(
         Latitude ??= latLong?.Latitude;
         PlaceId ??= result?.PlaceId;
     }
+
+    #region Properties
+
+    /// <summary>
+    /// </summary>
+    public Guid? Id { get; protected init; }
+
+    /// <summary>
+    ///     The community id of the address
+    /// </summary>
+    public Guid CommunityId { get; set; }
+
+    /// <summary>
+    ///     The user id of a user address.
+    /// </summary>
+    public Guid? UserId { get; set; }
+
+    /// <summary>
+    ///     gets or sets the longitude of the requested address
+    /// </summary>
+    public decimal? Latitude { get; set; }
+
+    /// <summary>
+    ///     Gets or sets the Longitude of the requested address
+    /// </summary>
+    public decimal? Longitude { get; set; }
+
+    /// <summary>
+    ///     Gets or sets the place id from the google response.
+    /// </summary>
+    public string? PlaceId { get; set; }
+
+    /// <summary>
+    ///     Gets or sets the timezone offset.
+    /// </summary>
+    public TimeSpan? TimeZoneOffset { get; set; }
+
+    /// <summary>
+    ///     Gets or sets who's making the change.
+    /// </summary>
+    protected Guid? ModifiedBy { get; set; }
+
+    #endregion
 }

@@ -35,7 +35,7 @@ public static class ConfigureSwaggerSwashbuckle
                     Title = swaggerGenOptions.Title,
                     Description = swaggerGenOptions.Description
                 });
-            
+
             if (swaggerGenOptions.ShouldDisplayAuthorization)
                 opts.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {

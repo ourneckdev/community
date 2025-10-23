@@ -3,7 +3,7 @@ using TimeZone = community.data.entities.Locales.TimeZone;
 namespace community.models.Responses.Locales;
 
 /// <summary>
-/// Immutable response object that represents available timezones.
+///     Immutable response object that represents available timezones.
 /// </summary>
 /// <param name="Code">The abbreviation of the timezone</param>
 /// <param name="Name">the name of the timezone</param>
@@ -14,7 +14,7 @@ public record TimeZoneResponse(
     TimeSpan UtcOffset)
 {
     /// <summary>
-    /// Maps a timezone entity to it's response object.
+    ///     Maps a timezone entity to it's response object.
     /// </summary>
     /// <param name="timezone"></param>
     /// <returns></returns>

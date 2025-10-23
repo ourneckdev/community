@@ -1,7 +1,7 @@
 namespace community.data.entities.Search;
 
 /// <summary>
-/// Immutable search results object.
+///     Immutable search results object.
 /// </summary>
 /// <param name="Id">The community id returned.  Indicates a match on name</param>
 /// <param name="Name">The name of the existing community.</param>

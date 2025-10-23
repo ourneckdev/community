@@ -18,16 +18,16 @@ public class Location
     /// </summary>
     [JsonPropertyName("longitude")]
     public decimal Longitude { get; set; }
-    
+
     /// <summary>
-    /// Gets or sets the latitude
+    ///     Gets or sets the latitude
     /// </summary>
     [JsonPropertyName("lat")]
     public decimal Lat { get; set; }
-    
+
     /// <summary>
-    ///  Gets or sets the longitude
+    ///     Gets or sets the longitude
     /// </summary>
-   [JsonPropertyName("lng")]
+    [JsonPropertyName("lng")]
     public decimal Lng { get; set; }
 }

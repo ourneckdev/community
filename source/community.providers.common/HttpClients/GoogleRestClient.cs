@@ -11,8 +11,8 @@ namespace community.providers.common.HttpClients;
 public class GoogleRestClient : IGoogleRestClient
 {
     private readonly HttpClient _client;
-    private readonly JsonSerializerOptions _jsonSerializerOptions;
     private readonly GoogleSettings _googleSettings;
+    private readonly JsonSerializerOptions _jsonSerializerOptions;
 
     /// <summary>
     ///     Instantiates the new client
@@ -29,10 +29,12 @@ public class GoogleRestClient : IGoogleRestClient
     /// <inheritdoc />
     public async Task<Response?> GetGecodeForAddressAsync(string address, CancellationToken cancellationToken = default)
     {
-        var url = $"{_googleSettings.GeoCodeBaseUrl}?key={_googleSettings.ApiKey}&address={HttpUtility.UrlEncode(address)}";
+        var url =
+            $"{_googleSettings.GeoCodeBaseUrl}?key={_googleSettings.ApiKey}&address={HttpUtility.UrlEncode(address)}";
         using var response = await _client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
-        response.EnsureSuccessStatusCode(); 
-        var parsedResponse = await response.Content.ReadFromJsonAsync<Response>(_jsonSerializerOptions, cancellationToken);
+        response.EnsureSuccessStatusCode();
+        var parsedResponse =
+            await response.Content.ReadFromJsonAsync<Response>(_jsonSerializerOptions, cancellationToken);
         return parsedResponse;
     }
 }

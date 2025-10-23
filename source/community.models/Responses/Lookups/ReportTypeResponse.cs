@@ -3,7 +3,7 @@ using community.data.entities.Lookups;
 namespace community.models.Responses.Lookups;
 
 /// <summary>
-/// Defines a report type response object.
+///     Defines a report type response object.
 /// </summary>
 /// <param name="Id"></param>
 /// <param name="Name"></param>

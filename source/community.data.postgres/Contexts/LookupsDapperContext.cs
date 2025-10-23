@@ -6,9 +6,10 @@ using Npgsql;
 namespace community.data.postgres.Contexts;
 
 /// <summary>
-/// Initializes a standalone context for interacting with user data.
+///     Initializes a standalone context for interacting with user data.
 /// </summary>
-public class LookupsDapperContext(IConfiguration configuration, ILogger<LookupsDapperContext> logger) : ILookupsDapperContext
+public class LookupsDapperContext(IConfiguration configuration, ILogger<LookupsDapperContext> logger)
+    : ILookupsDapperContext
 {
     /// <summary>
     ///     Creates a connection to the underlying data store.

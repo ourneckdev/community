@@ -75,18 +75,18 @@ public static partial class StringExtensions
     public static string FormatUsPhoneNumber(this string input)
     {
         var phoneNumber = new string(input.Where(char.IsDigit).ToArray());
-        return phoneNumber.Length != 10 
-            ? throw new BusinessRuleException(ValidationMessages.PhoneNumberLength) 
+        return phoneNumber.Length != 10
+            ? throw new BusinessRuleException(ValidationMessages.PhoneNumberLength)
             : phoneNumber;
     }
 
     /// <summary>
-    /// In order to protect the underlying tokens, or any other potentially sensitive data from
-    /// being logged, we're going to mask the values with ellipses to indicate there is additional data.
+    ///     In order to protect the underlying tokens, or any other potentially sensitive data from
+    ///     being logged, we're going to mask the values with ellipses to indicate there is additional data.
     /// </summary>
     /// <remarks>
-    /// If an uneven number is provided for the mask length, the first portion of the mask will contain
-    /// the extra character.
+    ///     If an uneven number is provided for the mask length, the first portion of the mask will contain
+    ///     the extra character.
     /// </remarks>
     /// <param name="input">the string to be masked</param>
     /// <param name="maxLength">The maximum amount of characters to display.</param>
@@ -95,7 +95,7 @@ public static partial class StringExtensions
     {
         if (input.Length <= maxLength)
             return input;
-        
+
         var frontHalf = (int)decimal.Round((decimal)maxLength / 2);
         var backHalf = maxLength - frontHalf;
 

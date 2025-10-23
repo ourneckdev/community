@@ -18,7 +18,7 @@ public record CountyResponse(
     /// <returns>a hydrated response object.</returns>
     public static implicit operator CountyResponse(County county)
     {
-        return new CountyResponse(county.Code, 
+        return new CountyResponse(county.Code,
             county.StateCode,
             county.CountryCode,
             county.Name);

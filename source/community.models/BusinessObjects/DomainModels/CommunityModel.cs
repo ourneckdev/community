@@ -1,7 +1,7 @@
 namespace community.models.BusinessObjects.DomainModels;
 
 /// <summary>
-/// Logic layer representation of a Community DDD Entity
+///     Logic layer representation of a Community DDD Entity
 /// </summary>
 public class CommunityModel : BasePrimaryModel
 {
@@ -29,29 +29,29 @@ public class CommunityModel : BasePrimaryModel
     ///     Gets or sets the name of the S3 bucket where media is stored.
     /// </summary>
     public string S3BucketName { get; set; } = "";
-    
+
     /// <summary>
-    /// Optional community information for number of parcels
+    ///     Optional community information for number of parcels
     /// </summary>
     public int? NumberOfParcels { get; set; }
-    
+
     /// <summary>
-    /// Optional community information for average parcel size
+    ///     Optional community information for average parcel size
     /// </summary>
     public decimal? ParcelSize { get; set; }
-    
+
     /// <summary>
-    /// Optional community information for unit of parcel size
+    ///     Optional community information for unit of parcel size
     /// </summary>
     public Guid? ParcelSizeUnitId { get; set; }
-    
+
     /// <summary>
-    /// Optional community information for number of residents 
+    ///     Optional community information for number of residents
     /// </summary>
     public int? NumberOfResidents { get; set; }
-    
+
     /// <summary>
-    /// Optional community information for average home value
+    ///     Optional community information for average home value
     /// </summary>
     public decimal? AverageHomeValue { get; set; }
 }

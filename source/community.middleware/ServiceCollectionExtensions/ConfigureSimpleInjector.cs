@@ -23,10 +23,10 @@ public static class ConfigureSimpleInjector
     {
         services.AddSimpleInjector(container, options =>
             {
-                    options
-                        .AddLogging()
-                        .AddAspNetCore()
-                        .AddControllerActivation();
+                options
+                    .AddLogging()
+                    .AddAspNetCore()
+                    .AddControllerActivation();
             })
             .UseSimpleInjectorAspNetRequestScoping(container);
     }

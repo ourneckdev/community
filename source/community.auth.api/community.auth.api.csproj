@@ -7,7 +7,7 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <LangVersion>latest</LangVersion>
         <UserSecretsId>a4e4d9a0-f2a4-4377-b370-ffc3a700b362</UserSecretsId>
-  </PropertyGroup>
+    </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
         <DocumentationFile>bin\Debug\net9.0\community.auth.api.xml</DocumentationFile>
@@ -20,8 +20,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
-        <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc.Core" Version="5.5.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
+        <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc.Core" Version="5.5.0"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -34,10 +34,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\community.common\community.common.csproj" />
-        <ProjectReference Include="..\community.ioc\community.ioc.csproj" />
-        <ProjectReference Include="..\community.middleware\community.middleware.csproj" />
-        <ProjectReference Include="..\community.models\community.models.csproj" />
+        <ProjectReference Include="..\community.common\community.common.csproj"/>
+        <ProjectReference Include="..\community.ioc\community.ioc.csproj"/>
+        <ProjectReference Include="..\community.middleware\community.middleware.csproj"/>
+        <ProjectReference Include="..\community.models\community.models.csproj"/>
     </ItemGroup>
 
 </Project>

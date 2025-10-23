@@ -18,21 +18,21 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Carter" Version="9.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.4" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
-        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.4" />
-        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.4.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="Polly" Version="8.5.2" />
+        <PackageReference Include="Carter" Version="9.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.4.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="Polly" Version="8.5.2"/>
         <PackageReference Include="SimpleInjector" Version="5.5.0"/>
         <PackageReference Include="SimpleInjector.Integration.AspNetCore" Version="5.5.0"/>
         <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc.Core" Version="5.5.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.1.1" />
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.1" />
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.1.1"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.1"/>
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -41,7 +41,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\community.common\community.common.csproj"/>
-        <ProjectReference Include="..\community.providers.common\community.providers.common.csproj" />
+        <ProjectReference Include="..\community.providers.common\community.providers.common.csproj"/>
     </ItemGroup>
 
 </Project>

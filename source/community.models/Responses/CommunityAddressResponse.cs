@@ -3,12 +3,11 @@ using community.data.entities;
 namespace community.models.Responses;
 
 /// <summary>
-/// Community address concrete implementation
+///     Community address concrete implementation
 /// </summary>
 public class CommunityAddressResponse : AddressResponse
 {
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="address"></param>
     /// <returns></returns>

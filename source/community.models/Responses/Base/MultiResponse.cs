@@ -10,7 +10,6 @@ namespace community.models.Responses.Base;
 public record MultiResponse<T>(IEnumerable<T> Items) : BaseRecord
 {
     /// <summary>
-    /// 
     /// </summary>
     public long Count => Items.Count();
 }

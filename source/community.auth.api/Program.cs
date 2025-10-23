@@ -42,6 +42,8 @@ await app.RunAsync();
 
 
 /// <summary>
-/// exposes the underlying program without top-level statements
+///     exposes the underlying program without top-level statements
 /// </summary>
-public partial class Program { }
+public partial class Program
+{
+}

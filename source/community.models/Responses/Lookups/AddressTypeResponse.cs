@@ -11,7 +11,7 @@ public record AddressTypeResponse(
     string Name)
 {
     /// <summary>
-    /// Maps a database entity to a return record.
+    ///     Maps a database entity to a return record.
     /// </summary>
     /// <param name="entity"></param>
     /// <returns></returns>

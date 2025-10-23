@@ -3,7 +3,7 @@ using community.data.entities.Locales;
 namespace community.models.Responses.Locales;
 
 /// <summary>
-/// Gets an immutable country  
+///     Gets an immutable country
 /// </summary>
 /// <param name="Code"></param>
 /// <param name="Name"></param>
@@ -16,7 +16,7 @@ public record CountryResponse(
     string NumericCode)
 {
     /// <summary>
-    /// Maps a <see cref="Country"/> entity to an immutable response object
+    ///     Maps a <see cref="Country" /> entity to an immutable response object
     /// </summary>
     /// <param name="country"></param>
     /// <returns></returns>

@@ -29,7 +29,7 @@ public class SwaggerConfiguration
     public IEnumerable<string> DocumentationFiles { get; set; } = new List<string>();
 
     /// <summary>
-    /// Whether or not the authorization button displays in swagger
+    ///     Whether or not the authorization button displays in swagger
     /// </summary>
     public bool ShouldDisplayAuthorization { get; set; } = true;
 }

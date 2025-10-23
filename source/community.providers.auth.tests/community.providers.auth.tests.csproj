@@ -7,6 +7,11 @@
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DocumentationFile>bin\Debug\net9.0\community.providers.auth.tests.xml</DocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.4">
             <PrivateAssets>all</PrivateAssets>
@@ -27,7 +32,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\community.providers.auth\community.providers.auth.csproj"/>
-        <ProjectReference Include="..\community.tests.common\community.tests.common.csproj" />
+        <ProjectReference Include="..\community.tests.common\community.tests.common.csproj"/>
     </ItemGroup>
 
 </Project>

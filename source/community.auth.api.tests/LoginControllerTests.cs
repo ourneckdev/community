@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using System.Text;
 using community.models.Responses;
 using community.models.Responses.Authentication;
 using community.models.Responses.Base;
@@ -10,10 +11,10 @@ namespace community.auth.api.tests;
 
 public class LoginControllerTests
 {
-    private readonly HttpClient _httpClient;
     private readonly TestApplicationFactory _factory = new();
-    private readonly string _testUser = "ourneckofthewoods@proton.me";
+    private readonly HttpClient _httpClient;
     private readonly string _testPassword = "BlahBlahBlah98!";
+    private readonly string _testUser = "ourneckofthewoods@proton.me";
 
     //private readonly ITokenProvider? _tokenProvider;
 
@@ -34,7 +35,7 @@ public class LoginControllerTests
         };
 
         var postBody = new StringContent(JsonSerializer.Serialize(loginRequest),
-            System.Text.Encoding.UTF8,
+            Encoding.UTF8,
             "application/json");
         var response = await _httpClient.PostAsync("withpassword", postBody);
         Assert.NotNull(response);
@@ -53,7 +54,7 @@ public class LoginControllerTests
         Assert.Equal(_testUser, token.Subject);
         Assert.True(token.IssuedAt < DateTime.UtcNow);
         Assert.True(token.ValidTo > DateTime.UtcNow);
-        
+
         Assert.IsType<UserResponse>(itemResponse.Item.User);
         Assert.NotNull(itemResponse.Item.User);
         Assert.NotNull(itemResponse.Item.User.DateOfBirth);

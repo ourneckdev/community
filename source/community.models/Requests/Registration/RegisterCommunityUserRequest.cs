@@ -8,7 +8,7 @@ using community.models.Abstract;
 namespace community.models.Requests.Registration;
 
 /// <summary>
-/// Registers a user to an existing community.
+///     Registers a user to an existing community.
 /// </summary>
 /// <param name="CommunityId">The id of the community the user is attmepting to join.</param>
 /// <param name="Password">Optional, the password the user has chosen.</param>
@@ -31,7 +31,7 @@ public record RegisterCommunityUserRequest(
     IEnumerable<RegisterContactRequest>? ContactMethods) : VerifiableUserNameRecord
 {
     /// <summary>
-    /// Maps the request to a series of database objects to add.
+    ///     Maps the request to a series of database objects to add.
     /// </summary>
     /// <returns></returns>
     public User ToUser()
@@ -69,14 +69,14 @@ public record RegisterCommunityUserRequest(
                 string.Format(ValidationMessages.NameLength, Integers.ValidationMinimumNameLength));
 
         base.Validate(validationException);
-        
+
         Address?.Validate(validationException);
-        
-        if(ContactMethods?.Any() ?? false)
-            foreach(var contactMethod in ContactMethods)
+
+        if (ContactMethods?.Any() ?? false)
+            foreach (var contactMethod in ContactMethods)
                 contactMethod.Validate(validationException);
-        
-        if(validationException.Errors.Any())
+
+        if (validationException.Errors.Any())
             throw validationException;
     }
 }

@@ -39,7 +39,7 @@ public class LoginController(IAuthenticationProvider authenticationProvider)
     /// <returns></returns>
     [HttpPost]
     [Route("")]
-    [ProducesResponseType(typeof(LoginResponse),StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -55,7 +55,7 @@ public class LoginController(IAuthenticationProvider authenticationProvider)
     /// <returns></returns>
     [HttpPost]
     [Route("withpassword")]
-    [ProducesResponseType(typeof(SingleResponse<LoginResponse>),StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(SingleResponse<LoginResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -65,7 +65,7 @@ public class LoginController(IAuthenticationProvider authenticationProvider)
     }
 
     /// <summary>
-    /// Endpoint exposing functionality to initiate a password reset process for a user.
+    ///     Endpoint exposing functionality to initiate a password reset process for a user.
     /// </summary>
     /// <param name="forgotPasswordRequest">Post body params necessary for initiating a forgot password flow.</param>
     /// <returns>A boolean indicating success an any relevant messaging.</returns>

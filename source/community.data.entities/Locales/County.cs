@@ -15,7 +15,6 @@ public class County : BaseLocaleEntity
     public string StateCode { get; set; } = null!;
 
     /// <summary>
-    /// 
     /// </summary>
     [Length(3, 3)]
     public string CountryCode { get; set; } = null!;
