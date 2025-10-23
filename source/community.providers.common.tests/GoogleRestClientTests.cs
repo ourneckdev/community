@@ -13,7 +13,6 @@ public class GoogleRestClientTests
     private readonly GoogleRestClient _googleRestClient = new(HttpClient, Options.Create(new GoogleSettings
     {
         GeoCodeBaseUrl = "https://maps.googleapis.com/maps/api/geocode/json",
-        ApiKey = "AIzaSyDDtjkZ7w1c5MRQd_E3-rwwZQCkksWY4wQ"
     }));
 
 
