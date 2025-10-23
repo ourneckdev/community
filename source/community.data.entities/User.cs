@@ -18,33 +18,33 @@ public sealed class User : BasePrimaryEntity
     ///     CommunityAdmin
     ///     CommunityMember
     /// </remarks>
-    
+
     public Guid UserTypeId { get; set; }
 
     /// <summary>
     ///     Gets or sets the username, either email or mobile phone, of the user.
     /// </summary>
-    
+
     [MaxLength(75)]
     public string Username { get; set; } = "";
 
     /// <summary>
     ///     Gets or sets an optional password that can be used to login, if preferred.
     /// </summary>
-    
+
     [MaxLength(150)]
     public string? Password { get; set; } = "";
-    
+
     /// <summary>
     ///     Gets or sets an indicator as to whether the user is a verified member of the community.
     /// </summary>
-    
+
     public bool UsernameVerified { get; set; }
 
     /// <summary>
     ///     Gets or sets the date the user was verified, if verified.
     /// </summary>
-    
+
     public DateTime? UsernameVerifiedDate { get; set; }
 
     /// <summary>
@@ -54,7 +54,7 @@ public sealed class User : BasePrimaryEntity
     ///     While this column exists it will never be selected or set by object reference.  It will be used in query
     ///     predicates only during login.
     /// </remarks>
-    
+
     [Length(6, 6)]
     public string? LoginCode { get; set; }
 
@@ -65,67 +65,67 @@ public sealed class User : BasePrimaryEntity
     ///     While this column exists it will never be selected or set by object reference.  It will be used in query
     ///     predicates only during login.
     /// </remarks>
-    
+
     public DateTime? LoginCodeExpiration { get; set; }
 
     /// <summary>
     ///     Gets or sets the user's name prefix.
     /// </summary>
-    
+
     [MaxLength(10)]
     public string? Prefix { get; set; }
 
     /// <summary>
     ///     Gets or sets the user's first name
     /// </summary>
-    
+
     [MaxLength(100)]
     public string FirstName { get; set; } = "";
 
     /// <summary>
     ///     Gets or sets the user's lastname.
     /// </summary>
-    
+
     [MaxLength(100)]
     public string LastName { get; set; } = "";
 
     /// <summary>
     ///     Gets or sets the user's name prefix.
     /// </summary>
-    
+
     [MaxLength(10)]
     public string? Suffix { get; set; }
 
     /// <summary>
     ///     Gets or sets the user's date of birth as an encrypted string.
     /// </summary>
-    
+
     public string? DateOfBirth { get; set; }
 
     /// <summary>
     ///     Gets or sets a status indicating whether the user's account is locked out.
     /// </summary>
     /// <remarks>Locked accounts are a result of too many failed login attempts.</remarks>
-    
+
     public bool Locked { get; set; }
 
     /// <summary>
     ///     Gets or sets the object name in S3
     /// </summary>
-    
+
     [MaxLength(255)]
     public string? ProfilePic { get; set; }
 
     /// <summary>
     ///     Gets or sets the timestamp the last time the user logged in
     /// </summary>
-    
+
     public DateTime? LastLoginDate { get; set; }
 
     /// <summary>
     ///     Gets or sets the last community the user logged into
     /// </summary>
-    
+
     public Guid? LastCommunityId { get; set; }
 
 

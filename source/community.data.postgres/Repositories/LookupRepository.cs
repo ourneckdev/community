@@ -23,28 +23,28 @@ public class LookupRepository(ILookupsDapperContext context, IHttpContextAccesso
         using var connection = context.CreateConnection();
         var sql = HasCommunityIdColumn<T>()
             ? $"""
-              select *
+               select *
+                 from {GetTableName<T>()}
+                where is_active
+                  and (community_id is null or (@cid != emptyGuid() and community_id = @cid))
+               """
+            : $"""
+               select *
                 from {GetTableName<T>()}
                where is_active
-                 and (community_id is null or (@cid != emptyGuid() and community_id = @cid))
-              """
-            : $"""
-              select *
-               from {GetTableName<T>()}
-              where is_active
-              """;
+               """;
         return await connection.QueryAsync<T>(
             sql, new { cid = communityId.GetValueOrDefault() });
     }
-    
-    
+
+
     private string GetTableName<T>()
     {
         var type = typeof(T);
         var tableAttr = type.GetCustomAttribute<TableAttribute>();
-        
+
         if (tableAttr == null) return type.Name;
-        
+
         var tableName = tableAttr.Name;
         return tableName;
     }

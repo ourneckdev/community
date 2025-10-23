@@ -23,25 +23,30 @@ public abstract class BaseRepository(IHttpContextAccessor contextAccessor)
     }
 
     /// <summary>
-    /// Retrieves the current community a user is logged into from the JWT user.
+    ///     Retrieves the current community a user is logged into from the JWT user.
     /// </summary>
     protected Guid? CurrentCommunityId
     {
         get
         {
-            Guid.TryParse(contextAccessor.HttpContext?.User.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.CurrentCommunityId)?.Value, out var communityId);
+            Guid.TryParse(
+                contextAccessor.HttpContext?.User.Claims
+                    .FirstOrDefault(claim => claim.Type == CommunityClaims.CurrentCommunityId)?.Value,
+                out var communityId);
             return communityId;
         }
     }
 
     /// <summary>
-    /// Retrieves the current user id from the JWT, if authenticated.
+    ///     Retrieves the current user id from the JWT, if authenticated.
     /// </summary>
     protected Guid? UserId
     {
         get
         {
-            Guid.TryParse(contextAccessor.HttpContext?.User.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.UserId)?.Value, out var userId);
+            Guid.TryParse(
+                contextAccessor.HttpContext?.User.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.UserId)
+                    ?.Value, out var userId);
             return userId;
         }
     }
@@ -60,7 +65,6 @@ public abstract class BaseRepository(IHttpContextAccessor contextAccessor)
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="methodName"></param>
     /// <param name="executionTimeInMilliseconds"></param>

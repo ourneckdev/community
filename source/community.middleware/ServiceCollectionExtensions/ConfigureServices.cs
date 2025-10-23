@@ -31,7 +31,9 @@ public static class ConfigureServices
         bool useCarter = false)
     {
         if (useCarter)
+        {
             services.AddCarter();
+        }
         else
         {
             services.AddControllers()
@@ -39,12 +41,13 @@ public static class ConfigureServices
                 {
                     options.JsonSerializerOptions.TypeInfoResolverChain.Add(ProblemDetailsSerializerContext.Default);
                     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-                    options.JsonSerializerOptions.PropertyNamingPolicy=JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                });;
+                });
+            ;
             services.AddEndpointsApiExplorer();
         }
-        
+
         services.SetOptions(configuration);
         services.AddHttpContextAccessor();
         services.AddSimpleInjector(container);
@@ -55,7 +58,6 @@ public static class ConfigureServices
         services.AddLogging(options => options.AddConsole());
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddHttpClients(configuration);
-
     }
 }
 

@@ -69,20 +69,29 @@ public class Result
     ///     Returns first line of the street address
     /// </summary>
     /// <returns></returns>
-    public string GetStreetAddress() => $"{GetComponent(ComponentType.street_number)?.ShortName ?? ""} {GetComponent(ComponentType.route)?.ShortName ?? ""}";
-    
+    public string GetStreetAddress()
+    {
+        return
+            $"{GetComponent(ComponentType.street_number)?.ShortName ?? ""} {GetComponent(ComponentType.route)?.ShortName ?? ""}";
+    }
+
     /// <summary>
-    /// gets concatenated postal code 
+    ///     gets concatenated postal code
     /// </summary>
     /// <returns></returns>
-    public string GetPostalCode() => !string.IsNullOrWhiteSpace(GetComponent(ComponentType.postal_code_suffix)?.ShortName)
-        ? $"{GetComponent(ComponentType.postal_code)?.ShortName ?? ""}-{GetComponent(ComponentType.postal_code_suffix)?.ShortName ?? ""}"
-        : $"{GetComponent(ComponentType.postal_code)?.ShortName ?? ""}";
-    
+    public string GetPostalCode()
+    {
+        return !string.IsNullOrWhiteSpace(GetComponent(ComponentType.postal_code_suffix)?.ShortName)
+            ? $"{GetComponent(ComponentType.postal_code)?.ShortName ?? ""}-{GetComponent(ComponentType.postal_code_suffix)?.ShortName ?? ""}"
+            : $"{GetComponent(ComponentType.postal_code)?.ShortName ?? ""}";
+    }
+
     /// <summary>
-    /// Retrieves Longitude and Latitude from the results.
+    ///     Retrieves Longitude and Latitude from the results.
     /// </summary>
     /// <returns></returns>
-    public (decimal? Longitude, decimal? Latitude) GetLatLong() => (Geometry?.Location?.Lng, Geometry?.Location?.Lat); 
-    
+    public (decimal? Longitude, decimal? Latitude) GetLatLong()
+    {
+        return (Geometry?.Location?.Lng, Geometry?.Location?.Lat);
+    }
 }

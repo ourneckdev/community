@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace community.community.api.Controllers;
 
 /// <summary>
-/// Exposes endpoints for saving and retrieving user data.
+///     Exposes endpoints for saving and retrieving user data.
 /// </summary>
 /// <param name="userProvider"></param>
 [ApiController]
@@ -16,7 +16,7 @@ namespace community.community.api.Controllers;
 public class UserController(IUserProvider userProvider) : BaseController
 {
     /// <summary>
-    /// Retrieves a user's information.
+    ///     Retrieves a user's information.
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
@@ -30,7 +30,7 @@ public class UserController(IUserProvider userProvider) : BaseController
     }
 
     /// <summary>
-    /// Updates an existing user  
+    ///     Updates an existing user
     /// </summary>
     /// <param name="request">Optional and required info necessary to update user.</param>
     /// <param name="cancellationToken"></param>
@@ -44,7 +44,7 @@ public class UserController(IUserProvider userProvider) : BaseController
     }
 
     /// <summary>
-    /// Updates an existing user  
+    ///     Updates an existing user
     /// </summary>
     /// <param name="request">Optional and required info necessary to update user.</param>
     /// <param name="cancellationToken"></param>
@@ -59,8 +59,8 @@ public class UserController(IUserProvider userProvider) : BaseController
     }
 
     /// <summary>
-    /// During the registration process, a user will be required to verify they hold either
-    /// the mobile number or email address used for their username.
+    ///     During the registration process, a user will be required to verify they hold either
+    ///     the mobile number or email address used for their username.
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>

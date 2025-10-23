@@ -4,13 +4,12 @@ using Dapper;
 namespace community.common.Enumerations;
 
 /// <summary>
-/// Dapper type handler
+///     Dapper type handler
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class TypeHandler<T> : SqlMapper.TypeHandler<T> where T : IEnumeration
 {
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
@@ -20,7 +19,6 @@ public class TypeHandler<T> : SqlMapper.TypeHandler<T> where T : IEnumeration
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="parameter"></param>
     /// <param name="value"></param>

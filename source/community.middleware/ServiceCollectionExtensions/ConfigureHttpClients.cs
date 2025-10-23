@@ -32,16 +32,19 @@ public static class ConfigureHttpClients
         services
             .AddHttpClient<IGoogleRestClient, GoogleRestClient>(client =>
             {
-                client.BaseAddress = new Uri(configuration.GetSection("GoogleSettings").GetValue<string>("GeoCodeBaseUrl") ?? "https://localhost/");
+                client.BaseAddress =
+                    new Uri(configuration.GetSection("GoogleSettings").GetValue<string>("GeoCodeBaseUrl") ??
+                            "https://localhost/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             })
             .ConfigureDefaultResilience();
-        
+
         services
             .AddHttpClient<ITwilioHttpClient, TwilioHttpClient>(client =>
             {
-                client.BaseAddress = new Uri(configuration.GetSection("TwilioSettings").GetValue<string>("BaseUrl") ?? "https://localhost/");
+                client.BaseAddress = new Uri(configuration.GetSection("TwilioSettings").GetValue<string>("BaseUrl") ??
+                                             "https://localhost/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             })

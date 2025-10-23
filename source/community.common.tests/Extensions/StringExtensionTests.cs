@@ -5,7 +5,8 @@ namespace community.common.tests.Extensions;
 
 public class StringExtensionTests
 {
-    [Theory, Category("Unit")]
+    [Theory]
+    [Category("Unit")]
     [InlineData("407.662.9827")]
     [InlineData("(407) 662.9827")]
     [InlineData("(407)-662-9827")]
@@ -15,8 +16,9 @@ public class StringExtensionTests
     {
         Assert.True(phoneNumber.IsValidUsPhoneNumber());
     }
-    
-    [Theory, Category("Unit")]
+
+    [Theory]
+    [Category("Unit")]
     [InlineData("407.662.982")]
     [InlineData("(407) 662.M827")]
     [InlineData("662-9827")]
@@ -26,7 +28,8 @@ public class StringExtensionTests
         Assert.False(phoneNumber.IsValidUsPhoneNumber());
     }
 
-    [Theory, Category("Unit")]
+    [Theory]
+    [Category("Unit")]
     [InlineData("407.662.9827", "4076629827")]
     [InlineData("(407) 662.9827", "4076629827")]
     [InlineData("(407)-662-9827", "4076629827")]
@@ -38,27 +41,31 @@ public class StringExtensionTests
         Assert.Equal(expectedResult, result);
     }
 
-    [Theory, Category("Unit")]
+    [Theory]
+    [Category("Unit")]
     [InlineData("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9", "eyJhbGciOi...I6IkpXVCJ9")]
     [InlineData("35YZxwK6E9zsKjNIM5UIjQE2O3G2TqQW9LE60=", "35YZxwK6E9...TqQW9LE60=")]
     public void MaskString_ReturnsMaskedString_ShouldSucceed(string maskedString, string expectedResult)
     {
-        var result = maskedString.MaskString(); 
+        var result = maskedString.MaskString();
         Assert.Equal(expectedResult, result);
     }
-    
-    [Theory, Category("Unit")]
+
+    [Theory]
+    [Category("Unit")]
     [InlineData("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9", 20, "eyJhbGciOi...I6IkpXVCJ9")]
     [InlineData("35YZxwK6E9zsKjNIM5UIjQE2O3G2TqQW9LE60=", 20, "35YZxwK6E9...TqQW9LE60=")]
     [InlineData("35YZxwK6E9zsKjNIM5UIjQE2O3G2TqQW9LE60=", 10, "35YZx...LE60=")]
     [InlineData("35YZxwK6E9zsKjNIM5UIjQE2O3G2TqQW9LE60=", 15, "35YZxwK6...W9LE60=")]
-    public void MaskString_VaryingMaskLength_ReturnsMaskedString_ShouldSucceed(string maskedString, int maskLength, string expectedResult)
+    public void MaskString_VaryingMaskLength_ReturnsMaskedString_ShouldSucceed(string maskedString, int maskLength,
+        string expectedResult)
     {
-        var result = maskedString.MaskString(maskLength); 
+        var result = maskedString.MaskString(maskLength);
         Assert.Equal(expectedResult, result);
     }
 
-    [Theory, Category("Unit")]
+    [Theory]
+    [Category("Unit")]
     [InlineData("sample@example.com")]
     [InlineData("sample@example.co")]
     [InlineData("sample@example.co.uk")]
@@ -70,7 +77,8 @@ public class StringExtensionTests
         Assert.True(email.IsValidEmailAddress());
     }
 
-    [Theory, Category("Unit")]
+    [Theory]
+    [Category("Unit")]
     [InlineData("-sample-@example.com")]
     [InlineData(".sample@example.co")]
     [InlineData("sample..lastname@example.com")]

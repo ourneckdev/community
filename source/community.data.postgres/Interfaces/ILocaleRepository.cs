@@ -38,11 +38,12 @@ public interface ILocaleRepository : IRepository
     ValueTask<IEnumerable<TimeZone>> ListTimeZonesAsync(string countryCode);
 
     /// <summary>
-    /// Gets the timezone details by name
+    ///     Gets the timezone details by name
     /// </summary>
     /// <param name="countryCode"></param>
     /// <param name="name"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>A</returns>
-    ValueTask<TimeZone?> GetTimeZoneAsync(string countryCode, string name, CancellationToken cancellationToken = default);
+    ValueTask<TimeZone?> GetTimeZoneAsync(string countryCode, string name,
+        CancellationToken cancellationToken = default);
 }

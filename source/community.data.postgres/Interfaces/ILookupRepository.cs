@@ -39,9 +39,9 @@ public interface ILookupRepository : IRepository
     // /// </summary>
     // /// <returns></returns>
     // ValueTask<IEnumerable<ParcelSizeUnit>> ListParcelSizeUnitsAsync();
-    
+
     /// <summary>
-    /// Lists types that implememnt a commmunity id.
+    ///     Lists types that implememnt a commmunity id.
     /// </summary>
     /// <param name="communityId">Optional community id</param>
     /// <returns></returns>

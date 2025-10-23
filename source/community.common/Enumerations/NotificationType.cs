@@ -24,5 +24,5 @@ public enum NotificationType
     /// <summary>
     ///     No notifications.
     /// </summary>
-    None = 0x4,
+    None = 0x4
 }

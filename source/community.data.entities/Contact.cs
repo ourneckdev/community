@@ -13,9 +13,9 @@ public class Contact : BaseCommunityEntity
     ///     Gets or sets the id of the user the contact record is related
     /// </summary>
     public Guid? UserId { get; set; }
-    
+
     /// <summary>
-    /// Relate the record to an individual user or a community.
+    ///     Relate the record to an individual user or a community.
     /// </summary>
     public EntityType EntityType { get; set; }
 
@@ -44,9 +44,9 @@ public class Contact : BaseCommunityEntity
     ///     Gets or sets the date the user contact method was verified.
     /// </summary>
     public DateTime? VerifiedDate { get; set; }
-    
+
     /// <summary>
-    /// Gets a flag indicating whether the contact method is displayed on a user's profile.
+    ///     Gets a flag indicating whether the contact method is displayed on a user's profile.
     /// </summary>
     public bool Visible { get; set; }
 

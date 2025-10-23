@@ -8,37 +8,37 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DocumentationFile>bin\Debug\net9.0\community.common.content.xml</DocumentationFile>
-      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DocumentationFile>bin\Debug\net9.0\community.common.content.xml</DocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DocumentationFile>bin\Release\net9.0\community.common.content.xml</DocumentationFile>
-      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DocumentationFile>bin\Release\net9.0\community.common.content.xml</DocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="EmailContent.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>EmailContent.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="SmsContent.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>SmsContent.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
+        <EmbeddedResource Update="EmailContent.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>EmailContent.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="SmsContent.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>SmsContent.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="EmailContent.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>EmailContent.resx</DependentUpon>
-      </Compile>
-      <Compile Update="SmsContent.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>SmsContent.resx</DependentUpon>
-      </Compile>
+        <Compile Update="EmailContent.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>EmailContent.resx</DependentUpon>
+        </Compile>
+        <Compile Update="SmsContent.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>SmsContent.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>

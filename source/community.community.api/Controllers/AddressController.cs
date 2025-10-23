@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace community.community.api.Controllers;
 
 /// <summary>
-/// 
 /// </summary>
 [Authorize]
 [ApiController]
@@ -15,12 +14,13 @@ namespace community.community.api.Controllers;
 public class AddressController(IAddressProvider addressProvider) : BaseController
 {
     /// <summary>
-    /// Saves a user address
+    ///     Saves a user address
     /// </summary>
     /// <param name="request"></param>
     /// <param name="token"></param>
     /// <returns>The ID of the saved record and a boolean indicating success.</returns>
-    [HttpPost, Route("user")]
+    [HttpPost]
+    [Route("user")]
     [ProducesResponseType(typeof((Guid AddressId, bool Success)), StatusCodes.Status200OK)]
     public async Task<IActionResult> AddUserAddressAsync(AddAddressRequest request, CancellationToken token = default)
     {
@@ -28,12 +28,13 @@ public class AddressController(IAddressProvider addressProvider) : BaseControlle
     }
 
     /// <summary>
-    /// Saves a comunity address
+    ///     Saves a comunity address
     /// </summary>
     /// <param name="request"></param>
     /// <param name="token"></param>
     /// <returns>The ID of the saved record and a boolean indicating success.</returns>
-    [HttpPost, Route("community")]
+    [HttpPost]
+    [Route("community")]
     [ProducesResponseType(typeof((Guid AddressId, bool Success)), StatusCodes.Status200OK)]
     public async Task<IActionResult> AddCommunityAddressAsync(AddAddressRequest request,
         CancellationToken token = default)
@@ -43,12 +44,13 @@ public class AddressController(IAddressProvider addressProvider) : BaseControlle
 
 
     /// <summary>
-    /// Saves a user address
+    ///     Saves a user address
     /// </summary>
     /// <param name="request"></param>
     /// <param name="token"></param>
     /// <returns>The ID of the saved record and a boolean indicating success.</returns>
-    [HttpPost, Route("user/update")]
+    [HttpPost]
+    [Route("user/update")]
     [ProducesResponseType(typeof((Guid AddressId, bool Success)), StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateUserAddressAsync(EditAddressRequest request,
         CancellationToken token = default)
@@ -57,12 +59,13 @@ public class AddressController(IAddressProvider addressProvider) : BaseControlle
     }
 
     /// <summary>
-    /// Saves a comunity address
+    ///     Saves a comunity address
     /// </summary>
     /// <param name="request"></param>
     /// <param name="token"></param>
     /// <returns>The ID of the saved record and a boolean indicating success.</returns>
-    [HttpPost, Route("community/update")]
+    [HttpPost]
+    [Route("community/update")]
     [ProducesResponseType(typeof((Guid AddressId, bool Success)), StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateCommunityAddressAsync(EditAddressRequest request,
         CancellationToken token = default)
@@ -71,12 +74,13 @@ public class AddressController(IAddressProvider addressProvider) : BaseControlle
     }
 
     /// <summary>
-    /// Retrieves a user's address by the address id.
+    ///     Retrieves a user's address by the address id.
     /// </summary>
     /// <param name="addressId"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    [HttpGet, Route("user/{addressId}")]
+    [HttpGet]
+    [Route("user/{addressId}")]
     public async Task<IActionResult> GetUserAddressAsync(Guid addressId, CancellationToken token = default)
     {
         return Ok(await addressProvider.GetUserAddressAsync(addressId, token));

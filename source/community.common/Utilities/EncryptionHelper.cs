@@ -22,10 +22,11 @@ public static class EncryptionHelper
     }
 
     /// <summary>
-    /// Calculates the storage requirements for a base65 encoded cryptographic strong random numbers based on length of bytes required.
+    ///     Calculates the storage requirements for a base65 encoded cryptographic strong random numbers based on length of
+    ///     bytes required.
     /// </summary>
     /// <remarks>
-    /// Base64 encoding causes an overhead of 33–37% relative to the size of the original binary data
+    ///     Base64 encoding causes an overhead of 33–37% relative to the size of the original binary data
     /// </remarks>
     /// <param name="byteSize">The length of the bytes required to generate.</param>
     /// <returns>The calculated byte size of the encoded cryptographically strong random number.</returns>
@@ -83,8 +84,8 @@ public static class EncryptionHelper
         var data = reader.ReadToEnd();
 
         return data;
-    }    
-    
+    }
+
     /// <summary>
     ///     Decrypts a cipher envelope and parses the result to a DateOnly struct.
     /// </summary>

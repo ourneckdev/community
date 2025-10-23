@@ -6,23 +6,22 @@ using Polly;
 namespace community.middleware.Builders;
 
 /// <summary>
-/// 
 /// </summary>
 public static class ConfigureHttpClientResilience
 {
     /// <summary>
-    /// Sets the default policy for adding resilience to http calls
+    ///     Sets the default policy for adding resilience to http calls
     /// </summary>
     /// <remarks>
-    /// Retry:
-    ///   Backoff Type: exponential
-    ///   Max Retries: 3
-    ///   Use Jitter
-    /// Circuit Breaker:
-    ///   Sampling Duration: 15 minutes
-    ///   Failure Ratio: .2
-    ///   Minimum Throughput: 50
-    ///   Request timeout and Too Many Requests trigger breaker
+    ///     Retry:
+    ///     Backoff Type: exponential
+    ///     Max Retries: 3
+    ///     Use Jitter
+    ///     Circuit Breaker:
+    ///     Sampling Duration: 15 minutes
+    ///     Failure Ratio: .2
+    ///     Minimum Throughput: 50
+    ///     Request timeout and Too Many Requests trigger breaker
     /// </remarks>
     /// <param name="builder">The HttpClientBuilder the configuration should be applied to.</param>
     public static void ConfigureDefaultResilience(this IHttpClientBuilder builder)

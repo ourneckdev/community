@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 namespace community.models.BusinessObjects.Google.Geocode;
 
 /// <summary>
-/// 
 /// </summary>
 public class Viewport
 {

@@ -36,7 +36,8 @@ public interface IAddressProvider : IProvider
     /// <param name="addressId">The id of the address record.</param>
     /// <param name="token">The cancellation token.</param>
     /// <returns></returns>
-    Task<SingleResponse<CommunityAddressResponse>> GetCommunityAddressAsync(Guid addressId, CancellationToken token = default);
+    Task<SingleResponse<CommunityAddressResponse>> GetCommunityAddressAsync(Guid addressId,
+        CancellationToken token = default);
 
     /// <summary>
     ///     Retrieves a user address by id
@@ -47,7 +48,7 @@ public interface IAddressProvider : IProvider
     Task<SingleResponse<UserAddressResponse>> GetUserAddressAsync(Guid addressId, CancellationToken token = default);
 
     /// <summary>
-    /// Lists all the active addresses assigned to a community.
+    ///     Lists all the active addresses assigned to a community.
     /// </summary>
     /// <param name="communityId">The community id to retrieve the addresses against</param>
     /// <param name="token">The cancellation token.</param>
@@ -56,7 +57,7 @@ public interface IAddressProvider : IProvider
         CancellationToken token = default);
 
     /// <summary>
-    /// Lists all the available addresses assigned to a community user.
+    ///     Lists all the available addresses assigned to a community user.
     /// </summary>
     /// <param name="communityId"></param>
     /// <param name="userId"></param>

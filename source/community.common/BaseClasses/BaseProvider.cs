@@ -10,8 +10,8 @@ namespace community.common.BaseClasses;
 /// </summary>
 public abstract class BaseProvider(IHttpContextAccessor contextAccessor)
 {
-    private ClaimsPrincipal? currentUser = contextAccessor.HttpContext?.User;
-    
+    private readonly ClaimsPrincipal? currentUser = contextAccessor.HttpContext?.User;
+
     /// <summary>
     ///     Retrieves the correlation key from the http context.
     /// </summary>
@@ -26,25 +26,28 @@ public abstract class BaseProvider(IHttpContextAccessor contextAccessor)
     }
 
     /// <summary>
-    /// Retrieves the current community a user is logged into from the JWT user.
+    ///     Retrieves the current community a user is logged into from the JWT user.
     /// </summary>
     protected Guid? CurrentCommunityId
     {
         get
         {
-            Guid.TryParse(currentUser?.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.CurrentCommunityId)?.Value, out var communityId);
+            Guid.TryParse(
+                currentUser?.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.CurrentCommunityId)?.Value,
+                out var communityId);
             return communityId;
         }
     }
 
     /// <summary>
-    /// Retrieves the current user id from the JWT, if authenticated.
+    ///     Retrieves the current user id from the JWT, if authenticated.
     /// </summary>
     protected Guid? UserId
     {
         get
         {
-            Guid.TryParse(currentUser?.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.UserId)?.Value, out var userId);
+            Guid.TryParse(currentUser?.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.UserId)?.Value,
+                out var userId);
             return userId;
         }
     }
@@ -66,7 +69,7 @@ public abstract class BaseProvider(IHttpContextAccessor contextAccessor)
     }
 
     /// <summary>
-    /// Logs an information log with request metrics.
+    ///     Logs an information log with request metrics.
     /// </summary>
     /// <param name="methodName">The name of the executing method</param>
     /// <param name="executionTimeInMilliseconds">The time it took for the method to execute, in milliseconds.</param>

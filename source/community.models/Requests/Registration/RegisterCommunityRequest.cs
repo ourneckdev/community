@@ -88,14 +88,14 @@ public record RegisterCommunityRequest(
     }
 
     /// <summary>
-    /// Sets the community id on child objects.
+    ///     Sets the community id on child objects.
     /// </summary>
     /// <param name="id"></param>
     public void SetId(Guid id)
     {
-        if(Address != null) Address.CommunityId = id;
-        if(PhoneNumber != null) PhoneNumber.CommunityId = id;
-        if(Admin.PhoneNumber != null) Admin.PhoneNumber.CommunityId = id;
-        if(Admin.Address != null) Admin.Address.CommunityId = id;
+        if (Address != null) Address.CommunityId = id;
+        if (PhoneNumber != null) PhoneNumber.CommunityId = id;
+        if (Admin.PhoneNumber != null) Admin.PhoneNumber.CommunityId = id;
+        if (Admin.Address != null) Admin.Address.CommunityId = id;
     }
 }

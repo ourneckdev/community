@@ -13,7 +13,6 @@ namespace community.middleware.Builders;
 public static class WebApplicationExtensions
 {
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="app">The built WebApplication</param>
     /// <param name="container">The SimpleInjector container.</param>

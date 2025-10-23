@@ -75,8 +75,7 @@ public record RegisterCommunityAdminRequest(
 
         Address?.Validate(validationException);
         PhoneNumber?.Validate(validationException);
-        
-        
+
 
         base.Validate(validationException);
 
@@ -86,7 +85,7 @@ public record RegisterCommunityAdminRequest(
     }
 
     /// <summary>
-    /// Adds the user id to child objects.
+    ///     Adds the user id to child objects.
     /// </summary>
     /// <param name="id"></param>
     public void SetId(Guid id)

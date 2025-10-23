@@ -40,12 +40,14 @@ public class AddressProvider(
 
             if (address.Id == Guid.Empty)
             {
-                addressId = await addressRepository.AddUserAddressAsync(address.AddUserAudit(UserId).ToUserAddress(), cancellationToken);
+                addressId = await addressRepository.AddUserAddressAsync(address.AddUserAudit(UserId).ToUserAddress(),
+                    cancellationToken);
                 saved = true;
             }
             else
             {
-                saved = await addressRepository.UpdateUserAddressAsync(address.AddUserAudit(UserId).ToUserAddress(), cancellationToken);
+                saved = await addressRepository.UpdateUserAddressAsync(address.AddUserAudit(UserId).ToUserAddress(),
+                    cancellationToken);
             }
 
             return new SingleResponse<(Guid AddressId, bool Saved)>((addressId, saved));
@@ -70,13 +72,15 @@ public class AddressProvider(
 
             if (address.Id == Guid.Empty)
             {
-                addressId = await addressRepository.AddCommunityAddress(address.AddUserAudit(UserId).ToCommunityAddress(),
+                addressId = await addressRepository.AddCommunityAddress(
+                    address.AddUserAudit(UserId).ToCommunityAddress(),
                     cancellationToken);
                 saved = true;
             }
             else
             {
-                saved = await addressRepository.UpdateCommunityAddressAsync(address.AddUserAudit(UserId).ToCommunityAddress(),
+                saved = await addressRepository.UpdateCommunityAddressAsync(
+                    address.AddUserAudit(UserId).ToCommunityAddress(),
                     cancellationToken);
             }
 
@@ -88,41 +92,50 @@ public class AddressProvider(
     }
 
     /// <inheritdoc />
-    public async Task<SingleResponse<CommunityAddressResponse>> GetCommunityAddressAsync(Guid addressId, CancellationToken token = default)
+    public async Task<SingleResponse<CommunityAddressResponse>> GetCommunityAddressAsync(Guid addressId,
+        CancellationToken token = default)
     {
         var response = await MeasureExecutionAsync(async () =>
         {
-            var userAddress = await addressRepository.GetCommunityAddressAsync(addressId, CurrentCommunityId.GetValueOrDefault(), token);
+            var userAddress =
+                await addressRepository.GetCommunityAddressAsync(addressId, CurrentCommunityId.GetValueOrDefault(),
+                    token);
             return new SingleResponse<CommunityAddressResponse>(userAddress);
         });
 
-        logger.LogInformation(PrepareInformationLog($"{nameof(GetUserAddressAsync)} with UserAddressResponse", response.ExecutionMilliseconds));
+        logger.LogInformation(PrepareInformationLog($"{nameof(GetUserAddressAsync)} with UserAddressResponse",
+            response.ExecutionMilliseconds));
 
         return response;
     }
 
     /// <inheritdoc />
-    public async Task<SingleResponse<UserAddressResponse>> GetUserAddressAsync(Guid addressId, CancellationToken token = default)
+    public async Task<SingleResponse<UserAddressResponse>> GetUserAddressAsync(Guid addressId,
+        CancellationToken token = default)
     {
         var response = await MeasureExecutionAsync(async () =>
         {
-            var userAddress = await addressRepository.GetUserAddressAsync(addressId, CurrentCommunityId.GetValueOrDefault(), UserId.GetValueOrDefault(), token);
+            var userAddress = await addressRepository.GetUserAddressAsync(addressId,
+                CurrentCommunityId.GetValueOrDefault(), UserId.GetValueOrDefault(), token);
             return new SingleResponse<UserAddressResponse>(userAddress);
         });
 
-        logger.LogInformation(PrepareInformationLog($"{nameof(GetUserAddressAsync)} with UserAddressResponse", response.ExecutionMilliseconds));
+        logger.LogInformation(PrepareInformationLog($"{nameof(GetUserAddressAsync)} with UserAddressResponse",
+            response.ExecutionMilliseconds));
 
         return response;
     }
 
     /// <inheritdoc />
-    public async Task<MultiResponse<CommunityAddressResponse>> ListCommunityAddressesAsync(Guid communityId, CancellationToken token = default)
+    public async Task<MultiResponse<CommunityAddressResponse>> ListCommunityAddressesAsync(Guid communityId,
+        CancellationToken token = default)
     {
         var response = await MeasureExecutionAsync(async () =>
         {
             var communityAddresses =
                 await addressRepository.ListByCommunityAsync(communityId, token);
-            return new MultiResponse<CommunityAddressResponse>(communityAddresses.Select(c => (CommunityAddressResponse)c));
+            return new MultiResponse<CommunityAddressResponse>(
+                communityAddresses.Select(c => (CommunityAddressResponse)c));
         });
 
         logger.LogInformation(PrepareInformationLog($"{nameof(ListCommunityAddressesAsync)}",
@@ -132,7 +145,8 @@ public class AddressProvider(
     }
 
     /// <inheritdoc />
-    public async Task<MultiResponse<UserAddressResponse>> ListUserAddressesAsync(Guid communityId, Guid userId, CancellationToken token = default)
+    public async Task<MultiResponse<UserAddressResponse>> ListUserAddressesAsync(Guid communityId, Guid userId,
+        CancellationToken token = default)
     {
         var response = await MeasureExecutionAsync(async () =>
         {
@@ -155,7 +169,8 @@ public class AddressProvider(
         editAddress.Validate();
         try
         {
-            var locationData = (await googleRestClient.GetGecodeForAddressAsync(editAddress.ToString(), cancellationToken))
+            var locationData =
+                (await googleRestClient.GetGecodeForAddressAsync(editAddress.ToString(), cancellationToken))
                 ?.Results.FirstOrDefault();
             editAddress.Latitude = locationData?.Geometry?.Location?.Latitude;
             editAddress.Longitude = locationData?.Geometry?.Location?.Longitude;

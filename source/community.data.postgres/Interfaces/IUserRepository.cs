@@ -60,16 +60,15 @@ public interface IUserRepository : IRepository
     /// <param name="verifiedBy">The ID of the Company Administrator who is doing the verification.</param>
     /// <param name="cancellationToken"></param>
     /// <returns>A boolean indicating success.</returns>
-    Task<bool> MarkUserVerified(Guid id, Guid communityId, Guid verifiedBy, CancellationToken cancellationToken = default);
+    Task<bool> MarkUserVerified(Guid id, Guid communityId, Guid verifiedBy,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Marks a username as verified by supplying the login code sent to the user's phone or email.
+    ///     Marks a username as verified by supplying the login code sent to the user's phone or email.
     /// </summary>
     /// <param name="username">the username to verify</param>
     /// <param name="code">the generated login code</param>
     /// <param name="cancellationToken"></param>
     /// <returns>true/false based on operation</returns>
     Task<bool> MarkUsernameVerified(string username, string code, CancellationToken cancellationToken = default);
-    
-    
 }

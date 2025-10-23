@@ -17,7 +17,7 @@ public static class DateTimeExtensions
     }
 
     /// <summary>
-    /// Converts epoch time to a UTC Date.
+    ///     Converts epoch time to a UTC Date.
     /// </summary>
     /// <param name="epoch"></param>
     /// <returns></returns>
@@ -26,5 +26,4 @@ public static class DateTimeExtensions
         var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         return dateTime.AddSeconds(epoch);
     }
-
 }

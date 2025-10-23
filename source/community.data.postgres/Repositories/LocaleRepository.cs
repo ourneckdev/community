@@ -9,14 +9,12 @@ using TimeZone = community.data.entities.Locales.TimeZone;
 namespace community.data.postgres.Repositories;
 
 /// <summary>
-/// 
 /// </summary>
 /// <param name="context"></param>
 /// <param name="contextAccessor">context access for accessing properties from the http pipeline</param>
-public class LocalRepository(ILookupsDapperContext context, IHttpContextAccessor contextAccessor) 
+public class LocalRepository(ILookupsDapperContext context, IHttpContextAccessor contextAccessor)
     : BaseRepository(contextAccessor), ILocaleRepository
 {
-    
     /// <inheritdoc />
     public async ValueTask<IEnumerable<Country>> ListCountriesAsync()
     {
@@ -89,24 +87,26 @@ public class LocalRepository(ILookupsDapperContext context, IHttpContextAccessor
     }
 
     /// <inheritdoc />
-    public async ValueTask<TimeZone?> GetTimeZoneAsync(string countryCode, string name, CancellationToken cancellationToken = default)
-    {using var connection = context.CreateConnection();
-        
+    public async ValueTask<TimeZone?> GetTimeZoneAsync(string countryCode, string name,
+        CancellationToken cancellationToken = default)
+    {
+        using var connection = context.CreateConnection();
+
         return await connection.QueryFirstOrDefaultAsync<TimeZone>(
             new CommandDefinition(
-            """
-            with tz as (select abbrev as code
-                 , name
-                 , utc_offset
-                 , row_number() over (partition by utc_offset order by name) rnk
-              from pg_catalog.pg_timezone_names
-             where name like @code || '%'
-            order by utc_offset desc, name)
-            select code
-                 , name
-                 , utc_offset
-              from tz 
-             where name = @name
-            """, name, cancellationToken: cancellationToken));
+                """
+                with tz as (select abbrev as code
+                     , name
+                     , utc_offset
+                     , row_number() over (partition by utc_offset order by name) rnk
+                  from pg_catalog.pg_timezone_names
+                 where name like @code || '%'
+                order by utc_offset desc, name)
+                select code
+                     , name
+                     , utc_offset
+                  from tz 
+                 where name = @name
+                """, name, cancellationToken: cancellationToken));
     }
 }

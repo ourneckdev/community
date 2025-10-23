@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace community.providers.lookups.Implementation;
 
 /// <summary>
-/// responsible for retrieving any related lookup data.
+///     responsible for retrieving any related lookup data.
 /// </summary>
 /// <param name="lookupRepository">The data repository to request the lookup data from</param>
 /// <param name="contextAccessor">The http context accessor</param>
@@ -28,7 +28,7 @@ public class LookupProvider(
         {
             var addressTypes =
                 (await lookupRepository.ListAsync<AddressType>(CurrentCommunityId))
-                    .Select(a => (AddressTypeResponse)a);
+                .Select(a => (AddressTypeResponse)a);
 
             return new LookupResponse<AddressTypeResponse>(addressTypes)
             {
@@ -36,7 +36,7 @@ public class LookupProvider(
             };
         });
         logger.LogInformation(PrepareInformationLog(nameof(ListAddressTypesAsync), response.ExecutionMilliseconds));
-        
+
         return response;
     }
 
@@ -46,16 +46,17 @@ public class LookupProvider(
         var response = await MeasureExecutionAsync(async () =>
         {
             var contactMethods =
-                (await lookupRepository.ListAsync<ContactMethod>(CurrentCommunityId)).Select(a => (ContactMethodResponse)a);
+                (await lookupRepository.ListAsync<ContactMethod>(CurrentCommunityId)).Select(a =>
+                    (ContactMethodResponse)a);
 
             return new LookupResponse<ContactMethodResponse>(contactMethods)
             {
                 CorrelationId = CorrelationId
             };
         });
-        
+
         logger.LogInformation(PrepareInformationLog(nameof(ListContactMethodsAsync), response.ExecutionMilliseconds));
-        
+
         return response;
     }
 
@@ -72,9 +73,9 @@ public class LookupProvider(
                 CorrelationId = CorrelationId
             };
         });
-        
+
         logger.LogInformation(PrepareInformationLog(nameof(ListReportTypesAsync), response.ExecutionMilliseconds));
-        
+
         return response;
     }
 
@@ -85,16 +86,16 @@ public class LookupProvider(
         {
             var userTypes =
                 (await lookupRepository.ListAsync<UserType>())
-                    .Select(a => (UserTypeResponse)a);
+                .Select(a => (UserTypeResponse)a);
 
             return new LookupResponse<UserTypeResponse>(userTypes)
             {
                 CorrelationId = CorrelationId
             };
         });
-        
+
         logger.LogInformation(PrepareInformationLog(nameof(ListUserTypesAsync), response.ExecutionMilliseconds));
-        
+
         return response;
     }
 

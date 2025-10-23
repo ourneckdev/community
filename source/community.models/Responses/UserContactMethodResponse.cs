@@ -40,9 +40,9 @@ public class UserContactMethodResponse : BasePrimaryResponse
     ///     Gets or sets a flag indicating if the user can be contacted at the relevant phone or email.
     /// </summary>
     public bool CanContact { get; set; }
-    
+
     /// <summary>
-    /// Gets or sets the contact type
+    ///     Gets or sets the contact type
     /// </summary>
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public ContactType ContactType { get; set; }

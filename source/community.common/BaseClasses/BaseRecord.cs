@@ -10,12 +10,10 @@ namespace community.common.BaseClasses;
 public abstract record BaseRecord
 {
     /// <summary>
-    /// 
     /// </summary>
-    public Guid CorrelationId { get; set; } 
-    
+    public Guid CorrelationId { get; set; }
+
     /// <summary>
-    /// 
     /// </summary>
     public long ExecutionMilliseconds { get; set; }
 }

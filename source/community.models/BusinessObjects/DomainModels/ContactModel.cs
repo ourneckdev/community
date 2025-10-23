@@ -4,7 +4,6 @@ using community.data.entities;
 namespace community.models.BusinessObjects.DomainModels;
 
 /// <summary>
-/// 
 /// </summary>
 public class ContactModel : BaseCommunityModel
 {
@@ -12,9 +11,8 @@ public class ContactModel : BaseCommunityModel
     ///     Gets or sets the id of the user the contact record is related
     /// </summary>
     public Guid? UserId { get; set; }
-    
+
     /// <summary>
-    /// 
     /// </summary>
     public EntityType EntityType { get; set; }
 
@@ -42,9 +40,9 @@ public class ContactModel : BaseCommunityModel
     ///     Gets or sets the date the user contact method was verified.
     /// </summary>
     public DateTime? VerifiedDate { get; set; }
-    
+
     /// <summary>
-    /// Gets a flag indicating whether the contact method is displayed on a user's profile.
+    ///     Gets a flag indicating whether the contact method is displayed on a user's profile.
     /// </summary>
     public bool Visible { get; set; }
 
@@ -55,13 +53,13 @@ public class ContactModel : BaseCommunityModel
 
 
     /// <summary>
-    /// Maps a database object to a domain business object.
+    ///     Maps a database object to a domain business object.
     /// </summary>
     /// <param name="contact"></param>
     /// <returns></returns>
     public static implicit operator ContactModel(Contact contact)
     {
-        return new()
+        return new ContactModel
         {
             Id = contact.Id,
             CommunityId = contact.CommunityId,
@@ -80,14 +78,15 @@ public class ContactModel : BaseCommunityModel
             IsActive = contact.IsActive
         };
     }
+
     /// <summary>
-    /// Maps a database object to a domain business object.
+    ///     Maps a database object to a domain business object.
     /// </summary>
     /// <param name="contact"></param>
     /// <returns></returns>
     public static implicit operator Contact(ContactModel contact)
     {
-        return new()
+        return new Contact
         {
             Id = contact.Id,
             CommunityId = contact.CommunityId,

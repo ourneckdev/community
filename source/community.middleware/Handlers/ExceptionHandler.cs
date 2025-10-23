@@ -21,7 +21,8 @@ public class GlobalExceptionHandler : IExceptionHandler
     /// <param name="cancellationToken">A cancellation token for the operation.</param>
     /// <returns>true/false</returns>
     /// <exception cref="NotImplementedException">Stand in.</exception>
-    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
+    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception,
+        CancellationToken cancellationToken)
     {
         var problemDetails = exception switch
         {
@@ -59,8 +60,8 @@ public class GlobalExceptionHandler : IExceptionHandler
         httpContext.Response.ContentType = "application/problem+json";
         httpContext.Response.StatusCode = problemDetails.Status ?? StatusCodes.Status400BadRequest;
         var newtonSoftProblemDetails = JsonConvert.SerializeObject(problemDetails);
-        await httpContext.Response.WriteAsync(newtonSoftProblemDetails, cancellationToken: cancellationToken);
-        
+        await httpContext.Response.WriteAsync(newtonSoftProblemDetails, cancellationToken);
+
         return true;
     }
 }

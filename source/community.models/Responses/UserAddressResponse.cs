@@ -3,17 +3,15 @@ using community.data.entities;
 namespace community.models.Responses;
 
 /// <summary>
-/// 
 /// </summary>
 public class UserAddressResponse : AddressResponse
 {
     /// <summary>
-    /// Gets or sets the user id the address is related to.
+    ///     Gets or sets the user id the address is related to.
     /// </summary>
     public Guid UserId { get; set; }
-    
+
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="userAddress"></param>
     /// <returns></returns>
@@ -23,4 +21,4 @@ public class UserAddressResponse : AddressResponse
         response.UserId = userAddress.UserId;
         return response;
     }
-};
+}

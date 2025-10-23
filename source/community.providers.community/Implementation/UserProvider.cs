@@ -37,15 +37,16 @@ public class UserProvider(
     : BaseProvider(contextAccessor), IUserProvider
 {
     /// <inheritdoc />
-    public async Task<SingleResponse<Guid>> AddAsync(AddUserRequest request, CancellationToken cancellationToken = default)
+    public async Task<SingleResponse<Guid>> AddAsync(AddUserRequest request,
+        CancellationToken cancellationToken = default)
     {
         await Task.CompletedTask;
         throw new NotImplementedException();
-        
     }
 
     /// <inheritdoc />
-    public async Task<SingleResponse<bool>> UpdateAsync(UpdateUserRequest request, CancellationToken cancellationToken = default)
+    public async Task<SingleResponse<bool>> UpdateAsync(UpdateUserRequest request,
+        CancellationToken cancellationToken = default)
     {
         var response = await MeasureExecutionAsync(async () =>
         {
@@ -70,7 +71,8 @@ public class UserProvider(
     }
 
     /// <inheritdoc />
-    public async Task<SingleResponse<bool>> VerifyUserNameAsync(VerifyUserNameRequest request, CancellationToken cancellationToken = default)
+    public async Task<SingleResponse<bool>> VerifyUserNameAsync(VerifyUserNameRequest request,
+        CancellationToken cancellationToken = default)
     {
         var response = await MeasureExecutionAsync(async () =>
         {

@@ -28,11 +28,12 @@ public class GoogleRestClientTests
         var response = await _googleRestClient.GetGecodeForAddressAsync($"{streetAddress} {city} {state} {postalCode}");
         Assert.NotNull(response);
         Assert.IsType<Response>(response);
-        
-        var resolvedStreetAddress = response.Results.FirstOrDefault()?.GetStreetAddress(); 
+
+        var resolvedStreetAddress = response.Results.FirstOrDefault()?.GetStreetAddress();
         Assert.NotNull(resolvedStreetAddress);
         Assert.Equal(city, response.Results.FirstOrDefault()?.GetComponent(ComponentType.locality)?.LongName);
-        Assert.Equal(state, response.Results.FirstOrDefault()?.GetComponent(ComponentType.administrative_area_level_1)?.ShortName);
+        Assert.Equal(state,
+            response.Results.FirstOrDefault()?.GetComponent(ComponentType.administrative_area_level_1)?.ShortName);
         Assert.StartsWith(postalCode, response.Results.FirstOrDefault()?.GetPostalCode());
     }
 }

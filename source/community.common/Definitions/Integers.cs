@@ -11,7 +11,7 @@ public static class Integers
     public const int LoginCodeLength = 6;
 
     /// <summary>
-    /// The minimum length of someone's first or last name
+    ///     The minimum length of someone's first or last name
     /// </summary>
     public const int ValidationMinimumNameLength = 3;
 }

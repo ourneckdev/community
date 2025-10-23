@@ -25,7 +25,7 @@
         <ProjectReference Include="..\community.models\community.models.csproj"/>
         <ProjectReference Include="..\community.providers.auth\community.providers.auth.csproj"/>
         <ProjectReference Include="..\community.providers.common\community.providers.common.csproj"/>
-        <ProjectReference Include="..\community.providers.lookups\community.providers.lookups.csproj" />
+        <ProjectReference Include="..\community.providers.lookups\community.providers.lookups.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

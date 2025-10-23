@@ -63,15 +63,16 @@ public class RegistrationProvider(
                 var error = new ValidationException(ValidationMessages.PotentialDuplicateCommunity);
                 foreach (var community in existingCommunities)
                 {
-                    if(!error.Errors.ContainsKey($"{community.Id}"))
+                    if (!error.Errors.ContainsKey($"{community.Id}"))
                         error.AddError($"{community.Id}", @$"Community ""{community.Name}"" already exists.");
-                    
+
                     if (community.AddressId.HasValue)
                         error.AddError($"{community.Id}", "A community with a matching address exists.");
-                   
+
                     if (community.ContactId.HasValue)
-                        error.AddError($"{community.Id}", $"A community with a matching phone number exists.");
+                        error.AddError($"{community.Id}", "A community with a matching phone number exists.");
                 }
+
                 throw error;
             }
 

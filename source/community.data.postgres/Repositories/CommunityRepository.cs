@@ -108,7 +108,7 @@ public class CommunityRepository(
                        and entity_type = 0
                        and (@PhoneNumber is null or t.value = @PhoneNumber)
                     """, search, cancellationToken: cancellationToken));
-            
+
             return matches.ToList();
         }
         catch (Exception ex)

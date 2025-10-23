@@ -48,7 +48,7 @@ public static class ErrorCodes
     /// </summary>
     public const string RegistrationError_Community = "Failed to register commmunity.";
 
-    
+
     /// <summary>
     ///     Failed to add contact.
     /// </summary>
@@ -114,27 +114,34 @@ public static class ErrorCodes
         "An unexpected error occurred updating a community address.";
 
     /// <summary>
-    /// An unexpected error occurred retrieving a user address.
+    ///     An unexpected error occurred retrieving a user address.
     /// </summary>
     public const string DatabaseError_GetUserAddress = "An unexpected error occurred retrieving a user address.";
-    
-    /// <summary>
-    /// An unexpected error occurred retrieving a user address.
-    /// </summary>
-    public const string DatabaseError_GetCommunityAddress = "An unexpected error occurred retrieving a community address.";
 
     /// <summary>
-    /// An unexpected error occurred listing user addresses.
+    ///     An unexpected error occurred retrieving a user address.
+    /// </summary>
+    public const string DatabaseError_GetCommunityAddress =
+        "An unexpected error occurred retrieving a community address.";
+
+    /// <summary>
+    ///     An unexpected error occurred listing user addresses.
     /// </summary>
     public const string DatabaseError_ListUserAddresses = "An unexpected error occurred listing user addresses.";
-    
-    /// <summary>
-    /// An unexpected error occurred listing user addresses.
-    /// </summary>
-    public const string DatabaseError_ListCommunityAddresses = "An unexpected error occurred listing community addresses.";
 
     /// <summary>
-    /// Unexpected error executing search.
+    ///     An unexpected error occurred listing user addresses.
+    /// </summary>
+    public const string DatabaseError_ListCommunityAddresses =
+        "An unexpected error occurred listing community addresses.";
+
+    /// <summary>
+    ///     Unexpected error executing search.
     /// </summary>
     public const string DatabaseError_SearchFailed = "Unexpected error executing search.";
+
+    /// <summary>
+    /// Token is invalid.
+    /// </summary>
+    public const string TokenProvider_InvalidToken = "Token is invalid.";
 }

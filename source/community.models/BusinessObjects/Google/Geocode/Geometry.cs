@@ -12,7 +12,7 @@ public class Geometry
     /// </summary>
     [JsonPropertyName("bounds")]
     public Viewport? Bounds { get; set; }
-    
+
     /// <summary>
     ///     contains the geocoded latitude, longitude value.
     /// </summary>

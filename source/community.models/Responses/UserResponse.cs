@@ -132,11 +132,11 @@ public class UserResponse : BasePrimaryResponse
         userResponse.ContactMethods = user.ContactMethods?.Any() ?? false
             ? user.ContactMethods.Select(m => (UserContactMethodResponse)m)
             : null;
-        userResponse.Addresses = user.Addresses?.Any() ?? false 
-            ? user.Addresses.Select(a => (UserAddressResponse)a) 
+        userResponse.Addresses = user.Addresses?.Any() ?? false
+            ? user.Addresses.Select(a => (UserAddressResponse)a)
             : null;
-        userResponse.Communities = user.Communities?.Any() ?? false 
-            ? user.Communities.Select(c => (CommunityResponse)c) 
+        userResponse.Communities = user.Communities?.Any() ?? false
+            ? user.Communities.Select(c => (CommunityResponse)c)
             : null;
         return userResponse;
     }

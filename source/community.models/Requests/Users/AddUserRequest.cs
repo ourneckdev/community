@@ -7,7 +7,6 @@ using community.models.Requests.ContactMethods;
 namespace community.models.Requests.Users;
 
 /// <summary>
-/// 
 /// </summary>
 /// <param name="CommunityId"></param>
 /// <param name="UserTypeId"></param>
@@ -30,13 +29,13 @@ public record AddUserRequest(
     DateOnly? DateOfBirth,
     IEnumerable<EditAddressRequest>? Addresses,
     IEnumerable<ContactMethodRequest>? ContactMethods) : VerifiableUserNameRecord
-{ 
+{
     /// <summary>
-    /// Converts the immutable record to a user object for save purposes
+    ///     Converts the immutable record to a user object for save purposes
     /// </summary>
     /// <returns></returns>
     public User ToUser()
-    {   
+    {
         return new User
         {
             UserTypeId = UserTypeId,

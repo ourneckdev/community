@@ -17,10 +17,11 @@ public static class ExceptionsHelper
         var errorCollection = (SqlErrorCollection)collectionConstructor?.Invoke(null)!;
         var errorConstructor = typeof(SqlError).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null,
         [
-            typeof (int), typeof (byte), typeof (byte), typeof (string), typeof(string), typeof (string),
-            typeof (int), typeof(Exception), typeof (int)
+            typeof(int), typeof(byte), typeof(byte), typeof(string), typeof(string), typeof(string),
+            typeof(int), typeof(Exception), typeof(int)
         ], null);
-        var error = errorConstructor?.Invoke([number, (byte)0, (byte)0, "server", "errMsg", "proccedure", 100, new Exception(), (int)0
+        var error = errorConstructor?.Invoke([
+            number, (byte)0, (byte)0, "server", "errMsg", "proccedure", 100, new Exception(), 0
         ]);
         addMethod?.Invoke(errorCollection, [error]);
         var constructor = typeof(SqlException).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance,

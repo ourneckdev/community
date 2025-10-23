@@ -5,7 +5,8 @@ namespace community.common.tests.Extensions;
 
 public class EncryptionHelperTests
 {
-    [Fact, Category("Unit")]
+    [Fact]
+    [Category("Unit")]
     public void EncryptAndDecryptTest_ShouldSucceed()
     {
         // using the maximum password length of 32 characters here
@@ -17,7 +18,8 @@ public class EncryptionHelperTests
         Assert.Equal(plainText, decryptedString);
     }
 
-    [Fact, Category("Unit")]
+    [Fact]
+    [Category("Unit")]
     public void EncryptAndDecryptDates_ShouldSucceed()
     {
         var dateOnly = new DateOnly(2001, 9, 11);
@@ -26,7 +28,8 @@ public class EncryptionHelperTests
         Assert.Equal(dateOnly, decryptedDate);
     }
 
-    [Theory, Category("Unit")]
+    [Theory]
+    [Category("Unit")]
     [InlineData(24)]
     [InlineData(36)]
     [InlineData(48)]

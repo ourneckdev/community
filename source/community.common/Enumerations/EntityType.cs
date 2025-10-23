@@ -43,16 +43,14 @@ namespace community.common.Enumerations;
 // }
 
 /// <summary>
-/// 
 /// </summary>
 public enum EntityType
 {
     /// <summary>
-    /// 
     /// </summary>
     Community,
+
     /// <summary>
-    /// 
     /// </summary>
     User
 }

@@ -11,10 +11,10 @@ namespace community.auth.api.tests;
 public class TestApplicationFactory : WebApplicationFactory<Program>
 {
     private readonly JwtSecurityTokenHandler _tokenHandler = new();
-    
+
     public SecurityToken ValidateToken(string token)
     {
-        var jwtSettings = this.Services.GetRequiredService<IOptions<JwtSettings>>().Value;
+        var jwtSettings = Services.GetRequiredService<IOptions<JwtSettings>>().Value;
         _tokenHandler
             .ValidateToken(token,
                 new TokenValidationParameters

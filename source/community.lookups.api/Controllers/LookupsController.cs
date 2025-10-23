@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace community.lookups.api.Controllers;
 
 /// <summary>
-/// Exposes endpoints returning lookup type data
+///     Exposes endpoints returning lookup type data
 /// </summary>
 /// <param name="provider">The provider logic required for retrieving the appropriate types</param>
 [AllowAnonymous]
@@ -16,7 +16,7 @@ namespace community.lookups.api.Controllers;
 public class LookupsController(ILookupProvider provider) : BaseController
 {
     /// <summary>
-    /// Retrieves the available address types including custom types per community
+    ///     Retrieves the available address types including custom types per community
     /// </summary>
     /// <returns></returns>
     [HttpGet]
@@ -26,9 +26,9 @@ public class LookupsController(ILookupProvider provider) : BaseController
     {
         return Ok(await provider.ListAddressTypesAsync());
     }
-    
+
     /// <summary>
-    /// Retrieves the available contact methods including any custom methods per community
+    ///     Retrieves the available contact methods including any custom methods per community
     /// </summary>
     /// <returns></returns>
     [HttpGet]
@@ -38,9 +38,9 @@ public class LookupsController(ILookupProvider provider) : BaseController
     {
         return Ok(await provider.ListContactMethodsAsync());
     }
-    
+
     /// <summary>
-    /// Retrieves the available report types that can be made
+    ///     Retrieves the available report types that can be made
     /// </summary>
     /// <returns></returns>
     [HttpGet]
@@ -50,22 +50,21 @@ public class LookupsController(ILookupProvider provider) : BaseController
     {
         return Ok(await provider.ListReportTypesAsync());
     }
-    
+
     /// <summary>
-    /// Retrieves the available user types for security purposes
+    ///     Retrieves the available user types for security purposes
     /// </summary>
     /// <returns></returns>
     [HttpGet]
     [Route("usertypes")]
-
     [ProducesResponseType(typeof(IEnumerable<UserTypeResponse>), 200)]
     public async Task<IActionResult> ListUserTypeAsync()
     {
         return Ok(await provider.ListUserTypesAsync());
     }
-    
+
     /// <summary>
-    /// Retrieves the available user types for security purposes
+    ///     Retrieves the available user types for security purposes
     /// </summary>
     /// <returns></returns>
     [HttpGet]

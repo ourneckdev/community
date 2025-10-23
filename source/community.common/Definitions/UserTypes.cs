@@ -17,7 +17,7 @@ public static class UserTypes
     };
 
     /// <summary>
-    /// Returns the key for a supplied string
+    ///     Returns the key for a supplied string
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>

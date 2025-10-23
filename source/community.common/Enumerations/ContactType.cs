@@ -44,17 +44,14 @@ namespace community.common.Enumerations;
 // }
 
 /// <summary>
-/// 
 /// </summary>
 public enum ContactType
 {
     /// <summary>
-    /// 
     /// </summary>
     Phone,
-    
+
     /// <summary>
-    /// 
     /// </summary>
     Email
 }
