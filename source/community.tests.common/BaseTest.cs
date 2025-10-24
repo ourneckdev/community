@@ -1,13 +1,10 @@
-using System.Security.Claims;
-using community.common.AppSettings;
-using community.common.Definitions;
-using community.common.Utilities;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using Moq;
+[assembly:InternalsVisibleTo("community.auth.api.tests")]
+[assembly:InternalsVisibleTo("community.providers.auth.tests")]
+[assembly:InternalsVisibleTo("community.providers.common.tests")]
 
 namespace community.tests.common;
 
+[ExcludeFromCodeCoverage]
 public abstract class BaseTest
 {
     protected static Guid CorrelationKey = Guid.NewGuid();

@@ -6,6 +6,7 @@ namespace community.providers.common.HttpClients;
 /// <summary>
 ///     Exposes endpoints for interacting with Twilio's service for sending SMS notifications.
 /// </summary>
+[Obsolete("Twilio account deactivated")]
 public interface ITwilioHttpClient : IHttpClient
 {
     /// <summary>

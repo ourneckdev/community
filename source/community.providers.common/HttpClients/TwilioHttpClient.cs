@@ -10,6 +10,7 @@ using HttpClient = System.Net.Http.HttpClient;
 namespace community.providers.common.HttpClients;
 
 /// <inheritdoc />
+[Obsolete("Twillio account deactivated")]
 public class TwilioHttpClient : ITwilioHttpClient
 {
     private const string Sender = "";

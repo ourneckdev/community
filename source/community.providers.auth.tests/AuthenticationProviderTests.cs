@@ -1,25 +1,9 @@
-using System.IdentityModel.Tokens.Jwt;
-using community.common.Definitions;
-using community.common.Exceptions;
-using community.common.Utilities;
-using community.data.entities;
-using community.data.postgres.Interfaces;
-using community.models.Requests.Authentication;
-using community.models.Responses.Authentication;
-using community.models.Responses.Base;
-using community.providers.auth.Implementation;
-using community.providers.auth.Interfaces;
-using community.tests.common;
-using community.tests.common.Models;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using Moq;
-
 namespace community.providers.auth.tests;
 
 /// <summary>
 ///     Unit tests for auth provider.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class AuthenticationProviderTests : BaseTest
 {
     private static readonly string UserName = nameof(UserName);
@@ -146,11 +130,11 @@ public class AuthenticationProviderTests : BaseTest
             nameof(LoginWithPasswordRequest.Username),
             nameof(LoginWithPasswordRequest.Password)
         );
-        
+
         _mockUserRepository
             .Setup(u => u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(_userId);
-        
+
         _mockUserRepository
             .Setup(u => u.GetAsync(_userId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(Entities.ValidUser);
@@ -160,8 +144,9 @@ public class AuthenticationProviderTests : BaseTest
         Assert.IsType<SingleResponse<LoginResponse>>(loginResponse);
         Assert.Equal(loginResponse.Item.User.Id, Entities.ValidUser.Id);
         Assert.IsType<JwtSecurityToken>(_tokenProvider.ValidateToken(loginResponse.Item.AccessToken));
-        
-        _mockUserRepository.Verify(u => u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
+
+        _mockUserRepository.Verify(u => u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()),
+            Times.Once);
         _mockUserRepository.Verify(u => u.GetAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -176,21 +161,71 @@ public class AuthenticationProviderTests : BaseTest
             nameof(LoginWithPasswordRequest.Username),
             "IncorrectPassword"
         );
-        
+
         _mockUserRepository
             .Setup(u => u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(_userId);
-        
+
         _mockUserRepository
             .Setup(u => u.GetAsync(_userId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(Entities.ValidUser);
 
-        var response = await Assert.ThrowsAsync<ValidationException>(async() =>  await _provider.LoginWithPasswordAsync(request));
+        var response =
+            await Assert.ThrowsAsync<ValidationException>(async () => await _provider.LoginWithPasswordAsync(request));
         Assert.NotNull(response);
         Assert.IsType<ValidationException>(response);
         Assert.Equal(ErrorCodes.Login_IncorrectPassword, response.Message);
+
+        _mockUserRepository.Verify(u => 
+            u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
         
-        _mockUserRepository.Verify(u => u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
-        _mockUserRepository.Verify(u => u.GetAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()), Times.Once);
+        _mockUserRepository.Verify(u => 
+            u.GetAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    /// <summary>
+    ///     Happy path forgot password flow
+    /// </summary>
+    /// <remarks>
+    ///     Will need adjustment with SES is inlaid.
+    /// </remarks>
+    [Fact]
+    [Trait("TestCategory", "Unit")]
+    public async Task ForgotPasswordAsync_ValidUser_SetsLoginCode_ShouldSucceed()
+    {
+        var request = new ForgotPasswordRequest(nameof(ForgotPasswordRequest.Username));
+
+        _mockUserRepository
+            .Setup(u => u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(_userId);
+
+        _mockAuthenticationRepository
+            .Setup(a => a.SetLoginCode(It.IsAny<Guid>(), It.IsAny<string>()));
+
+        var response = await _provider.ForgotPasswordAsync(request);
+        Assert.NotNull(response);
+        Assert.IsType<SingleResponse<ForgotPasswordResponse>>(response);
+
+        _mockUserRepository.Verify(u => 
+            u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
+        
+        _mockAuthenticationRepository.Verify(a => 
+            a.SetLoginCode(It.IsAny<Guid>(), It.IsAny<string>()), Times.Once);
+    }
+
+    /// <summary>
+    /// User doesn't exist, should throw a not found exception
+    /// </summary>
+    [Fact]
+    [Trait("TestCategory", "Unit")]
+    public async Task ForgotPasswordAsync_UserDoesNotExist_ThrowsError_ShouldSucceed()
+    {
+        var request = new ForgotPasswordRequest(nameof(ForgotPasswordRequest.Username));
+        
+        _mockUserRepository
+            .Setup(u => u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new NotFoundException(ErrorCodes.User_UserNotFound));
+        
+        await Assert.ThrowsAsync<NotFoundException>(async() => await _provider.ForgotPasswordAsync(request));
     }
 }

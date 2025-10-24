@@ -1,9 +1,6 @@
-using System.Data;
-using System.Reflection;
-using Microsoft.Data.SqlClient;
-
 namespace community.tests.common;
 
+[ExcludeFromCodeCoverage]
 public static class ExceptionsHelper
 {
     public static SqlException CreateSqlException(int number, string errorMessage = "the mock error message")

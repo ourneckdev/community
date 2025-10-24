@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace community.models.Requests.Authentication;
 
 /// <summary>
@@ -7,8 +5,4 @@ namespace community.models.Requests.Authentication;
 /// </summary>
 /// <param name="Username">The phone number or email address the user registered with.</param>
 /// <param name="LoginCode">The login code generated when the user requests a login code</param>
-public record LoginWithCodeRequest(
-    [property: JsonPropertyName("username")]
-    string Username,
-    [property: JsonPropertyName("loginCode")]
-    string? LoginCode);
+public record LoginWithCodeRequest(string Username, string? LoginCode);

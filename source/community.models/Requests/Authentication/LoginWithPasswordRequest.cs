@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace community.models.Requests.Authentication;
 
 /// <summary>
@@ -7,8 +5,4 @@ namespace community.models.Requests.Authentication;
 /// </summary>
 /// <param name="Username">The phone number or email address the user registered with.</param>
 /// <param name="Password">The optional password to supply, if bypassing login with code</param>
-public record LoginWithPasswordRequest(
-    [property: JsonPropertyName("username")]
-    string Username,
-    [property: JsonPropertyName("password")]
-    string? Password);
+public record LoginWithPasswordRequest(string Username, string? Password);

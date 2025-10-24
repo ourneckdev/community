@@ -36,8 +36,7 @@ public class AddressController(IAddressProvider addressProvider) : BaseControlle
     [HttpPost]
     [Route("community")]
     [ProducesResponseType(typeof((Guid AddressId, bool Success)), StatusCodes.Status200OK)]
-    public async Task<IActionResult> AddCommunityAddressAsync(AddAddressRequest request,
-        CancellationToken token = default)
+    public async Task<IActionResult> AddCommunityAddressAsync(AddAddressRequest request, CancellationToken token = default)
     {
         return Ok(await addressProvider.SaveCommunityAddressAsync(request, token));
     }
@@ -52,8 +51,7 @@ public class AddressController(IAddressProvider addressProvider) : BaseControlle
     [HttpPost]
     [Route("user/update")]
     [ProducesResponseType(typeof((Guid AddressId, bool Success)), StatusCodes.Status200OK)]
-    public async Task<IActionResult> UpdateUserAddressAsync(EditAddressRequest request,
-        CancellationToken token = default)
+    public async Task<IActionResult> UpdateUserAddressAsync(EditAddressRequest request, CancellationToken token = default)
     {
         return Ok(await addressProvider.SaveUserAddressAsync(request, token));
     }
@@ -67,8 +65,7 @@ public class AddressController(IAddressProvider addressProvider) : BaseControlle
     [HttpPost]
     [Route("community/update")]
     [ProducesResponseType(typeof((Guid AddressId, bool Success)), StatusCodes.Status200OK)]
-    public async Task<IActionResult> UpdateCommunityAddressAsync(EditAddressRequest request,
-        CancellationToken token = default)
+    public async Task<IActionResult> UpdateCommunityAddressAsync(EditAddressRequest request, CancellationToken token = default)
     {
         return Ok(await addressProvider.SaveCommunityAddressAsync(request, token));
     }

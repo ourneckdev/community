@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("community.auth.api.tests")]
 [assembly: InternalsVisibleTo("community.providers.community")]
 [assembly: InternalsVisibleTo("community.providers.auth")]
 [assembly: InternalsVisibleTo("community.providers.auth.tests")]

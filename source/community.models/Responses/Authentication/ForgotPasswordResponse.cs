@@ -3,4 +3,5 @@ namespace community.models.Responses.Authentication;
 /// <summary>
 ///     response object when initiating a forgot password flow.
 /// </summary>
-public record ForgotPasswordResponse;
+/// <param name="LoginCode"></param>
+public record ForgotPasswordResponse(string LoginCode);

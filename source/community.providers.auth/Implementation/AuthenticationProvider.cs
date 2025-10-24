@@ -147,7 +147,7 @@ public class AuthenticationProvider(
             var loginCode = GenerateLoginCode();
             await authRepository.SetLoginCode(userId, loginCode);
             //todo: send login code via email or sms
-            return new SingleResponse<ForgotPasswordResponse>(new ForgotPasswordResponse());
+            return new SingleResponse<ForgotPasswordResponse>(new ForgotPasswordResponse(loginCode));
         });
 
         return response;

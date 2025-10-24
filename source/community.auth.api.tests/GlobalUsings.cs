@@ -1,0 +1,14 @@
+global using System.Diagnostics.CodeAnalysis;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Text;
+global using community.common.AppSettings;
+global using Microsoft.AspNetCore.Mvc.Testing;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Options;
+global using Microsoft.IdentityModel.Tokens;
+global using System.Net;
+global using community.models.Responses;
+global using community.models.Responses.Authentication;
+global using community.models.Responses.Base;
+global using Newtonsoft.Json;
+global using JsonSerializer = System.Text.Json.JsonSerializer;

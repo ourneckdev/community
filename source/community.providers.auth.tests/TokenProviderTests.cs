@@ -1,21 +1,9 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using community.common.Definitions;
-using community.common.Exceptions;
-using community.models.Responses;
-using community.models.Responses.Authentication;
-using community.providers.auth.Implementation;
-using community.providers.auth.Interfaces;
-using community.tests.common;
-using Microsoft.Extensions.Logging.Abstractions;
-using Microsoft.IdentityModel.Tokens;
-using Moq;
-
 namespace community.providers.auth.tests;
 
 /// <summary>
 ///     Testing the token provider, ensuring tokens are created appropriately.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class TokenProviderTests : BaseTest
 {
     private readonly ITokenProvider _tokenProvider;

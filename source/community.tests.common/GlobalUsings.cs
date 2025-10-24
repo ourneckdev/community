@@ -1,0 +1,13 @@
+global using System.Diagnostics.CodeAnalysis;
+global using System.Security.Claims;
+global using System.Data;
+global using System.Reflection;
+global using community.common.AppSettings;
+global using community.common.Definitions;
+global using community.common.Utilities;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.Extensions.Options;
+global using Moq;
+global using Microsoft.Data.SqlClient;
+global using System.Runtime.CompilerServices;
+global using Microsoft.AspNetCore.Mvc.Testing;

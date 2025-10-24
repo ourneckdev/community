@@ -3,7 +3,7 @@ using community.data.entities;
 
 namespace community.tests.common.Models;
 
-public static class Entities
+internal static class Entities
 {
     private static readonly Guid UserId = Guid.NewGuid();
     private static readonly Guid CommunityId = Guid.NewGuid();

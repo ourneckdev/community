@@ -40,10 +40,10 @@ var app = builder.Build();
 app.RegisterApplication(container, swaggerConfiguration);
 await app.RunAsync();
 
-
-/// <summary>
-///     exposes the underlying program without top-level statements
-/// </summary>
-public partial class Program
+namespace community.auth.api
 {
+    /// <summary>
+    ///     exposes the underlying program without top-level statements
+    /// </summary>
+    public partial class Program;
 }
