@@ -40,14 +40,14 @@ public static class ConfigureHttpClients
             })
             .ConfigureDefaultResilience();
 
-        services
-            .AddHttpClient<ITwilioHttpClient, TwilioHttpClient>(client =>
-            {
-                client.BaseAddress = new Uri(configuration.GetSection("TwilioSettings").GetValue<string>("BaseUrl") ??
-                                             "https://localhost/");
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Add("Accept", "application/json");
-            })
-            .ConfigureDefaultResilience();
+        // services
+        //     .AddHttpClient<ITwilioHttpClient, TwilioHttpClient>(client =>
+        //     {
+        //         client.BaseAddress = new Uri(configuration.GetSection("TwilioSettings").GetValue<string>("BaseUrl") ??
+        //                                      "https://localhost/");
+        //         client.DefaultRequestHeaders.Clear();
+        //         client.DefaultRequestHeaders.Add("Accept", "application/json");
+        //     })
+        //     .ConfigureDefaultResilience();
     }
 }

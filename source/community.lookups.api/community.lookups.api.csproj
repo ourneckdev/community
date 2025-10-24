@@ -21,7 +21,7 @@
 
     <ItemGroup>
         <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc.Core" Version="5.5.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10" />
     </ItemGroup>
 
     <ItemGroup>

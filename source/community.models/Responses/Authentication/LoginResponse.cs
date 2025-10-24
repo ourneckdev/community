@@ -8,7 +8,4 @@ namespace community.models.Responses.Authentication;
 /// <param name="AccessToken">The Access token containing claims used for authorizing users.</param>
 /// <param name="RefreshToken">The refresh token used for renewing the AccessToken during active sessions.</param>
 /// <param name="User">The user data returned during a login operation.</param>
-public record LoginResponse(
-    string AccessToken,
-    string RefreshToken,
-    UserResponse User) : BaseRecord;
+public record LoginResponse(string AccessToken, string RefreshToken, UserResponse User) : BaseRecord;

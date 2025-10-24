@@ -1,12 +1,10 @@
-﻿using System.ComponentModel;
-using community.common.Utilities;
+﻿namespace community.common.tests.Extensions;
 
-namespace community.common.tests.Extensions;
-
+[ExcludeFromCodeCoverage]
 public class EncryptionHelperTests
 {
     [Fact]
-    [Category("Unit")]
+    [Trait("Category", "Unit")]
     public void EncryptAndDecryptTest_ShouldSucceed()
     {
         // using the maximum password length of 32 characters here
@@ -19,7 +17,7 @@ public class EncryptionHelperTests
     }
 
     [Fact]
-    [Category("Unit")]
+    [Trait("Category", "Unit")]
     public void EncryptAndDecryptDates_ShouldSucceed()
     {
         var dateOnly = new DateOnly(2001, 9, 11);
@@ -29,7 +27,7 @@ public class EncryptionHelperTests
     }
 
     [Theory]
-    [Category("Unit")]
+    [Trait("Category", "Unit")]
     [InlineData(24)]
     [InlineData(36)]
     [InlineData(48)]

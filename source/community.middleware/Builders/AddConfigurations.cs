@@ -37,6 +37,5 @@ public static class ConfigureAppSettings
     {
         services.Configure<JwtSettings>(configuration.GetSection(nameof(JwtSettings)));
         services.Configure<GoogleSettings>(configuration.GetSection(nameof(GoogleSettings)));
-        services.Configure<TwilioSettings>(configuration.GetSection(nameof(Twilio)));
     }
 }

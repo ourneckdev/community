@@ -1,11 +1,17 @@
-using System.Data;
-using System.Reflection;
-using Microsoft.Data.SqlClient;
-
 namespace community.tests.common;
 
+/// <summary>
+/// 
+/// </summary>
+[ExcludeFromCodeCoverage]
 public static class ExceptionsHelper
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="number"></param>
+    /// <param name="errorMessage"></param>
+    /// <returns></returns>
     public static SqlException CreateSqlException(int number, string errorMessage = "the mock error message")
     {
         var collectionConstructor = typeof(SqlErrorCollection)

@@ -1,23 +1,38 @@
-﻿using System.ComponentModel;
+﻿using System.Diagnostics.CodeAnalysis;
 using community.common.AppSettings;
 using community.models.BusinessObjects.Google.Geocode;
 using community.providers.common.HttpClients;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace community.providers.common.tests;
 
+[ExcludeFromCodeCoverage]
 public class GoogleRestClientTests
 {
     private static readonly HttpClient HttpClient = new();
+    private static readonly GoogleSettings GoogleSettings;
 
-    private readonly GoogleRestClient _googleRestClient = new(HttpClient, Options.Create(new GoogleSettings
+    private readonly GoogleRestClient _googleRestClient = new(HttpClient, Options.Create(GoogleSettings));
+
+    static GoogleRestClientTests()
     {
-        GeoCodeBaseUrl = "https://maps.googleapis.com/maps/api/geocode/json",
-    }));
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddUserSecrets<GoogleRestClientTests>()
+            .AddJsonFile("appsettings.json", false, true)
+            .Build();
 
+
+        GoogleSettings = configuration.GetSection(nameof(community.common.AppSettings.GoogleSettings))
+                             .Get<GoogleSettings>()
+                         ?? throw new ArgumentNullException(
+                             $"{nameof(community.common.AppSettings.GoogleSettings)} configuration not provided.");
+        HttpClient.BaseAddress = new Uri(GoogleSettings.GeoCodeBaseUrl);
+    }
 
     [Fact]
-    [Category("Integration")]
+    [Trait("Category", "Integration")]
     public async Task TestAddressLookup_ReturnsValue_ShouldSucceed()
     {
         var streetAddress = "33110 Fishers Peak Pkwy";

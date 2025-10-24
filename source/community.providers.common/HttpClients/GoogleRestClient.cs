@@ -29,8 +29,7 @@ public class GoogleRestClient : IGoogleRestClient
     /// <inheritdoc />
     public async Task<Response?> GetGecodeForAddressAsync(string address, CancellationToken cancellationToken = default)
     {
-        var url =
-            $"{_googleSettings.GeoCodeBaseUrl}?key={_googleSettings.ApiKey}&address={HttpUtility.UrlEncode(address)}";
+        var url = $"?key={_googleSettings.ApiKey}&address={HttpUtility.UrlEncode(address)}";
         using var response = await _client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         response.EnsureSuccessStatusCode();
         var parsedResponse =
