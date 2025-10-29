@@ -1,4 +1,3 @@
-using community.common.Utilities;
 using community.data.entities;
 
 namespace community.tests.common.Models;

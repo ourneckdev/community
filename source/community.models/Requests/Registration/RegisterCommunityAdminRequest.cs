@@ -32,12 +32,15 @@ public record RegisterCommunityAdminRequest(
     /// <summary>
     ///     Converts the immutable record to a user object for save purposes
     /// </summary>
+    /// <exception cref="ArgumentNullException">
+    ///     This condition should never be raised but it is a potential outcome.
+    /// </exception>
     /// <returns></returns>
     public User ToEntity(Guid? lastCommunityId = null)
     {
         return new User
         {
-            UserTypeId = UserTypes.GetKey(Strings.UserType_CommunityAdministrator),
+            UserTypeId = UserTypes.GetKey(Strings.UserType_CommunityAdministrator) ?? throw new ArgumentNullException(nameof(UserTypes)),
             LastCommunityId = lastCommunityId,
             Username = Username.IsValidUsPhoneNumber() ? Username.FormatUsPhoneNumber() : Username,
             Password = Password != null ? EncryptionHelper.Encrypt(Password) : null,

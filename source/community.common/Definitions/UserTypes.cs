@@ -21,7 +21,7 @@ public static class UserTypes
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static Guid GetKey(string value)
+    public static Guid? GetKey(string value)
     {
         return Values.FirstOrDefault(v => v.Value == value).Key;
     }

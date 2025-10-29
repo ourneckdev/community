@@ -141,7 +141,17 @@ public static class ErrorCodes
     public const string DatabaseError_SearchFailed = "Unexpected error executing search.";
 
     /// <summary>
-    /// Token is invalid.
+    ///     Token is invalid.
     /// </summary>
     public const string TokenProvider_InvalidToken = "Token is invalid.";
+
+    /// <summary>
+    /// Search yielded no results.
+    /// </summary>
+    public const string Search_NoResultsYielded = "Search yielded no results.";
+
+    /// <summary>
+    /// Community not found.
+    /// </summary>
+    public const string Community_CommunityNotFound = "Community not found.";
 }

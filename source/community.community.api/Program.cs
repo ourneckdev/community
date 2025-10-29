@@ -39,7 +39,7 @@ await app.RunAsync();
 namespace community.community.api
 {
     /// <summary>
-    /// Exposes a Program for top-level statements to expose an entrypoint for a WebApplicationFactory
+    ///     Exposes a Program for top-level statements to expose an entrypoint for a WebApplicationFactory
     /// </summary>
-    public partial class Program;
+    public class Program;
 }

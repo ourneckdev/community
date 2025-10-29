@@ -10,7 +10,7 @@ namespace community.common.BaseClasses;
 /// </summary>
 public abstract class BaseProvider(IHttpContextAccessor contextAccessor)
 {
-    private readonly ClaimsPrincipal? currentUser = contextAccessor.HttpContext?.User;
+    private readonly ClaimsPrincipal? _currentUser = contextAccessor.HttpContext?.User;
 
     /// <summary>
     ///     Retrieves the correlation key from the http context.
@@ -33,7 +33,7 @@ public abstract class BaseProvider(IHttpContextAccessor contextAccessor)
         get
         {
             Guid.TryParse(
-                currentUser?.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.CurrentCommunityId)?.Value,
+                _currentUser?.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.CurrentCommunityId)?.Value,
                 out var communityId);
             return communityId;
         }
@@ -46,7 +46,7 @@ public abstract class BaseProvider(IHttpContextAccessor contextAccessor)
     {
         get
         {
-            Guid.TryParse(currentUser?.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.UserId)?.Value,
+            Guid.TryParse(_currentUser?.Claims.FirstOrDefault(claim => claim.Type == CommunityClaims.UserId)?.Value,
                 out var userId);
             return userId;
         }

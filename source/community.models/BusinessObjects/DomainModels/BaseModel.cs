@@ -11,7 +11,7 @@ public class BaseModel : IChangeTracking
     /// <summary>
     ///     Gets or sets the UTC date the record was created
     /// </summary>
-    public DateTime CreatedDate { get; set; }
+    public DateTime CreatedDate { get; init; }
 
     /// <summary>
     ///     Gets or sets the UTC date the record was last modified.
@@ -21,7 +21,7 @@ public class BaseModel : IChangeTracking
     /// <summary>
     ///     Gets or sets the optional id of the user who created the record.
     /// </summary>
-    public Guid? CreatedBy { get; set; }
+    public Guid? CreatedBy { get; init; }
 
     /// <summary>
     ///     Gets or sets the optional id of the user who last modified the record.
@@ -31,7 +31,7 @@ public class BaseModel : IChangeTracking
     /// <summary>
     ///     Gets or sets the flag indicating if the record has been soft deleted
     /// </summary>
-    public bool IsActive { get; set; }
+    public bool IsActive { get; init; }
 
     /// <summary>
     /// </summary>

@@ -19,7 +19,9 @@ public record ContactMethodResponse(
     /// <returns></returns>
     public static implicit operator ContactMethodResponse(ContactMethod entity)
     {
-        return new ContactMethodResponse(entity.Id, entity.CommunityId,
-            (ContactType)Enum.Parse(typeof(ContactType), entity.ContactType), entity.Name);
+        return new ContactMethodResponse(entity.Id, 
+            entity.CommunityId,
+            Enum.Parse<ContactType>(entity.ContactType), 
+            entity.Name);
     }
 }

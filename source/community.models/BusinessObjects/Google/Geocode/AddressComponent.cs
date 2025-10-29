@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace community.models.BusinessObjects.Google.Geocode;
 
 /// <summary>
@@ -10,18 +8,15 @@ public class AddressComponent
     /// <summary>
     ///     Gets or sets the long name
     /// </summary>
-    [JsonPropertyName("long_name")]
-    public string LongName { get; set; } = null!;
+    public required string LongName { get; init; }
 
     /// <summary>
     ///     Gets or sets the short name
     /// </summary>
-    [JsonPropertyName("short_name")]
-    public string ShortName { get; set; } = null!;
+    public required string ShortName { get; init; }
 
     /// <summary>
     ///     Gets or sets the collection of types for the component.
     /// </summary>
-    [JsonPropertyName("types")]
-    public List<string> Types { get; set; } = null!;
+    public required List<string> Types { get; init; }
 }

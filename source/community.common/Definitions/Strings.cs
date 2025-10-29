@@ -71,4 +71,14 @@ public static class Strings
     ///     Defines the registered LLC name.
     /// </summary>
     public const string CompanyName = "OurNeckoftheWoods LLC";
+
+    /// <summary>
+    /// Main Phone (for communities)
+    /// </summary>
+    public const string ContactMethod_MainPhone = "Main Phone";
+
+    /// <summary>
+    /// Main email (for communities)
+    /// </summary>
+    public const string ContactMethod_MainEmail = "Main Email";
 }

@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace community.models.BusinessObjects.Google.Geocode;
 
 /// <summary>
@@ -17,32 +15,27 @@ public class Result
     ///     component for the state of Alaska may have a long_name of "Alaska" and a short_name of "AK" using the 2-letter
     ///     postal abbreviation.
     /// </remarks>
-    [JsonPropertyName("address_components")]
-    public List<AddressComponent> AddressComponents { get; set; } = null!;
+    public List<AddressComponent>? AddressComponents { get; init; }
 
     /// <summary>
     ///     a string containing the human-readable address of this location.
     /// </summary>
-    [JsonPropertyName("formatted_address")]
-    public string? FormattedAddress { get; set; }
+    public string? FormattedAddress { get; init; }
 
     /// <summary>
     ///     Contains the geometric data from the response
     /// </summary>
-    [JsonPropertyName("geometry")]
-    public Geometry? Geometry { get; set; }
+    public Geometry? Geometry { get; init; }
 
     /// <summary>
     ///     contains a list of points that are useful for navigating to the place
     /// </summary>
-    [JsonPropertyName("navigation_points")]
-    public List<NavigationPoint>? NavigationPoints { get; set; }
+    public List<NavigationPoint>? NavigationPoints { get; init; }
 
     /// <summary>
     ///     is a unique identifier that can be used with other GoogleSettings APIs
     /// </summary>
-    [JsonPropertyName("place_id")]
-    public string? PlaceId { get; set; }
+    public string? PlaceId { get; init; }
 
     /// <summary>
     ///     This array contains a set of zero or more tags identifying the type of feature returned in the result.
@@ -52,8 +45,7 @@ public class Result
     ///     returns "political" which indicates it is a political entity. Components might have an empty types array when there
     ///     are no known types for that address component.
     /// </remarks>
-    [JsonPropertyName("types")]
-    public List<string>? Types { get; set; }
+    public List<string>? Types { get; init; }
 
     /// <summary>
     ///     Retrieves the long name from an address component by type.
@@ -62,7 +54,7 @@ public class Result
     /// <returns>The response value retrieved from the http call.</returns>
     public AddressComponent? GetComponent(ComponentType type)
     {
-        return AddressComponents.FirstOrDefault(component => component.Types.Contains(type.ToString()));
+        return AddressComponents?.FirstOrDefault(component => component.Types.Contains(type.ToString()));
     }
 
     /// <summary>

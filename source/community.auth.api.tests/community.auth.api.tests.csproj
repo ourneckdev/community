@@ -9,23 +9,23 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DocumentationFile>bin\Debug\net9.0\community.auth.api.tests.xml</DocumentationFile>
-      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DocumentationFile>bin\Debug\net9.0\community.auth.api.tests.xml</DocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.4">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.10" />
-        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="9.0.10" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
-        <PackageReference Include="xunit" Version="2.9.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.10"/>
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="9.0.10"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0"/>
+        <PackageReference Include="xunit" Version="2.9.3"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
 
@@ -35,7 +35,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\community.auth.api\community.auth.api.csproj"/>
-        <ProjectReference Include="..\community.tests.common\community.tests.common.csproj" />
+        <ProjectReference Include="..\community.tests.common\community.tests.common.csproj"/>
     </ItemGroup>
 
 </Project>

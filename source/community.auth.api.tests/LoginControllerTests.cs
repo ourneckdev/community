@@ -10,7 +10,7 @@ namespace community.auth.api.tests;
 [ExcludeFromCodeCoverage]
 public class LoginControllerTests
 {
-    private readonly TestApplicationFactory _factory = new();
+    private readonly AuthApplicationFactory _factory = new();
     private readonly HttpClient _httpClient;
     private readonly string _testPassword = "BlahBlahBlah98!";
     private readonly string _testUser = "ourneckofthewoods@proton.me";
@@ -129,11 +129,12 @@ public class LoginControllerTests
         Assert.IsType<UserResponse>(loginResponseObject.Item.User);
         Assert.Equal(_testUser, loginResponseObject.Item.User.Username);
     }
-    
+
     /// <summary>
-    /// Tests happy path with forgot password
+    ///     Tests happy path with forgot password
     /// </summary>
-    [Fact, Trait("Category", "Integration")]
+    [Fact]
+    [Trait("Category", "Integration")]
     public async Task ForgotPassword_ValidUser_ShouldSucceed()
     {
         var forgotPasswordRequest = new { username = _testUser };
@@ -141,7 +142,7 @@ public class LoginControllerTests
         var forgotPasswordResponse = await _httpClient.PostAsync("forgotpassword", postBody);
         Assert.NotNull(forgotPasswordResponse);
         Assert.Equal(HttpStatusCode.OK, forgotPasswordResponse.StatusCode);
-        
+
         var content = await forgotPasswordResponse.Content.ReadAsStringAsync();
         var itemResponse = JsonConvert.DeserializeObject<SingleResponse<ForgotPasswordResponse>>(content);
         Assert.NotNull(itemResponse);

@@ -23,7 +23,11 @@ public class GoogleRestClient : IGoogleRestClient
     {
         _client = client;
         _googleSettings = googleSettings.Value;
-        _jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        _jsonSerializerOptions = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
+        };
     }
 
     /// <inheritdoc />
@@ -32,8 +36,7 @@ public class GoogleRestClient : IGoogleRestClient
         var url = $"?key={_googleSettings.ApiKey}&address={HttpUtility.UrlEncode(address)}";
         using var response = await _client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         response.EnsureSuccessStatusCode();
-        var parsedResponse =
-            await response.Content.ReadFromJsonAsync<Response>(_jsonSerializerOptions, cancellationToken);
+        var parsedResponse = await response.Content.ReadFromJsonAsync<Response>(_jsonSerializerOptions, cancellationToken);
         return parsedResponse;
     }
 }
