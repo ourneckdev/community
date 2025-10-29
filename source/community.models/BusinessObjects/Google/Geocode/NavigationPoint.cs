@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace community.models.BusinessObjects.Google.Geocode;
 
 /// <summary>
@@ -10,12 +8,10 @@ public class NavigationPoint
     /// <summary>
     ///     contains the latitude, longitude value of the navigation point.
     /// </summary>
-    [JsonPropertyName("location")]
-    public Location? Location { get; set; }
+    public Location? Location { get; init; }
 
     /// <summary>
     ///     list of travel modes that the navigation point is not accessible from
     /// </summary>
-    [JsonPropertyName("restricted_travel_mode")]
-    public string? RestrictedTravelMode { get; set; }
+    public string? RestrictedTravelMode { get; init; }
 }

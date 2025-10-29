@@ -1,5 +1,7 @@
 using community.common.BaseClasses;
 using community.common.Definitions;
+using community.common.Enumerations;
+using community.common.Exceptions;
 using community.data.entities;
 using community.data.entities.Search;
 using community.data.postgres.Contexts;
@@ -55,18 +57,18 @@ public class CommunityRepository(
     }
 
     /// <inheritdoc />
-    public async Task<bool> AddUserToCommunityAsync(Guid userId, Guid communityId,
-        CancellationToken cancellationToken = default)
+    public async Task<bool> AddUserToCommunityAsync(Guid userId, Guid communityId, CancellationToken cancellationToken = default)
     {
         try
         {
             using var connection = context.CreateConnection();
             var recordsAffected = await connection.ExecuteAsync(
-                """
-                if not exists(select 1 from user_community where user_id = @userId and community_id = @communityId)
-                    insert into user_community (user_id, community_id)
-                    values (@userId, @communityId);
-                """, new { userId, communityId });
+                new CommandDefinition(
+                    """
+                    if not exists(select 1 from user_community where user_id = @userId and community_id = @communityId)
+                        insert into user_community (user_id, community_id)
+                        values (@userId, @communityId);
+                    """, new { userId, communityId }, cancellationToken: cancellationToken));
 
             return recordsAffected == 1;
         }
@@ -78,43 +80,93 @@ public class CommunityRepository(
     }
 
     /// <inheritdoc />
-    public async Task<IList<CommunitySearchResults>> FindCommunityAsync(FindCommunityRecord search,
-        CancellationToken cancellationToken = default)
+    public async Task<Community> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        try
-        {
-            using var connection = context.CreateConnection();
+        using var connection = context.CreateConnection();
+        var reader = await connection.QueryMultipleAsync(
+            new CommandDefinition(
+                """
+                select *
+                  from community
+                 where id = @id;
 
-            var matches = await connection.QueryAsync<CommunitySearchResults>(
-                new CommandDefinition(
-                    """
-                    select c.id, c.name, cast(null as uuid) address_id, cast(null as uuid) contact_id
-                      from community c
-                     where levenshtein(c.name, @Name, 1, 0, 4) <= 3
-                     union
-                    select c.id, c.name, a.id address_id, cast(null as uuid) contact_id
-                      from community_address a
-                      join community c on a.community_id = c.id
-                     where (@StateCode is null or upper(a.state_code) = @StateCode)
-                       and (@City is null or lower(a.city) = lower(@City))
-                       and (@PostalCode is null or a.postal_code = @PostalCode)
-                       and (@AddressLine1 is null or levenshtein(lower(address_1), lower(@AddressLine1), 5, 0, 4) <= 4)
-                     union
-                    select c.id, c.name, cast(null as uuid) address_id, t.id contact_id
-                      from contact t 
-                      join contact_method m on t.contact_method_id = m.id
-                       and m.contact_type = 'phone'
-                      join community c on c.id = t.community_id
-                       and entity_type = 0
-                       and (@PhoneNumber is null or t.value = @PhoneNumber)
-                    """, search, cancellationToken: cancellationToken));
+                select a.*
+                  from community_address a
+                 where a.community_id = @id
+                   and a.is_active;
 
-            return matches.ToList();
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, ErrorCodes.DatabaseError_SearchFailed);
-            return [];
-        }
+                select c.*
+                  from contact c
+                 where community_id = @communityId
+                   and user_id is null
+                   and c.is_active;
+                """, new { id, communityId = CurrentCommunityId }, cancellationToken: cancellationToken));
+
+        var community = (await reader.ReadAsync<Community>()).FirstOrDefault();
+
+        if (community == null) throw new NotFoundException(ErrorCodes.Community_CommunityNotFound);
+
+        community.Addresses = await reader.ReadAsync<CommunityAddress>();
+        community.ContactMethods = await reader.ReadAsync<Contact>();
+
+        logger.LogInformation($"User found with id {id}.");
+
+        return community;
+    }
+
+    /// <inheritdoc />
+    public async Task<IEnumerable<Community>> ListAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
+    {
+        using var connection = context.CreateConnection();
+        var reader = await connection.QueryMultipleAsync(
+            new CommandDefinition(
+                """
+                select *
+                  from community
+                 where id = any(@ids);
+
+                select a.*
+                  from community_address a
+                 where a.community_id = any(@ids)
+                   and a.is_active;
+
+                select c.*
+                  from contact c
+                 where community_id = any(@ids)
+                   and entity_type = @entity_type
+                   and c.is_active;
+                """, new { ids, entity_type = EntityType.Community }, cancellationToken: cancellationToken));
+
+        var communities = (await reader.ReadAsync<Community>()).ToList();
+        if (communities == null) throw new NotFoundException(ErrorCodes.Community_CommunityNotFound);
+
+        var addresses = (await reader.ReadAsync<CommunityAddress>()).ToList();
+        var contacts = (await reader.ReadAsync<Contact>()).ToList();
+
+        var communityAddresses = communities
+            .GroupJoin(addresses,
+                c => c.Id,
+                a => a.CommunityId,
+                (c, a) => new Community(c, a)).ToList();
+
+        var communityContacts = communityAddresses
+            .GroupJoin(contacts,
+                c => c.Id,
+                m => m.CommunityId,
+                (c, m) => new Community(c, m)).ToList();
+
+        logger.LogInformation("Communities found using ids {ids}", ids);
+        return communityContacts;
+    }
+
+    /// <inheritdoc />
+    public async Task<IList<CommunitySearchResults>> FindCommunityAsync(FindCommunityRecord search, CancellationToken cancellationToken = default)
+    {
+        using var connection = context.CreateConnection();
+        var matches = (await connection.QueryAsync<CommunitySearchResults>(
+            new CommandDefinition(search.BuildQuery(), search, cancellationToken: cancellationToken))).ToList();
+
+        if (!matches.Any()) throw new NotFoundException(ErrorCodes.Community_CommunityNotFound);
+        return matches;
     }
 }

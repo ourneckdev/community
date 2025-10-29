@@ -6,7 +6,6 @@ using community.common.AppSettings;
 using community.common.BaseClasses;
 using community.common.Definitions;
 using community.common.Exceptions;
-using community.common.Extensions;
 using community.common.Utilities;
 using community.data.entities;
 using community.models.Responses;
@@ -45,7 +44,7 @@ public class TokenProvider(IOptions<JwtSettings> jwtSettings, IHttpContextAccess
             new(JwtRegisteredClaimNames.Iss, jwtSettings.Value.Issuer),
             new(JwtRegisteredClaimNames.Aud, jwtSettings.Value.Audience),
             new(JwtRegisteredClaimNames.Sub, user.Username),
-            
+
             new(CommunityClaims.CurrentCommunityId, $"{user.LastCommunityId}"), // current community ID
             new(CommunityClaims.UserId, $"{user.Id}"), // the user's ID
             new(ClaimTypes.Role, user.UserType)

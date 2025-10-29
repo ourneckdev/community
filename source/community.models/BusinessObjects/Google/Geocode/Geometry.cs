@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace community.models.BusinessObjects.Google.Geocode;
 
 /// <summary>
@@ -10,14 +8,12 @@ public class Geometry
     ///     The bounding box of the viewport within which to bias geocode results more prominently. This parameter will only
     ///     influence, not fully restrict, results from the geocoder
     /// </summary>
-    [JsonPropertyName("bounds")]
-    public Viewport? Bounds { get; set; }
+    public Viewport? Bounds { get; init; }
 
     /// <summary>
     ///     contains the geocoded latitude, longitude value.
     /// </summary>
-    [JsonPropertyName("location")]
-    public Location? Location { get; set; }
+    public Location? Location { get; init; }
 
     /// <summary>
     ///     stores additional data about the specified location
@@ -32,13 +28,11 @@ public class Geometry
     ///     example, a street) or polygon (region).
     ///     "APPROXIMATE" indicates that the returned result is approximate.
     /// </remarks>
-    [JsonPropertyName("location_type")]
-    public string? LocationType { get; set; } = null!;
+    public string? LocationType { get; init; }
 
     /// <summary>
     ///     contains the recommended viewport for displaying the returned result, specified as two latitude,longitude values
     ///     defining the southwest and northeast corner of the viewport bounding box.
     /// </summary>
-    [JsonPropertyName("viewport")]
-    public Viewport? Viewport { get; set; }
+    public Viewport? Viewport { get; init; }
 }

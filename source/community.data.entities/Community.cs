@@ -1,6 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 using community.common.BaseClasses;
+
+[assembly: InternalsVisibleTo("community.data.postgres")]
+[assembly: InternalsVisibleTo("community.tests.common")]
 
 namespace community.data.entities;
 
@@ -9,6 +13,40 @@ namespace community.data.entities;
 /// </summary>
 public sealed class Community : BasePrimaryEntity
 {
+    /// <summary>
+    /// Default constructor for a community
+    /// </summary>
+    public Community() {  }
+
+    internal Community(Community community)
+    {
+        Id = community.Id;
+        Name = community.Name;
+        Description = community.Description;
+        Website = community.Website;
+        ParentId = community.ParentId;
+        S3BucketName = community.S3BucketName;
+        NumberOfParcels = community.NumberOfParcels;
+        ParcelSize = community.ParcelSize;
+        ParcelSizeUnitId = community.ParcelSizeUnitId;
+        NumberOfResidents = community.NumberOfResidents;
+        AverageHomeValue = community.AverageHomeValue;
+        Addresses = community.Addresses;
+        ContactMethods = community.ContactMethods;
+    }
+
+    internal Community(Community community, IEnumerable<CommunityAddress> addresses)
+        : this(community)
+    {
+        Addresses = addresses;
+    }
+
+    internal Community(Community community, IEnumerable<Contact> contactMethods)
+        : this(community)
+    {
+        ContactMethods = contactMethods;
+    }
+
     /// <summary>
     ///     Gets or sets the community name
     /// </summary>

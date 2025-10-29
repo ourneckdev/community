@@ -25,6 +25,22 @@ public interface ICommunityRepository : IRepository
     /// <param name="cancellationToken"></param>
     /// <returns>true/false indicating success.</returns>
     Task<bool> AddUserToCommunityAsync(Guid userId, Guid communityId, CancellationToken cancellationToken = default);
+    
+    /// <summary>
+    /// Retrieves a single community by id.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<Community> GetAsync(Guid id, CancellationToken cancellationToken = default);
+    
+    /// <summary>
+    /// Lists a collection of communities by Id.
+    /// </summary>
+    /// <param name="ids">The list of Id</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<IEnumerable<Community>> ListAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Searches for an existing community by name, address and phone

@@ -25,12 +25,12 @@ public class UserModel : BasePrimaryModel
     /// <summary>
     ///     Gets or sets the username, either email or mobile phone, of the user.
     /// </summary>
-    public string Username { get; set; } = "";
+    public required string Username { get; set; }
 
     /// <summary>
     ///     Gets or sets an optional password that can be used to login, if preferred.
     /// </summary>
-    public string? Password { get; init; } = "";
+    public string? Password { get; init; }
 
     /// <summary>
     ///     Gets or sets an indicator whether the user is a verified member of the community.
@@ -68,12 +68,12 @@ public class UserModel : BasePrimaryModel
     /// <summary>
     ///     Gets or sets the user's first name
     /// </summary>
-    public string FirstName { get; set; } = "";
+    public required string FirstName { get; set; }
 
     /// <summary>
     ///     Gets or sets the user's lastname.
     /// </summary>
-    public string LastName { get; set; } = "";
+    public required string LastName { get; set; }
 
     /// <summary>
     ///     Gets or sets the user's name prefix.
@@ -99,22 +99,22 @@ public class UserModel : BasePrimaryModel
     /// <summary>
     ///     Gets or sets the timestamp the last time the user logged in
     /// </summary>
-    public DateTime? LastLoginDate { get; set; }
+    public DateTime? LastLoginDate { get; init; }
 
     /// <summary>
     ///     Gets or sets the last community the user logged into
     /// </summary>
-    public Guid? LastCommunityId { get; set; }
+    public Guid? LastCommunityId { get; init; }
 
     /// <summary>
     ///     Gets the email addresses and phone numbers for the user.
     /// </summary>
-    public IEnumerable<ContactModel>? ContactMethods { get; set; } = new List<ContactModel>();
+    public IEnumerable<ContactModel>? ContactMethods { get; init; } = new List<ContactModel>();
 
     /// <summary>
     ///     Gets the addresses for the user.
     /// </summary>
-    public IEnumerable<UserAddressModel>? Addresses { get; set; } = new List<UserAddressModel>();
+    public IEnumerable<UserAddressModel>? Addresses { get; init; } = new List<UserAddressModel>();
 
 
     /// <summary>
@@ -230,12 +230,13 @@ public class UserModel : BasePrimaryModel
     /// </summary>
     /// <param name="request"></param>
     /// <param name="userId"></param>
+    /// <exception cref="ArgumentNullException">If an unmapped guid is passed for user type, we'll throw an exception here.</exception>
     public async Task ApplyChanges(RegisterCommunityAdminRequest request, Guid? userId)
     {
         var hash = await GetHash();
 
         if (!UserTypeId.Equals(UserTypes.GetKey(Strings.UserType_CommunityAdministrator)))
-            UserTypeId = UserTypes.GetKey(Strings.UserType_CommunityAdministrator);
+            UserTypeId = UserTypes.GetKey(Strings.UserType_CommunityAdministrator) ?? throw new ArgumentNullException(nameof(UserTypeId));
 
         if (!Username.Equals(request.Username))
             Username = request.Username;

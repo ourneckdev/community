@@ -1,13 +1,11 @@
 namespace community.tests.common;
 
 /// <summary>
-/// 
 /// </summary>
 [ExcludeFromCodeCoverage]
 public static class ExceptionsHelper
 {
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="number"></param>
     /// <param name="errorMessage"></param>

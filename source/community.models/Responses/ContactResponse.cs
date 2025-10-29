@@ -9,7 +9,7 @@ namespace community.models.Responses;
 /// <summary>
 ///     Defines individual user contact methods response
 /// </summary>
-public class UserContactMethodResponse : BasePrimaryResponse
+public class ContactResponse : BasePrimaryResponse
 {
     /// <summary>
     ///     Gets or sets the type of contact record, phone/email
@@ -52,9 +52,9 @@ public class UserContactMethodResponse : BasePrimaryResponse
     /// </summary>
     /// <param name="contact">the database entity to be mapped.</param>
     /// <returns>a hydrated response object.</returns>
-    public static implicit operator UserContactMethodResponse(Contact contact)
+    public static implicit operator ContactResponse(Contact contact)
     {
-        return new UserContactMethodResponse
+        return new ContactResponse
         {
             Id = contact.Id,
             ContactMethod = ContactMethods.Values[contact.ContactMethodId].Item1,

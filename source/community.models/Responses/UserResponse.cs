@@ -93,7 +93,7 @@ public class UserResponse : BasePrimaryResponse
     ///     Gets an optional collection of contact methods defined to a user.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public IEnumerable<UserContactMethodResponse>? ContactMethods { get; set; } = new List<UserContactMethodResponse>();
+    public IEnumerable<ContactResponse>? ContactMethods { get; set; } = new List<ContactResponse>();
 
     /// <summary>
     ///     Gets or sets an optional list of addresses for a user.
@@ -130,7 +130,7 @@ public class UserResponse : BasePrimaryResponse
         userResponse.LastLoginDate = user.LastLoginDate;
         userResponse.LastCommunityId = user.LastCommunityId;
         userResponse.ContactMethods = user.ContactMethods?.Any() ?? false
-            ? user.ContactMethods.Select(m => (UserContactMethodResponse)m)
+            ? user.ContactMethods.Select(m => (ContactResponse)m)
             : null;
         userResponse.Addresses = user.Addresses?.Any() ?? false
             ? user.Addresses.Select(a => (UserAddressResponse)a)

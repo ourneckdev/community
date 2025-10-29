@@ -176,10 +176,10 @@ public class AuthenticationProviderTests : BaseTest
         Assert.IsType<ValidationException>(response);
         Assert.Equal(ErrorCodes.Login_IncorrectPassword, response.Message);
 
-        _mockUserRepository.Verify(u => 
+        _mockUserRepository.Verify(u =>
             u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
-        
-        _mockUserRepository.Verify(u => 
+
+        _mockUserRepository.Verify(u =>
             u.GetAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -206,26 +206,26 @@ public class AuthenticationProviderTests : BaseTest
         Assert.NotNull(response);
         Assert.IsType<SingleResponse<ForgotPasswordResponse>>(response);
 
-        _mockUserRepository.Verify(u => 
+        _mockUserRepository.Verify(u =>
             u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
-        
-        _mockAuthenticationRepository.Verify(a => 
+
+        _mockAuthenticationRepository.Verify(a =>
             a.SetLoginCode(It.IsAny<Guid>(), It.IsAny<string>()), Times.Once);
     }
 
     /// <summary>
-    /// User doesn't exist, should throw a not found exception
+    ///     User doesn't exist, should throw a not found exception
     /// </summary>
     [Fact]
     [Trait("TestCategory", "Unit")]
     public async Task ForgotPasswordAsync_UserDoesNotExist_ThrowsError_ShouldSucceed()
     {
         var request = new ForgotPasswordRequest(nameof(ForgotPasswordRequest.Username));
-        
+
         _mockUserRepository
             .Setup(u => u.UserExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ThrowsAsync(new NotFoundException(ErrorCodes.User_UserNotFound));
-        
-        await Assert.ThrowsAsync<NotFoundException>(async() => await _provider.ForgotPasswordAsync(request));
+
+        await Assert.ThrowsAsync<NotFoundException>(async () => await _provider.ForgotPasswordAsync(request));
     }
 }

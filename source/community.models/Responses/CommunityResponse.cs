@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using community.data.entities;
+using community.data.entities.Lookups;
 using community.models.Responses.Base;
+using community.models.Responses.Lookups;
 
 namespace community.models.Responses;
 
@@ -27,13 +29,22 @@ public class CommunityResponse : BasePrimaryResponse
     /// <summary>
     ///     Gets or sets an optional parent, if part of a hierarchy of communities.
     /// </summary>
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Guid? ParentId { get; set; }
 
     /// <summary>
     ///     Gets or sets the bucket name in S3 any media assigned to the community
     /// </summary>
     public string? S3BucketName { get; set; }
+    
+    /// <summary>
+    /// Returns any associated addresses for the community.
+    /// </summary>
+    public IEnumerable<CommunityAddressResponse>? Addresses { get; set; }
+    
+    /// <summary>
+    /// Returns any associated email and phone numbers for the community.
+    /// </summary>
+    public IEnumerable<ContactResponse>? Contacts { get; set; }
 
     /// <summary>
     ///     Maps an entity to a response.
@@ -48,6 +59,10 @@ public class CommunityResponse : BasePrimaryResponse
         response.Website = community.Website;
         response.ParentId = community.ParentId;
         response.S3BucketName = community.S3BucketName;
+        if (community.Addresses != null) 
+            response.Addresses = community.Addresses.Select(a => (CommunityAddressResponse)a);
+        if (community.ContactMethods != null)
+            response.Contacts = community.ContactMethods.Select(c => (ContactResponse)c);
         return response;
     }
 }

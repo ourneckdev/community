@@ -3307,7 +3307,8 @@ values ('01950294-15e0-7bd7-b232-4cfe690f1bb5', 'Main Phone', 'phone')
      , ('01950294-15e2-732f-ac22-1ff1ab6ae67c', 'Work Phone', 'phone')
      , ('01950294-15e2-7374-969a-dd871e567604', 'Emergency Contact','phone')
      , ('01950294-15e2-73a1-8772-dc729ab46f37', 'Personal Email', 'email')
-     , ('01966570-ab82-7b1a-ba12-77e18833cecf', 'Work Email', 'email');
+     , ('01966570-ab82-7b1a-ba12-77e18833cecf', 'Work Email', 'email')
+     , ('019a269a-e89b-770e-8caa-68c26ac042d5', 'Main Email', 'email');
 
 insert into community (name, description)
 values ('Santa Fe Trail Ranch', 'Santa Fe Trail Ranch (SFTR) is south of Trinidad, Colorado near the Colorado/New Mexico state line. The entrance is west of Interstate 25 exit 6, just north of Raton Pass. SFTR covers approximately 16,800 acres and ranges in elevation from 6,500 to 8,100 feet. All 454 of the 35-acre parcels are privately owned, and homes have been built on about half of them. Approximately six to eight new homes are being built each year. Eighty-three (83) miles of reasonably good dirt and gravel roads, maintained by the property owner''s association, provide year-round access.' ||
@@ -3359,6 +3360,16 @@ returning id, can_contact
 insert into contact_consent_log(contact_id, has_consent, community_id)
 select *, community_id
   from ins;
+
+  with cins
+    as (
+          insert into contact (community_id, entity_type, contact_method_id, value, verified, can_contact)
+              values (community_id, 0, '01950294-15e0-7bd7-b232-4cfe690f1bb5', '', true, true)
+              returning id, can_contact)
+
+insert into contact_consent_log(contact_id, has_consent, community_id)
+select *, community_id
+  from cins;
 
 END $$;
 

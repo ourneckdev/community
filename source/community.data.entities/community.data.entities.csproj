@@ -21,8 +21,4 @@
         <ProjectReference Include="..\community.common\community.common.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Base\"/>
-    </ItemGroup>
-
 </Project>

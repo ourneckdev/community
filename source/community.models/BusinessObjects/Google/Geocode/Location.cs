@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace community.models.BusinessObjects.Google.Geocode;
 
 /// <summary>
@@ -10,24 +8,20 @@ public class Location
     /// <summary>
     ///     Gets or sets the latitude
     /// </summary>
-    [JsonPropertyName("latitude")]
-    public decimal Latitude { get; set; }
+    public decimal Latitude { get; init; }
 
     /// <summary>
     ///     Gets or sets the longitude
     /// </summary>
-    [JsonPropertyName("longitude")]
-    public decimal Longitude { get; set; }
+    public decimal Longitude { get; init; }
 
     /// <summary>
     ///     Gets or sets the latitude
     /// </summary>
-    [JsonPropertyName("lat")]
-    public decimal Lat { get; set; }
+    public decimal Lat { get; init; }
 
     /// <summary>
     ///     Gets or sets the longitude
     /// </summary>
-    [JsonPropertyName("lng")]
-    public decimal Lng { get; set; }
+    public decimal Lng { get; init; }
 }

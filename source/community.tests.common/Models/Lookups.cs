@@ -1,6 +1,7 @@
 namespace community.tests.common.Models;
 
 /// <summary>
+///     constants for phone contact methods
 /// </summary>
 public static class PhoneContactMethods
 {

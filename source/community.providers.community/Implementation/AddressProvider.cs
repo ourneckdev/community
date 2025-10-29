@@ -52,8 +52,7 @@ public class AddressProvider(
 
             return new SingleResponse<(Guid AddressId, bool Saved)>((addressId, saved));
         });
-        logger.LogInformation(
-            PrepareInformationLog(nameof(SaveUserAddressAsync), response.ExecutionMilliseconds));
+        logger.LogInformation(PrepareInformationLog(nameof(SaveUserAddressAsync), response.ExecutionMilliseconds));
 
         return response;
     }
@@ -127,8 +126,7 @@ public class AddressProvider(
     }
 
     /// <inheritdoc />
-    public async Task<MultiResponse<CommunityAddressResponse>> ListCommunityAddressesAsync(Guid communityId,
-        CancellationToken token = default)
+    public async Task<MultiResponse<CommunityAddressResponse>> ListCommunityAddressesAsync(Guid communityId, CancellationToken token = default)
     {
         var response = await MeasureExecutionAsync(async () =>
         {
@@ -145,25 +143,21 @@ public class AddressProvider(
     }
 
     /// <inheritdoc />
-    public async Task<MultiResponse<UserAddressResponse>> ListUserAddressesAsync(Guid communityId, Guid userId,
-        CancellationToken token = default)
+    public async Task<MultiResponse<UserAddressResponse>> ListUserAddressesAsync(Guid communityId, Guid userId, CancellationToken token = default)
     {
         var response = await MeasureExecutionAsync(async () =>
         {
-            var userAddresses =
-                await addressRepository.ListByUserAsync(communityId, userId, token);
+            var userAddresses = await addressRepository.ListByUserAsync(communityId, userId, token);
             return new MultiResponse<UserAddressResponse>(userAddresses.Select(c => (UserAddressResponse)c));
         });
 
-        logger.LogInformation(PrepareInformationLog($"{nameof(ListCommunityAddressesAsync)}",
-            response.ExecutionMilliseconds));
+        logger.LogInformation(PrepareInformationLog($"{nameof(ListCommunityAddressesAsync)}", response.ExecutionMilliseconds));
 
         return response;
     }
 
 
-    private async Task PopulateGeoCodeData(BaseAddressRequest editAddress,
-        CancellationToken cancellationToken = default)
+    private async Task PopulateGeoCodeData(BaseAddressRequest editAddress, CancellationToken cancellationToken = default)
     {
         // validate the address before we make the call to google.  if it fails validation, throw error.
         editAddress.Validate();

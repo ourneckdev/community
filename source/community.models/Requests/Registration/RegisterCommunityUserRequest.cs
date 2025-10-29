@@ -28,7 +28,8 @@ public record RegisterCommunityUserRequest(
     string? Suffix,
     DateOnly? DateOfBirth,
     RegisterAddressRequest? Address,
-    IEnumerable<RegisterContactRequest>? ContactMethods) : VerifiableUserNameRecord
+    IEnumerable<RegisterContactRequest>? ContactMethods) 
+        : VerifiableUserNameRecord
 {
     /// <summary>
     ///     Maps the request to a series of database objects to add.
@@ -38,7 +39,7 @@ public record RegisterCommunityUserRequest(
     {
         return new User
         {
-            UserTypeId = UserTypes.GetKey(Strings.UserType_CommunityMember),
+            UserTypeId = UserTypes.GetKey(Strings.UserType_CommunityMember) ?? throw new ArgumentNullException(nameof(UserTypes)),
             Username = Username,
             Password = Password != null ? EncryptionHelper.Encrypt(Password) : null,
             Prefix = Prefix,
