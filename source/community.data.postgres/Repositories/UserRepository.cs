@@ -25,7 +25,7 @@ public class UserRepository(
     /// <inheritdoc />
     public async Task<bool> UsernameExistsAsync(string username, CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var exists = await connection.QuerySingleAsync<bool>(
             new CommandDefinition(
                 """
@@ -42,7 +42,7 @@ public class UserRepository(
     /// <inheritdoc />
     public async Task<Guid> UserExistsAsync(string username, CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var userId = await connection.ExecuteScalarAsync<Guid?>(
             new CommandDefinition(
                 """
@@ -62,7 +62,7 @@ public class UserRepository(
     /// <inheritdoc />
     public async Task<User> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
 
         var reader = await connection.QueryMultipleAsync(
             new CommandDefinition(
@@ -106,7 +106,7 @@ public class UserRepository(
     /// <inheritdoc />
     public async Task<Guid> AddAsync(User user, CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var userId = await connection.ExecuteScalarAsync<Guid>(
             new CommandDefinition(
                 """
@@ -145,7 +145,7 @@ public class UserRepository(
     /// <inheritdoc />
     public async Task<bool> UpdateAsync(User user, CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var recordsAffected = await connection.ExecuteAsync(
             new CommandDefinition(
                 """
@@ -170,7 +170,7 @@ public class UserRepository(
     public async Task<bool> MarkUsernameVerified(string username, string code,
         CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var exists = await connection.ExecuteScalarAsync<bool>(
             new CommandDefinition(
                 """
@@ -204,7 +204,7 @@ public class UserRepository(
     public async Task<bool> MarkUserVerified(Guid id, Guid communityId, Guid verifiedBy,
         CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var recordsAffected = await connection.ExecuteAsync(
             new CommandDefinition(
                 """

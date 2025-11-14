@@ -28,7 +28,7 @@ public class CommunityRepository(
     {
         try
         {
-            using var connection = context.CreateConnection();
+            await using var connection = context.CreateConnection();
             var communityId = await connection.ExecuteScalarAsync<Guid>(
                 new CommandDefinition(
                     """
@@ -61,7 +61,7 @@ public class CommunityRepository(
     {
         try
         {
-            using var connection = context.CreateConnection();
+            await using var connection = context.CreateConnection();
             var recordsAffected = await connection.ExecuteAsync(
                 new CommandDefinition(
                     """
@@ -82,7 +82,7 @@ public class CommunityRepository(
     /// <inheritdoc />
     public async Task<Community> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var reader = await connection.QueryMultipleAsync(
             new CommandDefinition(
                 """
@@ -117,7 +117,7 @@ public class CommunityRepository(
     /// <inheritdoc />
     public async Task<IEnumerable<Community>> ListAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var reader = await connection.QueryMultipleAsync(
             new CommandDefinition(
                 """
@@ -162,7 +162,7 @@ public class CommunityRepository(
     /// <inheritdoc />
     public async Task<IList<CommunitySearchResults>> FindCommunityAsync(FindCommunityRecord search, CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var matches = (await connection.QueryAsync<CommunitySearchResults>(
             new CommandDefinition(search.BuildQuery(), search, cancellationToken: cancellationToken))).ToList();
 

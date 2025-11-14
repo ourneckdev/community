@@ -1,4 +1,5 @@
 using System.Data;
+using Npgsql;
 
 namespace community.common.Interfaces;
 
@@ -11,5 +12,5 @@ public interface IDapperContext
     ///     Instantiates a connection to use for the current scope.
     /// </summary>
     /// <returns></returns>
-    IDbConnection CreateConnection();
+    NpgsqlConnection CreateConnection();
 }

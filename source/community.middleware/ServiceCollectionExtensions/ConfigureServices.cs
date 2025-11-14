@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Carter;
+using community.common.Utilities;
 using community.middleware.Builders;
 using community.middleware.Configurations;
 using community.middleware.Handlers;
@@ -58,6 +59,7 @@ public static class ConfigureServices
         services.AddLogging(options => options.AddConsole());
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddHttpClients(configuration);
+        ConfigurationHelper.Initialize(configuration);
     }
 }
 

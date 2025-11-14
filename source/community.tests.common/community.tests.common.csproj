@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
+        <UserSecretsId>a4e4d9a0-f2a4-4377-b370-ffc3a700b362</UserSecretsId>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
@@ -18,12 +19,12 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.10"/>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.10"/>
-        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="9.0.10"/>
-        <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="10.0.0" />
+        <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.3" />
         <PackageReference Include="Moq" Version="4.20.72"/>
         <PackageReference Include="xunit" Version="2.9.3"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">

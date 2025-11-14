@@ -40,7 +40,7 @@ public class TokenProvider(IOptions<JwtSettings> jwtSettings, IHttpContextAccess
         {
             new(JwtRegisteredClaimNames.GivenName, user.FirstName),
             new(JwtRegisteredClaimNames.FamilyName, user.LastName),
-            new(JwtRegisteredClaimNames.Jti, EncryptionHelper.Generate(48)),
+            new(JwtRegisteredClaimNames.Jti, EncryptionHelper.GenerateSalt(48)),
             new(JwtRegisteredClaimNames.Iss, jwtSettings.Value.Issuer),
             new(JwtRegisteredClaimNames.Aud, jwtSettings.Value.Audience),
             new(JwtRegisteredClaimNames.Sub, user.Username),
@@ -70,7 +70,7 @@ public class TokenProvider(IOptions<JwtSettings> jwtSettings, IHttpContextAccess
     /// <inheritdoc cref="ITokenProvider.GenerateRefreshToken" />
     public string GenerateRefreshToken(Guid userId)
     {
-        var refreshToken = EncryptionHelper.Generate();
+        var refreshToken = EncryptionHelper.GenerateSalt();
         //TODO: cache this value to use to re-authorize a user later.
         return refreshToken;
     }

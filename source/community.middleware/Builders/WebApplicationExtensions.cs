@@ -3,6 +3,7 @@ using community.middleware.Configurations;
 using community.middleware.Handlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi;
 using SimpleInjector;
 
 namespace community.middleware.Builders;
@@ -32,7 +33,7 @@ public static class WebApplicationExtensions
 
         app.UseMiddleware<CorrelationIdHandler>();
 
-        app.UseSwagger();
+        app.UseSwagger(options => options.OpenApiVersion = OpenApiSpecVersion.OpenApi2_0);
         app.UseSwaggerUI(config =>
         {
             config.SwaggerEndpoint("/swagger/v1/swagger.json", $"{configuration.Title} {configuration.Version}");

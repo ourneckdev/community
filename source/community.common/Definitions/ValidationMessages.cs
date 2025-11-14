@@ -36,4 +36,5 @@ internal static class ValidationMessages
     internal const string ContactMethodInvalid = "Must be valid phone or email address.";
     internal const string TimeZoneRequired = "Time zone is required.";
     internal const string PotentialDuplicateCommunity = "One or more existing communities found.";
+    internal const string InvalidFormat = "Supplied format is invalid.";
 }

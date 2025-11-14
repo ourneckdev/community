@@ -7,6 +7,6 @@ namespace community.models.Responses.Base;
 /// </summary>
 /// <param name="Values"></param>
 /// <typeparam name="T"></typeparam>
-public record LookupResponse<T>(IEnumerable<T> Values) : BaseRecord
+public record LookupResponse<T>(IReadOnlyCollection<T> Values) : BaseRecord
 {
 }

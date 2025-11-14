@@ -1,4 +1,3 @@
-using System.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Npgsql;
@@ -15,14 +14,14 @@ public class AuthorizationDapperContext(IConfiguration configuration, ILogger<Au
     ///     Creates a connection to the underlying data store.
     /// </summary>
     /// <returns></returns>
-    public IDbConnection CreateConnection()
+    public NpgsqlConnection CreateConnection()
     {
         var connectionString = configuration.GetConnectionString("community");
 
         if (string.IsNullOrEmpty(connectionString))
             throw new Exception("Connection string is empty");
 
-        logger.LogInformation($"Connection string: {connectionString?.Split(';').FirstOrDefault()}");
+        logger.LogInformation("Connection string: {FirstOrDefault}", connectionString?.Split(';').FirstOrDefault());
         return new NpgsqlConnection(connectionString);
     }
 }

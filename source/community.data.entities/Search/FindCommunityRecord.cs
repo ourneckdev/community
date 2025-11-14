@@ -39,11 +39,11 @@ public record FindCommunityRecord(
               select c.id, c.name, a.id address_id, cast(null as uuid) contact_id
                 from community_address a
                 join community c on a.community_id = c.id
-               where (@name is null or levenshtein(c.name, @Name, 1, 0, 4) <= 3)
-                 and (@StateCode is null or upper(a.state_code) = @StateCode)
-                 and (@City is null or lower(a.city) = lower(@City))
+               where (@name is null or levenshtein(c.name, cast(@Name as citext), 1, 0, 4) <= 3)
+                 and (@StateCode is null or a.state_code = cast(@StateCode as citext))
+                 and (@City is null or a.city = cast(@City as citext))
                  and (@PostalCode is null or a.postal_code = @PostalCode)
-                 and (@AddressLine1 is null or levenshtein(lower(address_1), lower(@AddressLine1), 5, 0, 4) <= 4)
+                 and (@AddressLine1 is null or levenshtein(address_1, cast(@AddressLine1 as citext), 5, 0, 4) <= 4)
               """
             : "";
 
@@ -55,7 +55,7 @@ public record FindCommunityRecord(
                 and m.contact_type = 'phone'
                join community c on c.id = t.community_id
                 and entity_type = 0
-              where (@name is null or levenshtein(c.name, @Name, 1, 0, 4) <= 3)
+              where (@name is null or levenshtein(c.name, cast(@Name as citext), 1, 0, 4) <= 3)
                 and (@PhoneNumber is null or t.value = @PhoneNumber)
               """
             : "";

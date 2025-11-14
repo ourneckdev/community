@@ -1,3 +1,4 @@
+CREATE EXTENSION IF NOT EXISTS citext;
 
 drop table if exists user_address;
 drop table if exists community_address;
@@ -87,10 +88,10 @@ end $$ language plpgsql;
 --- lookups
 
 create table countries (
-    code char(3) not null,
+    code citext not null,
     constraint pk__country__code
         primary key (code),
-    name varchar(100) not null,
+    name citext not null,
     iso_2 char(2) null,
     numeric_code char(3) null,
     sort_order smallint not null default 100,
@@ -106,8 +107,8 @@ with (
    , autovacuum_vacuum_scale_factor = 0.001);
 
 create table states (
-    code char(3) not null,
-    country_code char(3) not null,
+    code citext not null,
+    country_code citext not null,
     constraint pk__state__code
         primary key (code, country_code),
     constraint fk__state__country
@@ -115,7 +116,7 @@ create table states (
         references countries(code),
     fips_code char(2) null,
     ansi_code char(3) null,
-    name varchar(100) not null,
+    name citext not null,
     created_date timestamp without time zone not null default utcnow(),
     modified_date timestamp without time zone not null default utcnow(),
     created_by uuid null,
@@ -128,15 +129,15 @@ with (
    , autovacuum_vacuum_scale_factor = 0.001);
 
 create table counties(
-    code char(5) not null,
+    code citext not null,
     constraint pk__county__code
         primary key (code),
-    state_code char(3) not null,
-    country_code char(3) not null,
+    state_code citext not null,
+    country_code citext not null,
     constraint fk__county__state
         foreign key (state_code, country_code)
         references states(code, country_code),
-    name varchar(100),
+    name citext,
     created_date timestamp without time zone not null default utcnow(),
     modified_date timestamp without time zone not null default utcnow(),
     created_by uuid null,
@@ -152,8 +153,8 @@ create table parcel_size_unit (
     id uuid not null default uuid7(),
     constraint pk__parcel_size_unit__id
        primary key(id),
-    name varchar(25) not null,
-    description varchar(200) null,
+    name citext not null,
+    description citext null,
     created_date timestamp without time zone not null default utcnow(),
     modified_date timestamp without time zone not null default utcnow(),
     created_by uuid null,
@@ -171,9 +172,9 @@ create table community (
     id uuid not null default uuid7(),
     constraint pk__community__id
         primary key (id),
-    name varchar(200) not null,
+    name citext not null,
     description text not null,
-    website varchar(255) null,
+    website citext null,
     parent_id uuid null,
     constraint fk__parent__community
         foreign key (parent_id)
@@ -202,8 +203,8 @@ create table user_type (
     id uuid not null default uuid7(),
     constraint pk__user_type__id
         primary key (id),
-    name varchar(25) not null,
-    description varchar(200) not null,
+    name citext not null,
+    description citext not null,
     created_date timestamp without time zone  not null default utcnow(),
     modified_date timestamp without time zone  not null default utcnow(),
     created_by uuid null,
@@ -223,16 +224,16 @@ create table "user" (
     constraint fk__user_user__type 
         foreign key (user_type_id) 
         references user_type(id),
-    username varchar(75) not null,
+    username citext not null,
     password varchar(150) null,
     username_verified boolean not null default false,
     username_verified_date timestamp without time zone null,
     login_code char(6) null,
     login_code_expiration timestamp without time zone null,
-    prefix varchar(10) null,
-    firstname varchar(100) not null,
-    lastname varchar(100) not null,
-    suffix varchar(10) null,
+    prefix citext null,
+    firstname citext not null,
+    lastname citext not null,
+    suffix citext null,
     date_of_birth char(70),
     locked boolean not null default false,
     profile_pic varchar(255) null,
@@ -292,8 +293,8 @@ create table contact_method (
     constraint fk__contact_method__community_id
         foreign key (community_id)
         references community(id),
-    name varchar(50) not null,
-    contact_type varchar(25) not null,
+    name citext not null,
+    contact_type citext not null,
     created_date timestamp without time zone  not null default utcnow(),
     modified_date timestamp without time zone  not null default utcnow(),
     created_by uuid null,
@@ -322,7 +323,7 @@ create table contact (
     constraint fk__user_contact_method__contact_method
         foreign key (contact_method_id)
         references contact_method(id),
-    value varchar(200) not null,
+    value citext not null,
     verified bool not null default false,
     verified_date timestamp without time zone not null default utcnow(),
     visible bool not null default false,
@@ -364,7 +365,7 @@ create table address_type (
     constraint fk__address_type__community_id
         foreign key (community_id)
         references community(id),
-    name varchar(50) not null,
+    name citext not null,
     created_date timestamp without time zone  not null default utcnow(),
     modified_date timestamp without time zone  not null default utcnow(),
     created_by uuid null,
@@ -388,19 +389,19 @@ create table address (
     constraint fk__address__address_type
         foreign key (address_type_id)
         references address_type(id),
-    lot_number varchar(20) null,
-    address_1 varchar(100) not null,
-    address_2 varchar(100) null,
-    address_3 varchar(100) null,
-    city varchar(50) not null,
-    state_code char(3) not null,
-    postal_code varchar(20) not null,
-    county_code char(5) null,
-    place_id varchar(100) null,
+    lot_number citext null,
+    address_1 citext not null,
+    address_2 citext null,
+    address_3 citext null,
+    city citext not null,
+    state_code citext not null,
+    postal_code citext not null,
+    county_code citext null,
+    place_id citext null,
     constraint fk__address__county
         foreign key (county_code)
         references counties(code),
-    country_code char(3) not null,
+    country_code citext not null,
     constraint fk__address__country
         foreign key (country_code)
         references countries(code),
@@ -442,8 +443,8 @@ create table claim_section (
     id uuid not null default uuid7(),
     constraint pk__claim_section_id
         primary key (id),
-    name varchar(50) not null,
-    description varchar(200) not null,
+    name citext not null,
+    description citext not null,
     parent_claim_section_id uuid null,
     constraint fk_claim_section_parent
         foreign key (parent_claim_section_id)
@@ -489,8 +490,8 @@ create table claim (
     constraint fk__claim__claim_section
         foreign key (claim_section_id)
         references claim_section(id),
-    name varchar(50) not null,
-    description varchar(200) not null,
+    name citext not null,
+    description citext not null,
     created_date timestamp without time zone  not null default utcnow(),
     modified_date timestamp without time zone  not null default utcnow(),
     created_by uuid null,
@@ -526,7 +527,7 @@ create table report_type (
     id uuid not null default uuid7(),
     constraint pk__report_type__id
         primary key (id),
-    name varchar(50) not null,
+    name citext not null,
     icon varchar(255) not null,
     sort_order smallint not null default 100,
     created_date timestamp without time zone not null default utcnow(),
@@ -556,7 +557,7 @@ create table report (
     sticky bool not null default false,
     schedule_date timestamp without time zone null,
     end_date timestamp without time zone null,
-    message varchar(2000) null,
+    message citext null,
     longitude numeric(9,6) not null,
     latitude numeric(9,6) not null,
     end_longitude numeric(9,6) null,

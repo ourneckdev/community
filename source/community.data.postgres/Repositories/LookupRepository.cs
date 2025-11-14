@@ -17,10 +17,10 @@ public class LookupRepository(ILookupsDapperContext context, IHttpContextAccesso
     : BaseRepository(contextAccessor), ILookupRepository
 {
     /// <inheritdoc />
-    public async ValueTask<IEnumerable<T>> ListAsync<T>(Guid? communityId = null)
+    public async Task<IEnumerable<T>> ListAsync<T>(Guid? communityId = null)
         where T : BaseLookupEntity
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var sql = HasCommunityIdColumn<T>()
             ? $"""
                select *

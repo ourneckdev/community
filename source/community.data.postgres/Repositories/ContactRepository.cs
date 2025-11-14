@@ -26,7 +26,7 @@ public class ContactRepository(
     {
         try
         {
-            using var connection = commonDapperContext.CreateConnection();
+            await using var connection = commonDapperContext.CreateConnection();
             var id = await connection.ExecuteScalarAsync<Guid>(
                 new CommandDefinition(
                     """
@@ -60,7 +60,7 @@ public class ContactRepository(
     {
         try
         {
-            using var connection = commonDapperContext.CreateConnection();
+            await using var connection = commonDapperContext.CreateConnection();
             await connection.ExecuteAsync(
                 new CommandDefinition(
                     """
@@ -88,7 +88,7 @@ public class ContactRepository(
     {
         try
         {
-            using var connection = commonDapperContext.CreateConnection();
+            await using var connection = commonDapperContext.CreateConnection();
             var contact = await connection.QueryFirstOrDefaultAsync(
                 new CommandDefinition(
                     """
@@ -113,7 +113,7 @@ public class ContactRepository(
     {
         try
         {
-            using var connection = commonDapperContext.CreateConnection();
+            await using var connection = commonDapperContext.CreateConnection();
             return await connection.QueryAsync<Contact>(
                 new CommandDefinition(
                     """
@@ -137,7 +137,7 @@ public class ContactRepository(
     {
         try
         {
-            using var connection = commonDapperContext.CreateConnection();
+            await using var connection = commonDapperContext.CreateConnection();
             return await connection.QueryAsync<Contact>(
                 new CommandDefinition(
                     """
@@ -162,7 +162,7 @@ public class ContactRepository(
     {
         try
         {
-            using var connection = commonDapperContext.CreateConnection();
+            await using var connection = commonDapperContext.CreateConnection();
             await connection.ExecuteAsync(
                 new CommandDefinition(
                     """

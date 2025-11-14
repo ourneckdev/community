@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text;
 using community.common.BaseClasses;
 using community.common.Definitions;
@@ -33,7 +34,7 @@ public class AuthenticationProvider(
     private readonly Dictionary<string, string[]> _validationErrors = new();
 
     /// <inheritdoc cref="IAuthenticationProvider.RequestLoginCodeAsync" />
-    public async ValueTask<SingleResponse<LoginCodeResponse>> RequestLoginCodeAsync(string username)
+    public async Task<SingleResponse<LoginCodeResponse>> RequestLoginCodeAsync(string username)
     {
         var response = await MeasureExecutionAsync(async () =>
         {
@@ -151,6 +152,12 @@ public class AuthenticationProvider(
         });
 
         return response;
+    }
+
+    /// <inheritdoc />
+    public SingleResponse<(string Challenge, string Verifier)> GenerateProof()
+    {
+        return new SingleResponse<(string Challenge, string Verifier)>(Pkce.Generate());
     }
 
     #region Private Methods

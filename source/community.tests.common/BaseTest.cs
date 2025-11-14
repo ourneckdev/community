@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Configuration;
+
 [assembly: InternalsVisibleTo("community.auth.api.tests")]
 [assembly: InternalsVisibleTo("community.providers.auth.tests")]
 [assembly: InternalsVisibleTo("community.providers.common.tests")]
@@ -31,7 +33,7 @@ public abstract class BaseTest
     {
         Audience = $"{nameof(JwtSettings.Audience)}.com",
         Issuer = $"{nameof(JwtSettings.Issuer)}.com",
-        Secret = EncryptionHelper.Generate(),
+        Secret = EncryptionHelper.GenerateSalt(),
         TokenLifetime = new TimeSpan(0, 30, 0),
         RefreshTokenLifetime = new TimeSpan(2, 0, 0)
     };
@@ -40,6 +42,14 @@ public abstract class BaseTest
     /// </summary>
     protected BaseTest()
     {
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddUserSecrets<BaseTest>()
+            .AddJsonFile("appsettings.json", false, true)
+            .Build();
+        
+        ConfigurationHelper.Initialize(configuration);
+        
         MockOptions
             .Setup(j => j.Value)
             .Returns(MockSettings);

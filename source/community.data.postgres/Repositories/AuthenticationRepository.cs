@@ -18,7 +18,7 @@ public class AuthenticationRepository(IAuthorizationDapperContext context)
     /// <inheritdoc cref="IAuthenticationRepository.LoginAsync" />
     public async Task<Guid> LoginAsync(string username, string passwordCode)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         var userId = await connection.QuerySingleOrDefaultAsync<Guid?>(
             """
             select id
@@ -42,7 +42,7 @@ public class AuthenticationRepository(IAuthorizationDapperContext context)
     /// <inheritdoc cref="IAuthenticationRepository.SetUserLastCommunityAsync" />
     public async Task SetUserLastCommunityAsync(Guid userId, Guid communityId)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
 
         await connection.ExecuteAsync(
             """
@@ -70,7 +70,7 @@ public class AuthenticationRepository(IAuthorizationDapperContext context)
     /// <inheritdoc cref="IAuthenticationRepository.SetLastLoginDate" />
     public async Task SetLastLoginDate(Guid userId)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         await connection.ExecuteAsync(
             """
             update "user" 
