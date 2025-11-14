@@ -27,7 +27,7 @@ public class AddressRepository(
     {
         try
         {
-            using var connection = context.CreateConnection();
+            await using var connection = context.CreateConnection();
             var addressId = await connection.ExecuteScalarAsync<Guid>(
                 new CommandDefinition(
                     """
@@ -88,7 +88,7 @@ public class AddressRepository(
     {
         try
         {
-            using var connection = context.CreateConnection();
+            await using var connection = context.CreateConnection();
             var addressId = await connection.ExecuteScalarAsync<Guid>(
                 new CommandDefinition(
                     """
@@ -147,7 +147,7 @@ public class AddressRepository(
     {
         try
         {
-            using var connection = context.CreateConnection();
+            await using var connection = context.CreateConnection();
             var recordsAffected = await connection.ExecuteAsync(
                 new CommandDefinition(
                     """
@@ -190,7 +190,7 @@ public class AddressRepository(
     {
         try
         {
-            using var connection = context.CreateConnection();
+            await using var connection = context.CreateConnection();
             var recordsAffected = await connection.ExecuteAsync(
                 new CommandDefinition(
                     """
@@ -231,7 +231,7 @@ public class AddressRepository(
     {
         try
         {
-            using var connection = context.CreateConnection();
+            await using var connection = context.CreateConnection();
             var userAddress = await connection.QueryFirstOrDefaultAsync<UserAddress>(
                 new CommandDefinition(
                     """
@@ -261,7 +261,7 @@ public class AddressRepository(
     {
         try
         {
-            using var connection = context.CreateConnection();
+            await using var connection = context.CreateConnection();
             var communityAddress = await connection.QueryFirstOrDefaultAsync<CommunityAddress>(
                 new CommandDefinition(
                     """
@@ -290,7 +290,7 @@ public class AddressRepository(
     {
         try
         {
-            using var connection = context.CreateConnection();
+            await using var connection = context.CreateConnection();
             var userAddresses = await connection.QueryAsync<UserAddress>(
                 new CommandDefinition(
                     """
@@ -316,7 +316,7 @@ public class AddressRepository(
     {
         try
         {
-            using var connection = context.CreateConnection();
+            await using var connection = context.CreateConnection();
             var communityAddresses = await connection.QueryAsync<CommunityAddress>(
                 new CommandDefinition(
                     """

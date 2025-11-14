@@ -1,5 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
+using community.common.Extensions;
+using Microsoft.Extensions.Configuration;
 
 namespace community.common.Utilities;
 
@@ -16,9 +18,24 @@ public static class EncryptionHelper
     ///     Generates a cryptographically secure string.
     /// </summary>
     /// <returns>The generated string used as a refresh token.</returns>
-    public static string Generate(int byteSize = ByteLength)
+    public static string GenerateSalt(int byteSize = ByteLength)
     {
         return Convert.ToBase64String(RandomNumberGenerator.GetBytes(byteSize));
+    }    
+    
+    /// <summary>
+    /// Generates a salt hash from a supplied key
+    /// </summary>
+    /// <param name="salt"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static string Generate(string salt)
+    {
+        if(string.IsNullOrEmpty(salt)) throw new ArgumentNullException(nameof(salt));
+        var bytes = Encoding.UTF8.GetBytes(salt);
+        using var sha = SHA512.Create();
+        var hash = Convert.ToBase64String(sha.ComputeHash(bytes))[..16];
+        return hash;
     }
 
     /// <summary>
@@ -42,8 +59,9 @@ public static class EncryptionHelper
     /// <returns>An encrypted byte array in base 64.</returns>
     public static string Encrypt(object valueToEncrypt)
     {
-        var salt = Generate(16);
-
+        var salt = ConfigurationHelper.Configuration.GetValue<string>("Encryption:Salt") 
+                   ?? throw new ArgumentNullException(nameof(valueToEncrypt));
+        
         using var aes = Aes.Create();
         aes.GenerateIV();
         aes.Key = Convert.FromBase64String(salt);
@@ -59,15 +77,39 @@ public static class EncryptionHelper
         }
 
         var encryptedData = Convert.ToBase64String(ms.ToArray());
-        return $"{salt.Substring(0, Base64StringLength - 2)}{ivString}{encryptedData}";
+        return $"{ivString}{encryptedData}";
     }
 
     /// <summary>
     ///     Decrypts a cipher envelope.
     /// </summary>
     /// <param name="cipherText">The base-64 string containing the encrypted key, encrypted IV and encrypted text.</param>
+    /// <exception cref="ArgumentNullException">Throws an argument null exception if the salt is missing from secrets.</exception>
     /// <returns>The decrypted plain text data.</returns>
     public static string Decrypt(string cipherText)
+    {
+        if(string.IsNullOrEmpty(cipherText)) return string.Empty;
+        
+        var (salt, iv, encryptedData) = GetParts(cipherText);
+
+        using var aes = Aes.Create();
+        aes.Key = Convert.FromBase64String(salt);
+        aes.IV = Convert.FromBase64String(iv);
+
+        using var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+        using var ms = new MemoryStream(Convert.FromBase64String(encryptedData));
+        using var cryptoStream = new CryptoStream(ms, decryptor, CryptoStreamMode.Read);
+        using var reader = new StreamReader(cryptoStream);
+        return reader.ReadToEnd();
+    }
+    
+    /// <summary>
+    ///     Decrypts a cipher envelope.
+    /// </summary>
+    /// <param name="cipherText">The base-64 string containing the encrypted key, encrypted IV and encrypted text.</param>
+    /// <returns>The decrypted plain text data.</returns>
+    [Obsolete("Moved to a protected salt.")]
+    public static string DecryptWithStoredSalt(string cipherText)
     {
         var salt = $"{cipherText.Substring(0, Base64StringLength - 2)}{SaltPadding}";
         var iv = cipherText.Substring(Base64StringLength - 2, Base64StringLength);
@@ -91,22 +133,14 @@ public static class EncryptionHelper
     /// </summary>
     /// <param name="cipherText">The base-64 string containing the encrypted key, encrypted IV and encrypted text.</param>
     /// <returns>The decrypted plain text data.</returns>
-    public static DateOnly DecryptAsDateOnly(string cipherText)
+    public static DateOnly DecryptAsDateOnly(string cipherText) => DateOnly.Parse(Decrypt(cipherText));
+    
+    private static (string salt, string iv, string encryptedData) GetParts(this string cipherText)
     {
-        var salt = $"{cipherText.Substring(0, Base64StringLength - 2)}{SaltPadding}";
-        var iv = cipherText.Substring(Base64StringLength - 2, Base64StringLength);
-        var encryptedData = cipherText.Substring(Base64StringLength * 2 - 2);
+        var salt = ConfigurationHelper.Configuration.GetValue<string>("Encryption:Salt") ?? throw new ArgumentNullException("Encryption:Salt");
+        var iv = cipherText[..Base64StringLength];
+        var encryptedData = cipherText[Base64StringLength..];
 
-        using var aes = Aes.Create();
-        aes.Key = Convert.FromBase64String(salt);
-        aes.IV = Convert.FromBase64String(iv);
-
-        using var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-        using var ms = new MemoryStream(Convert.FromBase64String(encryptedData));
-        using var cryptoStream = new CryptoStream(ms, decryptor, CryptoStreamMode.Read);
-        using var reader = new StreamReader(cryptoStream);
-        var data = reader.ReadToEnd();
-
-        return DateOnly.Parse(data);
+        return (salt, iv, encryptedData);
     }
 }

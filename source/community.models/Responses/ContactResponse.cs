@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using community.common.Definitions;
 using community.common.Enumerations;
+using community.common.Utilities;
 using community.data.entities;
 using community.models.Responses.Base;
 
@@ -59,7 +60,7 @@ public class ContactResponse : BasePrimaryResponse
             Id = contact.Id,
             ContactMethod = ContactMethods.Values[contact.ContactMethodId].Item1,
             ContactType = ContactMethods.Values[contact.ContactMethodId].Item2,
-            Value = contact.Value,
+            Value = EncryptionHelper.Decrypt(contact.Value),
             Verified = contact.Verified,
             VerifiedDate = contact.VerifiedDate,
             CanContact = contact.CanContact,

@@ -1,7 +1,9 @@
-﻿namespace community.common.tests.Extensions;
+﻿using community.tests.common;
+
+namespace community.common.tests.Extensions;
 
 [ExcludeFromCodeCoverage]
-public class EncryptionHelperTests
+public class EncryptionHelperTests: BaseTest
 {
     [Fact]
     [Trait("Category", "Unit")]
@@ -10,10 +12,23 @@ public class EncryptionHelperTests
         // using the maximum password length of 32 characters here
         // this helped me determine the length of the string generated from the encryption routine
         // which is 110 characters.
-        const string plainText = "BlahBlahBlah98!";
+        const string plainText = "outneckofthewoods@proton.me";
         var encryptedString = EncryptionHelper.Encrypt(plainText);
         var decryptedString = EncryptionHelper.Decrypt(encryptedString);
         Assert.Equal(plainText, decryptedString);
+    }
+
+    [Fact]
+    [Trait("Category", "Unit")]
+    public void EncryptAndDecryptDatesTest_ShouldSucceed()
+    {
+        // using the maximum password length of 32 characters here
+        // this helped me determine the length of the string generated from the encryption routine
+        // which is 110 characters.
+        DateOnly? date = new DateOnly(2001, 9, 11);
+        var encryptedString = date.ToEncryptedString();
+        var decryptedString = encryptedString.FromEncryptedString();
+        Assert.Equal(date, decryptedString);
     }
 
     [Fact]
@@ -35,8 +50,20 @@ public class EncryptionHelperTests
     [InlineData(128)]
     public void Generate_256BitString_ShouldSucceed(int bytes)
     {
-        var key = EncryptionHelper.Generate(bytes);
+        var key = EncryptionHelper.GenerateSalt(bytes);
         Assert.NotNull(key);
         Assert.Equal(bytes.CalculateBase64Bytes(), key.Length);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [Fact]
+    public void GenerateSaltFromKey_ShouldSucceed()
+    {
+        var synchronousKey = EncryptionHelper.GenerateSalt(16);
+        var salt = EncryptionHelper.Generate(synchronousKey);
+        Assert.NotNull(salt);
+        
     }
 }

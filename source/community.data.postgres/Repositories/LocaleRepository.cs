@@ -16,9 +16,9 @@ public class LocalRepository(ILookupsDapperContext context, IHttpContextAccessor
     : BaseRepository(contextAccessor), ILocaleRepository
 {
     /// <inheritdoc />
-    public async ValueTask<IEnumerable<Country>> ListCountriesAsync()
+    public async Task<IEnumerable<Country>> ListCountriesAsync()
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         return await connection.QueryAsync<Country>(
             """
             select code
@@ -32,9 +32,9 @@ public class LocalRepository(ILookupsDapperContext context, IHttpContextAccessor
     }
 
     /// <inheritdoc />
-    public async ValueTask<IEnumerable<State>> ListStatesAsync(string countryCode)
+    public async Task<IEnumerable<State>> ListStatesAsync(string countryCode)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         return await connection.QueryAsync<State>(
             """
             select code
@@ -43,15 +43,15 @@ public class LocalRepository(ILookupsDapperContext context, IHttpContextAccessor
                  , name
                  , fips_code 
             from states 
-            where country_code = @countryCode 
+            where country_code = cast(@countryCode as citext) 
             and is_active
             """, new { countryCode });
     }
 
     /// <inheritdoc />
-    public async ValueTask<IEnumerable<County>> ListCountiesAsync(string countryCode, string stateCode)
+    public async Task<IEnumerable<County>> ListCountiesAsync(string countryCode, string stateCode)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         return await connection.QueryAsync<County>(
             """
             select code
@@ -59,16 +59,16 @@ public class LocalRepository(ILookupsDapperContext context, IHttpContextAccessor
                  , state_code
                  , name
               from counties 
-             where country_code = @countryCode 
-               and state_code = @stateCode
+             where country_code = cast(@countryCode as citext) 
+               and state_code = cast(@stateCode as citext)
                and is_active
             """, new { countryCode, stateCode });
     }
 
     /// <inheritdoc />
-    public async ValueTask<IEnumerable<TimeZone>> ListTimeZonesAsync(string countryCode)
+    public async Task<IEnumerable<TimeZone>> ListTimeZonesAsync(string countryCode)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
         return await connection.QueryAsync<TimeZone>(
             """
             with tz as (select abbrev as code
@@ -76,21 +76,20 @@ public class LocalRepository(ILookupsDapperContext context, IHttpContextAccessor
                  , utc_offset
                  , row_number() over (partition by utc_offset order by name) rnk
               from pg_catalog.pg_timezone_names
-             where name like @code || '%'
+             where cast(name as citext) like cast(@code as citext) || '%'
             order by utc_offset desc, name)
             select code
                  , name
                  , utc_offset
               from tz 
-             --where rnk = 1
-            """, new { code = countryCode.Substring(0, 2) });
+            """, new { code = countryCode[..2] });
     }
 
     /// <inheritdoc />
-    public async ValueTask<TimeZone?> GetTimeZoneAsync(string countryCode, string name,
+    public async Task<TimeZone?> GetTimeZoneAsync(string countryCode, string name,
         CancellationToken cancellationToken = default)
     {
-        using var connection = context.CreateConnection();
+        await using var connection = context.CreateConnection();
 
         return await connection.QueryFirstOrDefaultAsync<TimeZone>(
             new CommandDefinition(

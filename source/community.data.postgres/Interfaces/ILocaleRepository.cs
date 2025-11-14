@@ -13,14 +13,14 @@ public interface ILocaleRepository : IRepository
     ///     Gets a list of all the countries, sorted alphabetically, with the UnitedStates at the top of the list.
     /// </summary>
     /// <returns>A hydrated collection of all available countries in the database.</returns>
-    ValueTask<IEnumerable<Country>> ListCountriesAsync();
+    Task<IEnumerable<Country>> ListCountriesAsync();
 
     /// <summary>
     ///     Gets a collection of all state/provinces by country.
     /// </summary>
     /// <param name="countryCode">The three digit country code to retrieve the list of states for.</param>
     /// <returns>A hydrated collection of all available states by country.</returns>
-    ValueTask<IEnumerable<State>> ListStatesAsync(string countryCode);
+    Task<IEnumerable<State>> ListStatesAsync(string countryCode);
 
     /// <summary>
     ///     Retrieves a list of all counties/regions by state.
@@ -28,14 +28,14 @@ public interface ILocaleRepository : IRepository
     /// <param name="countryCode"></param>
     /// <param name="stateCode"></param>
     /// <returns></returns>
-    ValueTask<IEnumerable<County>> ListCountiesAsync(string countryCode, string stateCode);
+    Task<IEnumerable<County>> ListCountiesAsync(string countryCode, string stateCode);
 
     /// <summary>
     ///     Lists the PG available timezones for a specified country
     /// </summary>
     /// <param name="countryCode"></param>
     /// <returns></returns>
-    ValueTask<IEnumerable<TimeZone>> ListTimeZonesAsync(string countryCode);
+    Task<IEnumerable<TimeZone>> ListTimeZonesAsync(string countryCode);
 
     /// <summary>
     ///     Gets the timezone details by name
@@ -44,6 +44,6 @@ public interface ILocaleRepository : IRepository
     /// <param name="name"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>A</returns>
-    ValueTask<TimeZone?> GetTimeZoneAsync(string countryCode, string name,
+    Task<TimeZone?> GetTimeZoneAsync(string countryCode, string name,
         CancellationToken cancellationToken = default);
 }

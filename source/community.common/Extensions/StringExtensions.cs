@@ -103,6 +103,34 @@ public static partial class StringExtensions
         return maskedString;
     }
 
+    /// <summary>
+    /// Accepts a base64 encoded string and returns valid URL formatted response.
+    /// </summary>
+    /// <param name="base64String"></param>
+    /// <returns></returns>
+    /// <exception cref="BusinessRuleException"></exception>
+    public static string UrlEncodeForBase64(this string base64String)
+    {
+        var buffer = new Span<byte>(new byte[base64String.Length]);
+        if(!Convert.TryFromBase64String(base64String, buffer, out _)) throw new BusinessRuleException(ValidationMessages.InvalidFormat);
+        return base64String.Replace('+', '-').Replace('/', '_').TrimEnd('=');
+    }
+
+    /// <summary>
+    /// Accepts a base64 encoded string and returns valid URL formatted response.
+    /// </summary>
+    /// <param name="bytes"></param>
+    /// <returns></returns>
+    /// <exception cref="BusinessRuleException"></exception>
+    public static string UrlEncodeForBase64(this byte[] bytes)
+    {
+        var base64String = Convert.ToBase64String(bytes);
+        var buffer = new Span<byte>(new byte[base64String.Length]);
+        return !Convert.TryFromBase64String(base64String, buffer, out _) 
+            ? throw new BusinessRuleException(ValidationMessages.InvalidFormat) 
+            : base64String.Replace('+', '-').Replace('/', '_').TrimEnd('=');
+    }
+
     [GeneratedRegex(@"^\w+([-+.']\w+)*@(\[*\w+)([-.]\w+)*\.\w+([-.]\w+\])*$")]
     private static partial Regex MyRegex();
 }

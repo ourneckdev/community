@@ -19,7 +19,7 @@ public class CommunityControllerTests
     private readonly string _testUser = "ourneckofthewoods@proton.me";
     private const string BaseAddress = "http://localhost:7063/community/";
     private const string AuthBaseAddress = "https://localhost:7279/login/";
-    private readonly Guid _testCommunityId = Guid.Parse("019a26a0-28ee-7ae1-824c-42225fa859a6");
+    private readonly Guid _testCommunityId = Guid.Parse("019a7dee-2dde-7d74-8f62-7d7837a38c9d");
     
     private readonly JwtSecurityTokenHandler _tokenHandler = new();
     private string? _accessToken;
@@ -130,6 +130,7 @@ public class CommunityControllerTests
         Assert.Equal(communityResponse.Items.Single()?.Id, community.Item.Id);
     }
 
+    
     /// <summary>
     /// Initializes the integration tests against the community set of endpoints.
     /// </summary>
@@ -142,6 +143,7 @@ public class CommunityControllerTests
         _authClient = _authFactory.CreateClient();
         _authClient.BaseAddress = new Uri(AuthBaseAddress);
     }
+    
     
     private async Task LoginAsync()
     {

@@ -22,7 +22,7 @@ public class LookupsController(ILookupProvider provider) : BaseController
     [HttpGet]
     [Route("addresstypes")]
     [ProducesResponseType(typeof(IEnumerable<AddressTypeResponse>), 200)]
-    public async Task<IActionResult> ListAddressTypesAsync()
+    public async ValueTask<IActionResult> ListAddressTypesAsync()
     {
         return Ok(await provider.ListAddressTypesAsync());
     }
@@ -34,7 +34,7 @@ public class LookupsController(ILookupProvider provider) : BaseController
     [HttpGet]
     [Route("contactmethods")]
     [ProducesResponseType(typeof(IEnumerable<ContactMethodResponse>), 200)]
-    public async Task<IActionResult> ListContactMethodAsync()
+    public async ValueTask<IActionResult> ListContactMethodAsync()
     {
         return Ok(await provider.ListContactMethodsAsync());
     }
@@ -46,7 +46,7 @@ public class LookupsController(ILookupProvider provider) : BaseController
     [HttpGet]
     [Route("reporttypes")]
     [ProducesResponseType(typeof(IEnumerable<ReportTypeResponse>), 200)]
-    public async Task<IActionResult> ListReportTypeAsync()
+    public async ValueTask<IActionResult> ListReportTypeAsync()
     {
         return Ok(await provider.ListReportTypesAsync());
     }
@@ -58,7 +58,7 @@ public class LookupsController(ILookupProvider provider) : BaseController
     [HttpGet]
     [Route("usertypes")]
     [ProducesResponseType(typeof(IEnumerable<UserTypeResponse>), 200)]
-    public async Task<IActionResult> ListUserTypeAsync()
+    public async ValueTask<IActionResult> ListUserTypeAsync()
     {
         return Ok(await provider.ListUserTypesAsync());
     }
@@ -71,7 +71,7 @@ public class LookupsController(ILookupProvider provider) : BaseController
     [Route("parcelsizeunits")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(IEnumerable<ParcelSizeUnitResponse>), 200)]
-    public async Task<IActionResult> ListParcelSizeUnitsAsync()
+    public async ValueTask<IActionResult> ListParcelSizeUnitsAsync()
     {
         return Ok(await provider.ListParcelSizeUnitsAsync());
     }

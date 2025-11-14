@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using community.common.Definitions;
 using community.common.Extensions;
+using community.common.Utilities;
 using community.data.entities;
 using community.models.Responses.Authentication;
 using community.models.Responses.Base;
@@ -121,8 +122,8 @@ public class UserResponse : BasePrimaryResponse
         userResponse.UsernameVerified = user.UsernameVerified;
         userResponse.UsernameVerifiedDate = user.UsernameVerifiedDate;
         userResponse.Prefix = user.Prefix;
-        userResponse.FirstName = user.FirstName;
-        userResponse.LastName = user.LastName;
+        userResponse.FirstName = EncryptionHelper.Decrypt(user.FirstName);
+        userResponse.LastName = EncryptionHelper.Decrypt(user.LastName);
         userResponse.Suffix = user.Suffix;
         userResponse.DateOfBirth = user.DateOfBirth.FromEncryptedString();
         userResponse.Locked = user.Locked;

@@ -19,7 +19,7 @@ public interface IAuthenticationProvider : IProvider
     /// </summary>
     /// <param name="username">The initial email or password the user joined with</param>
     /// <returns>a generated 6 digit login code</returns>
-    ValueTask<SingleResponse<LoginCodeResponse>> RequestLoginCodeAsync(string username);
+    Task<SingleResponse<LoginCodeResponse>> RequestLoginCodeAsync(string username);
 
     /// <summary>
     ///     Contains the user's username and generated login code to verify the user's account.
@@ -47,4 +47,10 @@ public interface IAuthenticationProvider : IProvider
     /// </param>
     /// <returns>a response indicating if the process was executed successfully and any relevant messaging.</returns>
     Task<SingleResponse<ForgotPasswordResponse>> ForgotPasswordAsync(ForgotPasswordRequest forgotPasswordRequest);
+
+    /// <summary>
+    /// Generates a one time code verifier and code challenge 
+    /// </summary>
+    /// <returns></returns>
+    SingleResponse<(string Challenge, string Verifier)> GenerateProof();
 }

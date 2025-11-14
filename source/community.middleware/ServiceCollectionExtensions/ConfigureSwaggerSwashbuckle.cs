@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using community.middleware.Configurations;
 using community.middleware.SwaggerFilters;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi;
 using Microsoft.OpenApi.Models;
 
 namespace community.middleware.ServiceCollectionExtensions;
